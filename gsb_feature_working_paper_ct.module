@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the GSB Feature Working Paper Content Type feature.
+ */
+
+include_once 'gsb_feature_working_paper_ct.features.inc';
