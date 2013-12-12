@@ -13,6 +13,35 @@ function gsb_feature_working_paper_ct_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'field_bundle_settings_node__working_paper';
+  $strongarm->value = array(
+    'view_modes' => array(),
+    'extra_fields' => array(
+      'form' => array(
+        'metatags' => array(
+          'weight' => '21',
+        ),
+        'title' => array(
+          'weight' => '0',
+        ),
+        'path' => array(
+          'weight' => '20',
+        ),
+        'redirect' => array(
+          'weight' => '19',
+        ),
+        'workbench_access' => array(
+          'weight' => '18',
+        ),
+      ),
+      'display' => array(),
+    ),
+  );
+  $export['field_bundle_settings_node__working_paper'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'menu_options_working_paper';
   $strongarm->value = array();
   $export['menu_options_working_paper'] = $strongarm;
@@ -47,6 +76,13 @@ function gsb_feature_working_paper_ct_strongarm() {
   $strongarm->name = 'node_submitted_working_paper';
   $strongarm->value = 0;
   $export['node_submitted_working_paper'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_access_node_type_working_paper';
+  $strongarm->value = 0;
+  $export['workbench_access_node_type_working_paper'] = $strongarm;
 
   return $export;
 }
