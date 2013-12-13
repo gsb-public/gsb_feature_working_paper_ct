@@ -5,3 +5,139 @@
  */
 
 include_once 'gsb_feature_working_paper_ct.features.inc';
+
+
+function gsb_feature_working_paper_ct_gsb_cmis_content_type_import_info() {
+	return array(
+    'working_paper' => array(
+      'callback' => 'gsb_feature_working_paper_ct_cmis_import',
+    ),
+  );
+}
+
+function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
+
+  global $user;
+	
+  dpm($doc);
+
+  $url = gsb_cmis_api_getObjectURL('default', $doc);
+
+  $query = new EntityFieldQuery();
+  $query->fieldCondition('field_document_uuid', 'value', $uuid, '=')->range(0, 1);
+  $entities = $query->execute();
+
+  if (!empty($entities['node'])) {
+    $nids = array_keys($entities['node']);
+    $node = node_load(array_shift($nids));
+  } else {
+    $values = array(
+      'type' => 'working_paper',
+      'uid' => $user->uid,
+      'status' => 1,
+      'comment' => 1,
+      'promote' => 0,
+    );
+    $node = entity_create('node', $values);
+  }
+
+  if ($node->type != 'working_paper') {
+    return;
+  }  
+
+  $ewrapper = entity_metadata_wrapper('node', $node);
+
+  $ewrapper->field_document_uuid->set($uuid);
+
+	if (!empty($doc->properties['cm:title']) && trim($doc->properties['cm:title']) != '') {
+  	$ewrapper->title->set($doc->properties['cm:title']);
+	} else {
+    $ewrapper->title->set('');
+  }
+
+  if (!empty($doc->properties['gsb:cwoPublicationYear']) && trim($doc->properties['gsb:cwoPublicationYear']) != '') {
+    $ewrapper->field_year->set($doc->properties['gsb:cwoPublicationYear']);
+  } else {
+    $ewrapper->field_year = NULL;
+  }
+
+	if (!empty($doc->properties['cmis:contentStreamFileName']) && trim($doc->properties['cmis:contentStreamFileName']) != '') {
+		$ewrapper->field_document_name->set($doc->properties['cmis:contentStreamFileName']);
+	} else {
+    $ewrapper->field_document_name->set('');
+  }
+
+	if (!empty($doc->properties['cm:description']) && trim($doc->properties['cm:description']) != '') {
+		$ewrapper->field_description->set($doc->properties['cm:description']);
+	} else {
+    $ewrapper->field_description->set('');
+  }
+  
+  if (!empty($url) && trim($url) != '') {
+    $ewrapper->field_link_document->url->set($url);
+  } else {
+    $ewrapper->field_link_document = array();
+  }
+  
+	if (!empty($doc->properties['cm:author']) && trim($doc->properties['cm:author']) != '') {
+		$ewrapper->field_author->set($doc->properties['cm:author']);
+	} else {
+    $ewrapper->field_author->set('');
+  }
+
+	if (!empty($doc->properties['gsb:permisiionStatement']) && trim($doc->properties['gsb:permisiionStatement']) != '') {
+		$ewrapper->field_permissions_statement->set($doc->properties['gsb:permisiionStatement']);
+	} else {
+    $ewrapper->field_permissions_statement->set('');
+  }
+
+  if (!empty($doc->properties['gsb:cwoLinkAtHarvard']) && trim($doc->properties['gsb:cwoLinkAtHarvard']) != '') {
+    $ewrapper->field_link_single->url->set($doc->properties['gsb:cwoLinkAtHarvard']);
+  } else {
+    $ewrapper->field_link_single = array();
+  }
+
+	if (!empty($doc->properties['gsb:cwoCitation']) && trim($doc->properties['gsb:cwoCitation']) != '') {
+		$ewrapper->field_citation->set($doc->properties['gsb:cwoCitation']);
+	} else {
+    $ewrapper->field_citation->set('');
+  }       
+
+  if (!empty($doc->properties['gsb:cwoLearningObjective']) && trim($doc->properties['gsb:cwoLearningObjective']) != '') {
+    $ewrapper->field_learning_objective->set($doc->properties['gsb:cwoLearningObjective']);
+  } else {
+    $ewrapper->field_learning_objective->set('');
+  }
+
+  if (!empty($doc->properties['gsb:cwoLength']) && trim($doc->properties['gsb:cwoLength']) != '') {
+    $ewrapper->field_page_count->set($doc->properties['gsb:cwoLength']);
+  } else {
+    $ewrapper->field_page_count->set('');
+  }
+
+  if (!empty($doc->properties['gsb:cwoAcademicArea']) && trim($doc->properties['gsb:cwoAcademicArea']) != '') {
+    $ewrapper->field_business_insight_topic->set($doc->properties['gsb:cwoAcademicArea']);
+  } else {
+    $ewrapper->field_business_insight_topic = array();
+  }
+
+  if (!empty($doc->properties['gsb:authorsSunetId']) && trim($doc->properties['gsb:authorsSunetId']) != '') {
+    $ewrapper->field_author_sunet_id_reference->set(array_map('trim', explode(',', $doc->properties['gsb:authorsSunetId'])));
+  } else {
+    $ewrapper->field_author_sunet_id_reference = array();
+  }
+
+  if (!empty($doc->properties['gsb:cwoECopy']) && trim($doc->properties['gsb:cwoECopy']) != '') {
+    $ewrapper->field_e_copy->set($doc->properties['gsb:cwoECopy']);
+  } else {
+    $ewrapper->field_e_copy->set('');
+  }
+
+  if (!empty($doc->properties['gsb:cwoPaperCopy']) && trim($doc->properties['gsb:cwoPaperCopy']) != '') {
+    $ewrapper->field_paper_copy->set($doc->properties['gsb:cwoPaperCopy']);
+  } else {
+    $ewrapper->field_paper_copy->set('');
+  }  
+
+  $ewrapper->save();
+}
