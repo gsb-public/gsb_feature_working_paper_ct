@@ -127,12 +127,6 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_author_sunet_id_reference = array();
   }
 
-  if (!empty($doc->properties['gsb:cwoECopy']) && trim($doc->properties['gsb:cwoECopy']) != '') {
-    $ewrapper->field_e_copy->set($doc->properties['gsb:cwoECopy']);
-  } else {
-    $ewrapper->field_e_copy->set('');
-  }
-
   if (!empty($doc->properties['gsb:cwoPaperCopy']) && trim($doc->properties['gsb:cwoPaperCopy']) != '') {
     $ewrapper->field_paper_copy->set($doc->properties['gsb:cwoPaperCopy']);
   } else {

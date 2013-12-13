@@ -14,6 +14,8 @@ dependencies[] = list
 dependencies[] = options
 dependencies[] = strongarm
 dependencies[] = taxonomy
+dependencies[] = text
+datestamp = 1386954747
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[field_instance][] = node-working_paper-field_author
@@ -23,7 +25,6 @@ features[field_instance][] = node-working_paper-field_citation
 features[field_instance][] = node-working_paper-field_description
 features[field_instance][] = node-working_paper-field_document_name
 features[field_instance][] = node-working_paper-field_document_uuid
-features[field_instance][] = node-working_paper-field_e_copy
 features[field_instance][] = node-working_paper-field_item_id
 features[field_instance][] = node-working_paper-field_learning_objective
 features[field_instance][] = node-working_paper-field_link_document
@@ -41,10 +42,3 @@ features[variable][] = node_options_working_paper
 features[variable][] = node_preview_working_paper
 features[variable][] = node_submitted_working_paper
 features[variable][] = workbench_access_node_type_working_paper
-
-
-; Information added by drush on 2013-12-12
-version = "WP-2357-dev"
-project = "gsb_feature_working_paper_ct"
-datestamp = "1386888856"
-
