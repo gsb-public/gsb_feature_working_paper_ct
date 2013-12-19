@@ -161,11 +161,15 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'taxonomy',
+        'module' => 'gsb_field_formatter',
         'settings' => array(
           'conditions' => array(),
+          'limit_depth' => 0,
+          'path_prefix' => 'taxonomy/term',
+          'separator' => ', ',
+          'tid_or_name' => 'tid',
         ),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'gsb_field_formatter_path_term_separator',
         'weight' => 4,
       ),
       'teaser' => array(
