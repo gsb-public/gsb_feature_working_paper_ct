@@ -18,8 +18,24 @@ function gsb_feature_working_paper_ct_gsb_cmis_content_type_import_info() {
 function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
 
   global $user;
-	
-  dpm($doc);
+
+  //drush_log(dt('gsb_feature_working_paper_ct_cmis_import 1'), 'success');
+  
+  //drush_log(print_r($doc));
+
+  //drush_log(dt('gsb_feature_working_paper_ct_cmis_import 2'), 'success');
+
+  // Check if the Product Type has been set. If not, bail.
+  if (empty($doc->properties['gsb:cwoProductType']) || trim($doc->properties['gsb:cwoProductType']) == '') {
+    return;
+  }
+
+  // Valid Product Types for 'Working Paper' Content type is:
+  //   Working Paper
+  $product_type = $doc->properties['gsb:cwoProductType'];
+  if ($product_type != 'Working Paper') {
+    return;
+  }
 
   $url = gsb_cmis_api_getObjectURL('default', $doc);
 
@@ -43,53 +59,89 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
 
   if ($node->type != 'working_paper') {
     return;
-  }  
+  }
+
+  drush_log(dt('uuid = '.$uuid), 'success');
 
   $ewrapper = entity_metadata_wrapper('node', $node);
 
   $ewrapper->field_document_uuid->set($uuid);
 
-	if (!empty($doc->properties['cm:title']) && trim($doc->properties['cm:title']) != '') {
-  	$ewrapper->title->set($doc->properties['cm:title']);
-	} else {
+  drush_log(dt('writing title'), 'success');
+
+  if (!empty($doc->properties['cm:title']) && trim($doc->properties['cm:title']) != '') {
+    $ewrapper->title->set($doc->properties['cm:title']);
+  } else {
     $ewrapper->title->set('');
   }
 
+  drush_log(dt('writing field_year'), 'success');
+
   if (!empty($doc->properties['gsb:cwoPublicationYear']) && trim($doc->properties['gsb:cwoPublicationYear']) != '') {
-    $ewrapper->field_year->set($doc->properties['gsb:cwoPublicationYear']);
+    $year = $doc->properties['gsb:cwoPublicationYear'];
+    if (is_numeric($year)) {
+      $ewrapper->field_year->set($year);
+    } else {
+      $ewrapper->field_year = NULL;
+    }
   } else {
     $ewrapper->field_year = NULL;
   }
 
-	if (!empty($doc->properties['cmis:contentStreamFileName']) && trim($doc->properties['cmis:contentStreamFileName']) != '') {
-		$ewrapper->field_document_name->set($doc->properties['cmis:contentStreamFileName']);
-	} else {
-    $ewrapper->field_document_name->set('');
+  drush_log(dt('writing field_document_name'), 'success');
+
+  if (!empty($doc->properties['cmis:contentStreamFileName']) && trim($doc->properties['cmis:contentStreamFileName']) != '') {
+    drush_log(dt('writing field_document_name = '.$doc->properties['cmis:contentStreamFileName']), 'success');
+    $ewrapper->field_document_name = array(
+      'value' => $doc->properties['cmis:contentStreamFileName'],
+      'format' => 'full_html',
+    );  
+  } else {
+    $ewrapper->field_document_name = array(
+      'value' => '',
+      'format' => 'full_html',
+    );
   }
 
-	if (!empty($doc->properties['cm:description']) && trim($doc->properties['cm:description']) != '') {
-		$ewrapper->field_description->set($doc->properties['cm:description']);
-	} else {
-    $ewrapper->field_description->set('');
+  drush_log(dt('writing field_description'), 'success');
+
+  if (!empty($doc->properties['cm:description']) && trim($doc->properties['cm:description']) != '') {
+    $ewrapper->field_description = array(
+      'value' => $doc->properties['cm:description'],
+      'format' => 'full_html',
+    );
+  } else {
+    $ewrapper->field_description = array(
+      'value' => '',
+      'format' => 'full_html',
+    );
   }
+
+  drush_log(dt('writing field_link_document'), 'success');
   
   if (!empty($url) && trim($url) != '') {
     $ewrapper->field_link_document->url->set($url);
   } else {
     $ewrapper->field_link_document = array();
   }
+
+  drush_log(dt('writing field_author'), 'success');
   
-	if (!empty($doc->properties['cm:author']) && trim($doc->properties['cm:author']) != '') {
-		$ewrapper->field_author->set($doc->properties['cm:author']);
-	} else {
+  if (!empty($doc->properties['cm:author']) && trim($doc->properties['cm:author']) != '') {
+    $ewrapper->field_author->set($doc->properties['cm:author']);
+  } else {
     $ewrapper->field_author->set('');
   }
 
-	if (!empty($doc->properties['gsb:permisiionStatement']) && trim($doc->properties['gsb:permisiionStatement']) != '') {
-		$ewrapper->field_permissions_statement->set($doc->properties['gsb:permisiionStatement']);
-	} else {
+  drush_log(dt('writing field_permissions_statement'), 'success');
+
+  if (!empty($doc->properties['gsb:permisiionStatement']) && trim($doc->properties['gsb:permisiionStatement']) != '') {
+    $ewrapper->field_permissions_statement->set($doc->properties['gsb:permisiionStatement']);
+  } else {
     $ewrapper->field_permissions_statement->set('');
   }
+
+  drush_log(dt('writing field_link_single'), 'success');
 
   if (!empty($doc->properties['gsb:cwoLinkAtHarvard']) && trim($doc->properties['gsb:cwoLinkAtHarvard']) != '') {
     $ewrapper->field_link_single->url->set($doc->properties['gsb:cwoLinkAtHarvard']);
@@ -97,11 +149,15 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_link_single = array();
   }
 
-	if (!empty($doc->properties['gsb:cwoCitation']) && trim($doc->properties['gsb:cwoCitation']) != '') {
-		$ewrapper->field_citation->set($doc->properties['gsb:cwoCitation']);
-	} else {
+  drush_log(dt('writing field_citation'), 'success');
+
+  if (!empty($doc->properties['gsb:cwoCitation']) && trim($doc->properties['gsb:cwoCitation']) != '') {
+    $ewrapper->field_citation->set($doc->properties['gsb:cwoCitation']);
+  } else {
     $ewrapper->field_citation->set('');
-  }       
+  }
+
+  drush_log(dt('writing field_learning_objective'), 'success');
 
   if (!empty($doc->properties['gsb:cwoLearningObjective']) && trim($doc->properties['gsb:cwoLearningObjective']) != '') {
     $ewrapper->field_learning_objective->set($doc->properties['gsb:cwoLearningObjective']);
@@ -109,23 +165,61 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_learning_objective->set('');
   }
 
+  drush_log(dt('writing field_page_count'), 'success');
+
   if (!empty($doc->properties['gsb:cwoLength']) && trim($doc->properties['gsb:cwoLength']) != '') {
     $ewrapper->field_page_count->set($doc->properties['gsb:cwoLength']);
   } else {
     $ewrapper->field_page_count->set('');
   }
 
+  drush_log(dt('writing field_product_type'), 'success');
+  $ewrapper->field_product_type->set($product_type);
+
+  drush_log(dt('writing field_business_insight_topic'), 'success');
+
   if (!empty($doc->properties['gsb:cwoAcademicArea']) && trim($doc->properties['gsb:cwoAcademicArea']) != '') {
-    $ewrapper->field_business_insight_topic->set($doc->properties['gsb:cwoAcademicArea']);
+    $ids = array();
+    $bi_topic = $doc->properties['gsb:cwoAcademicArea'];
+    $results = taxonomy_get_term_by_name($bi_topic);
+    foreach ($results as $item) {
+      if ($item->vocabulary_machine_name == 'business_insight_topic') {
+        $ids[] = $item->tid;
+      }
+    }
+    $ewrapper->field_business_insight_topic->set($ids);
   } else {
     $ewrapper->field_business_insight_topic = array();
   }
 
+  drush_log(dt('writing field_author_sunet_id_reference'), 'success');
+
   if (!empty($doc->properties['gsb:authorsSunetId']) && trim($doc->properties['gsb:authorsSunetId']) != '') {
-    $ewrapper->field_author_sunet_id_reference->set(array_map('trim', explode(',', $doc->properties['gsb:authorsSunetId'])));
-  } else {
-    $ewrapper->field_author_sunet_id_reference = array();
+
+    $sunet_ids = array_map('trim', explode(',', $doc->properties['gsb:authorsSunetId']));
+
+    //drush_log(dt('sunet_id = '.$sunet_id), 'success');
+
+    $query = db_select('field_data_field_sunetid', 'su');
+    $query->fields('su', array('bundle', 'entity_id', 'field_sunetid_value'));
+    $query->condition('su.field_sunetid_value',$sunet_ids,'IN');
+    $result = $query->execute();
+    //dpm($result);
+
+    $entity_ids = array();
+    foreach ($result as $record) {
+      $entity_ids[] = $record->entity_id;
+    }
+
+    if (!empty($entity_ids) != '') {
+      $ewrapper->field_author_sunet_id_reference->set($entity_ids);
+    } else {
+      $ewrapper->field_author_sunet_id_reference = array();
+    }
+
   }
+
+  drush_log(dt('writing field_paper_copy'), 'success');
 
   if (!empty($doc->properties['gsb:cwoPaperCopy']) && trim($doc->properties['gsb:cwoPaperCopy']) != '') {
     $ewrapper->field_paper_copy->set($doc->properties['gsb:cwoPaperCopy']);
@@ -133,5 +227,8 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_paper_copy->set('');
   }  
 
+  drush_log(dt('saving node'), 'success');
+
   $ewrapper->save();
+  
 }
