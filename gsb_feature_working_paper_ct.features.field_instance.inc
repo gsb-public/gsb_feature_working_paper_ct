@@ -226,7 +226,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'enable' => 0,
         'insert_plugin' => '',
       ),
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -269,13 +269,13 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_document_name',
     'label' => 'Document Name',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'linkit' => array(
         'enable' => 0,
         'insert_plugin' => '',
       ),
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -287,7 +287,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 14,
     ),
     'workbench_access_field' => 0,
   );
@@ -334,7 +334,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -497,7 +497,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'link_field',
-      'weight' => 14,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -697,6 +697,49 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-working_paper-field_product_type'
+  $field_instances['node-working_paper-field_product_type'] = array(
+    'bundle' => 'working_paper',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(
+          'conditions' => array(),
+        ),
+        'type' => 'list_default',
+        'weight' => 23,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_product_type',
+    'label' => 'Product Type',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+      ),
+      'type' => 'options_select',
+      'weight' => 17,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-working_paper-field_tag'
   $field_instances['node-working_paper-field_tag'] = array(
     'bundle' => 'working_paper',
@@ -816,6 +859,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
   t('Link at Harvard');
   t('Paper Copy');
   t('Permission Statement');
+  t('Product Type');
   t('Publication Year');
   t('Tag');
 

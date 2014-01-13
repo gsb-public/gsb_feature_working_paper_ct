@@ -62,16 +62,16 @@ function gsb_feature_working_paper_ct_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '21',
+          'weight' => '20',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '20',
+          'weight' => '19',
         ),
         'redirect' => array(
-          'weight' => '19',
+          'weight' => '18',
         ),
         'workbench_access' => array(
           'weight' => '18',
