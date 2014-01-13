@@ -79,8 +79,10 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
 
   if (!empty($doc->properties['gsb:cwoPublicationYear']) && trim($doc->properties['gsb:cwoPublicationYear']) != '') {
     $year = $doc->properties['gsb:cwoPublicationYear'];
+    drush_log(dt('year = '.$year), 'success');
     if (is_numeric($year)) {
-      $ewrapper->field_year->set($year);
+      $date = new DateTime($year."-01-01");
+      $ewrapper->field_year->set($date->getTimestamp());
     } else {
       $ewrapper->field_year = NULL;
     }
