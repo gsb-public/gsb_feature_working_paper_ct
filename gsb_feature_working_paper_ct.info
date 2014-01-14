@@ -48,3 +48,10 @@ features[variable][] = node_options_working_paper
 features[variable][] = node_preview_working_paper
 features[variable][] = node_submitted_working_paper
 features[variable][] = workbench_access_node_type_working_paper
+
+
+; Information added by drush on 2014-01-13
+version = "WP-2606-dev"
+project = "gsb_feature_working_paper_ct"
+datestamp = "1389638524"
+
