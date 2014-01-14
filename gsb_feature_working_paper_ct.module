@@ -6,7 +6,9 @@
 
 include_once 'gsb_feature_working_paper_ct.features.inc';
 
-
+/**
+ * Sets up a callback function for handling the cmis import
+ */
 function gsb_feature_working_paper_ct_gsb_cmis_content_type_import_info() {
 	return array(
     'working_paper' => array(
@@ -15,6 +17,10 @@ function gsb_feature_working_paper_ct_gsb_cmis_content_type_import_info() {
   );
 }
 
+/**
+ * The callback function for handling the cmis import for
+ * the Working Paper content type.
+ */
 function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
 
   global $user;
@@ -31,16 +37,17 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     return;
   }
 
-  $url = gsb_cmis_api_getObjectURL('default', $doc);
-
+  // Attempt to find a node with the document uuid
   $query = new EntityFieldQuery();
   $query->fieldCondition('field_document_uuid', 'value', $uuid, '=')->range(0, 1);
   $entities = $query->execute();
 
   if (!empty($entities['node'])) {
+    // a node already exists, so load it
     $nids = array_keys($entities['node']);
     $node = node_load(array_shift($nids));
   } else {
+    // a node does exist, so create one
     $values = array(
       'type' => 'working_paper',
       'uid' => $user->uid,
@@ -51,6 +58,7 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $node = entity_create('node', $values);
   }
 
+  // if the node isn't a Working Paper, then bail
   if ($node->type != 'working_paper') {
     return;
   }
@@ -58,6 +66,8 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   gsb_cmis_log('uuid = '.$uuid, 'success');
 
   $ewrapper = entity_metadata_wrapper('node', $node);
+
+  gsb_cmis_log('writing document uuid', 'success');
 
   $ewrapper->field_document_uuid->set($uuid);
 
@@ -115,6 +125,8 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
 
   gsb_cmis_log('writing field_link_document', 'success');
   
+  $url = gsb_cmis_api_getObjectURL('default', $doc);
+
   if (!empty($url) && trim($url) != '') {
     $ewrapper->field_link_document->url->set($url);
   } else {
@@ -170,6 +182,7 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   }
 
   gsb_cmis_log('writing field_product_type', 'success');
+
   $ewrapper->field_product_type->set($product_type);
 
   gsb_cmis_log('writing field_business_insight_topic', 'success');
@@ -194,13 +207,10 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
 
     $sunet_ids = array_map('trim', explode(',', $doc->properties['gsb:authorsSunetId']));
 
-    gsb_cmis_log('sunet_id = '.$sunet_id, 'success');
-
     $query = db_select('field_data_field_sunetid', 'su');
     $query->fields('su', array('bundle', 'entity_id', 'field_sunetid_value'));
     $query->condition('su.field_sunetid_value',$sunet_ids,'IN');
     $result = $query->execute();
-    //dpm($result);
 
     $entity_ids = array();
     foreach ($result as $record) {
