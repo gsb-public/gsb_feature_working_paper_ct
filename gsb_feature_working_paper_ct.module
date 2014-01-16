@@ -232,6 +232,14 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   } else {
     $ewrapper->field_paper_copy->set('');
   }  
+  
+  gsb_cmis_log('writing field_item_id', 'success');
+
+  if (!empty($doc->properties['gsb:cwoItemId']) && trim($doc->properties['gsb:cwoItemId']) != '') {
+    $ewrapper->field_item_id->set($doc->properties['gsb:cwoItemId']);
+  } else {
+    $ewrapper->field_item_id->set('');
+  }      
 
   gsb_cmis_log('saving node', 'success');
 
