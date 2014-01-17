@@ -76,7 +76,7 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   if (!empty($doc->properties['cm:title']) && trim($doc->properties['cm:title']) != '') {
     $ewrapper->title->set($doc->properties['cm:title']);
   } else {
-    $ewrapper->title->set('');
+    $ewrapper->title->set(NULL);
   }
 
   gsb_cmis_log('writing field_year', 'success');
@@ -100,7 +100,7 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     gsb_cmis_log('writing field_document_name = '.$doc->properties['cmis:contentStreamFileName'], 'success');
     $ewrapper->field_document_name->set($doc->properties['cm:contentStreamFileName']);
   } else {
-    $ewrapper->field_document_name->set('');
+    $ewrapper->field_document_name->set(NULL);
   }  
 
   gsb_cmis_log('writing field_description', 'success');
@@ -108,7 +108,7 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   if (!empty($doc->properties['cm:description']) && trim($doc->properties['cm:description']) != '') {
     $ewrapper->field_description->set($doc->properties['cm:description']);
   } else {
-    $ewrapper->field_description->set('');
+    $ewrapper->field_description->set(NULL);
   }
 
   gsb_cmis_log('writing field_link_document', 'success');
@@ -126,7 +126,7 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   if (!empty($doc->properties['cm:author']) && trim($doc->properties['cm:author']) != '') {
     $ewrapper->field_author->set($doc->properties['cm:author']);
   } else {
-    $ewrapper->field_author->set('');
+    $ewrapper->field_author->set(NULL);
   }
 
   gsb_cmis_log('writing field_permissions_statement', 'success');
@@ -134,7 +134,7 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   if (!empty($doc->properties['gsb:permisiionStatement']) && trim($doc->properties['gsb:permisiionStatement']) != '') {
     $ewrapper->field_permissions_statement->set($doc->properties['gsb:permisiionStatement']);
   } else {
-    $ewrapper->field_permissions_statement->set('');
+    $ewrapper->field_permissions_statement->set(NULL);
   }
 
   gsb_cmis_log('writing field_link_single', 'success');
@@ -150,7 +150,7 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   if (!empty($doc->properties['gsb:cwoCitation']) && trim($doc->properties['gsb:cwoCitation']) != '') {
     $ewrapper->field_citation->set($doc->properties['gsb:cwoCitation']);
   } else {
-    $ewrapper->field_citation->set('');
+    $ewrapper->field_citation->set(NULL);
   }
 
   gsb_cmis_log('writing field_learning_objective', 'success');
@@ -158,7 +158,7 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   if (!empty($doc->properties['gsb:cwoLearningObjective']) && trim($doc->properties['gsb:cwoLearningObjective']) != '') {
     $ewrapper->field_learning_objective->set($doc->properties['gsb:cwoLearningObjective']);
   } else {
-    $ewrapper->field_learning_objective->set('');
+    $ewrapper->field_learning_objective->set(NULL);
   }
 
   gsb_cmis_log('writing field_page_count', 'success');
@@ -166,7 +166,7 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   if (!empty($doc->properties['gsb:cwoLength']) && trim($doc->properties['gsb:cwoLength']) != '') {
     $ewrapper->field_page_count->set($doc->properties['gsb:cwoLength']);
   } else {
-    $ewrapper->field_page_count->set('');
+    $ewrapper->field_page_count->set(NULL);
   }
 
   gsb_cmis_log('writing field_product_type', 'success');
@@ -234,7 +234,7 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   if (!empty($doc->properties['gsb:cwoPaperCopy']) && trim($doc->properties['gsb:cwoPaperCopy']) != '') {
     $ewrapper->field_paper_copy->set($doc->properties['gsb:cwoPaperCopy']);
   } else {
-    $ewrapper->field_paper_copy->set('');
+    $ewrapper->field_paper_copy->set(NULL);
   }  
   
   gsb_cmis_log('writing field_item_id', 'success');
@@ -242,7 +242,7 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   if (!empty($doc->properties['gsb:cwoItemId']) && trim($doc->properties['gsb:cwoItemId']) != '') {
     $ewrapper->field_item_id->set($doc->properties['gsb:cwoItemId']);
   } else {
-    $ewrapper->field_item_id->set('');
+    $ewrapper->field_item_id->set(NULL);
   }  
   
   /*
