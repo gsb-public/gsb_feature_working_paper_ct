@@ -241,6 +241,10 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_item_id->set('');
   }  
   
+  /*
+  
+  @todo Need to find out how to retrieve the tags from an Alfresco document
+  
   gsb_cmis_log('writing field_tag', 'success');
 
   if (!empty($doc->properties['gsb:cwoSetting']) && trim($doc->properties['gsb:cwoSetting']) != '') {
@@ -262,6 +266,8 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   } else {
     $ewrapper->field_tag = array();
   }     
+  
+  */
 
   gsb_cmis_log('saving node', 'success');
 
@@ -277,6 +283,7 @@ function _gsb_feature_working_paper_ct_add_tags($tags) {
     if (empty($results)) {
       _gsb_feature_working_paper_ct_add_tag_term($term, $vid);
     } else {
+      $found = FALSE;	
       foreach ($results as $item) {
         if ($item->vocabulary_machine_name == 'tag') {
           $found = TRUE;
