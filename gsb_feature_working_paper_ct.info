@@ -1,7 +1,7 @@
 name = GSB Feature Working Paper Content Type
 core = 7.x
 package = GSB
-version = 7.x-1.0
+version = 7.x-3.1
 project = gsb_feature_working_paper_ct
 dependencies[] = ctools
 dependencies[] = date
@@ -17,7 +17,7 @@ dependencies[] = options
 dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = text
-datestamp = 1389023956
+datestamp = 1389918294
 features[ctools][] = ds:ds:1
 features[ctools][] = strongarm:strongarm:1
 features[ds_field_settings][] = node|working_paper|default
@@ -47,11 +47,5 @@ features[variable][] = menu_parent_working_paper
 features[variable][] = node_options_working_paper
 features[variable][] = node_preview_working_paper
 features[variable][] = node_submitted_working_paper
+features[variable][] = pathauto_node_working_paper_pattern
 features[variable][] = workbench_access_node_type_working_paper
-
-
-; Information added by drush on 2014-01-13
-version = "WP-2606-dev"
-project = "gsb_feature_working_paper_ct"
-datestamp = "1389638524"
-
