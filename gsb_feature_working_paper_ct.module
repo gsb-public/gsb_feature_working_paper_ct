@@ -239,7 +239,29 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_item_id->set($doc->properties['gsb:cwoItemId']);
   } else {
     $ewrapper->field_item_id->set('');
-  }      
+  }  
+  
+  gsb_cmis_log('writing field_tag', 'success');
+
+  if (!empty($doc->properties['gsb:cwoSetting']) && trim($doc->properties['gsb:cwoSetting']) != '') {
+    $ids = array();
+    $term_list = array();
+    $tags = $doc->properties['gsb:cwoSetting'];
+    $tags = explode(",", $tags);
+    _gsb_feature_working_paper_ct_add_tags($tags);
+    foreach($tags as $term) {
+      $results = taxonomy_get_term_by_name($term);
+      $term_list = array_merge($term_list, $results);
+    }
+    foreach ($term_list as $item) {
+      if ($item->vocabulary_machine_name == 'tag') {
+        $ids[] = $item->tid;
+      }
+    }
+    $ewrapper->field_tag->set($ids);
+  } else {
+    $ewrapper->field_tag = array();
+  }     
 
   gsb_cmis_log('saving node', 'success');
 
@@ -247,5 +269,34 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   
 }
 
+function _gsb_feature_working_paper_ct_add_tags($tags) {
+  $vocab = taxonomy_vocabulary_machine_name_load('tag');
+  $vid = $vocab->vid;
+  foreach($tags as $term) {
+    $results = taxonomy_get_term_by_name($term);
+    if (empty($results)) {
+      _gsb_feature_working_paper_ct_add_tag_term($term, $vid);
+    } else {
+      foreach ($results as $item) {
+        if ($item->vocabulary_machine_name == 'tag') {
+          $found = TRUE;
+          break;
+        }    
+      }
+      if (!$found) {
+        _gsb_feature_working_paper_ct_add_tag_term($term, $vid);
+      }
+    }
+  }
+}
+
+function _gsb_feature_working_paper_ct_add_tag_term($term, $vid) {
+  $new_term = new stdClass();
+  $new_term->name = $term;
+  $new_term->description = '';
+  $new_term->vid = $vid;
+  $new_term->parent = null;
+  taxonomy_term_save($new_term);
+}
 
 
