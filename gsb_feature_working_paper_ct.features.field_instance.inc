@@ -10,6 +10,44 @@
 function gsb_feature_working_paper_ct_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'node-working_paper-field_academic_area_unlimited'
+  $field_instances['node-working_paper-field_academic_area_unlimited'] = array(
+    'bundle' => 'working_paper',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(
+          'conditions' => array(),
+        ),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 24,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_academic_area_unlimited',
+    'label' => 'Academic Area',
+    'required' => FALSE,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'hs_taxonomy',
+      'settings' => array(),
+      'type' => 'taxonomy_hs',
+      'weight' => 10,
+    ),
+  );
+
   // Exported field_instance: 'node-working_paper-field_author'
   $field_instances['node-working_paper-field_author'] = array(
     'bundle' => 'working_paper',
@@ -138,7 +176,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_business_insight_topic',
-    'label' => 'Academic Area',
+    'label' => 'Business Insight Topic',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -150,7 +188,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'taxonomy_hs',
-      'weight' => 10,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -189,7 +227,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -269,7 +307,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_document_name',
     'label' => 'Document Name',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'linkit' => array(
         'enable' => 0,
@@ -287,7 +325,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 14,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -334,7 +372,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 14,
     ),
     'workbench_access_field' => 0,
   );
@@ -497,7 +535,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'link_field',
-      'weight' => 15,
+      'weight' => 16,
     ),
     'workbench_access_field' => 0,
   );
@@ -558,7 +596,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'link_field',
-      'weight' => 11,
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
@@ -645,7 +683,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_select',
-      'weight' => 16,
+      'weight' => 17,
     ),
     'workbench_access_field' => 0,
   );
@@ -735,7 +773,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_select',
-      'weight' => 17,
+      'weight' => 18,
     ),
     'workbench_access_field' => 0,
   );
@@ -848,6 +886,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
   t('Academic Area');
   t('Author');
   t('Author Sunet Id Reference');
+  t('Business Insight Topic');
   t('Citation');
   t('Description');
   t('Document Link');

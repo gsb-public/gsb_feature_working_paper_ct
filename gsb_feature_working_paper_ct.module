@@ -10,7 +10,7 @@ include_once 'gsb_feature_working_paper_ct.features.inc';
  * Sets up a callback function for handling the cmis import
  */
 function gsb_feature_working_paper_ct_gsb_cmis_content_type_import_info() {
-	return array(
+  return array(
     'working_paper' => array(
       'callback' => 'gsb_feature_working_paper_ct_cmis_import',
     ),
@@ -187,9 +187,9 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
 
   gsb_cmis_log('writing field_business_insight_topic', 'success');
 
-  if (!empty($doc->properties['gsb:cwoAcademicArea']) && trim($doc->properties['gsb:cwoAcademicArea']) != '') {
+  if (!empty($doc->properties['gsb:cwoBusinessTopics']) && trim($doc->properties['gsb:cwoBusinessTopics']) != '') {
     $ids = array();
-    $bi_topic = $doc->properties['gsb:cwoAcademicArea'];
+    $bi_topic = $doc->properties['gsb:cwoBusinessTopics'];
     $results = taxonomy_get_term_by_name($bi_topic);
     foreach ($results as $item) {
       if ($item->vocabulary_machine_name == 'business_insight_topic') {
@@ -199,6 +199,22 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_business_insight_topic->set($ids);
   } else {
     $ewrapper->field_business_insight_topic = array();
+  }
+
+  gsb_cmis_log('writing field_academic_area_unlimited', 'success');
+
+  if (!empty($doc->properties['gsb:cwoAcademicArea']) && trim($doc->properties['gsb:cwoAcademicArea']) != '') {
+    $ids = array();
+    $academic_area = $doc->properties['gsb:cwoAcademicArea'];
+    $results = taxonomy_get_term_by_name($academic_area);
+    foreach ($results as $item) {
+      if ($item->vocabulary_machine_name == 'academic_area') {
+        $ids[] = $item->tid;
+      }
+    }
+    $ewrapper->field_academic_area_unlimited->set($ids);
+  } else {
+    $ewrapper->field_academic_area_unlimited = array();
   }
 
   gsb_cmis_log('writing field_author_sunet_id_reference', 'success');
@@ -241,6 +257,10 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_item_id->set('');
   }  
   
+  /*
+  
+  @todo Need to find out how to retrieve the tags from an Alfresco document
+  
   gsb_cmis_log('writing field_tag', 'success');
 
   if (!empty($doc->properties['gsb:cwoSetting']) && trim($doc->properties['gsb:cwoSetting']) != '') {
@@ -262,6 +282,8 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   } else {
     $ewrapper->field_tag = array();
   }     
+  
+  */
 
   gsb_cmis_log('saving node', 'success');
 
@@ -277,6 +299,7 @@ function _gsb_feature_working_paper_ct_add_tags($tags) {
     if (empty($results)) {
       _gsb_feature_working_paper_ct_add_tag_term($term, $vid);
     } else {
+      $found = FALSE; 
       foreach ($results as $item) {
         if ($item->vocabulary_machine_name == 'tag') {
           $found = TRUE;
@@ -298,5 +321,4 @@ function _gsb_feature_working_paper_ct_add_tag_term($term, $vid) {
   $new_term->parent = null;
   taxonomy_term_save($new_term);
 }
-
 
