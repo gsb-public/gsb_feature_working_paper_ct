@@ -1,7 +1,7 @@
 name = GSB Feature Working Paper Content Type
 core = 7.x
 package = GSB
-version = 7.x-1.0
+version = 7.x-3.1
 project = gsb_feature_working_paper_ct
 dependencies[] = ctools
 dependencies[] = date
@@ -17,7 +17,7 @@ dependencies[] = options
 dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = text
-datestamp = 1389984466
+datestamp = 1389992443
 features[ctools][] = ds:ds:1
 features[ctools][] = strongarm:strongarm:1
 features[ds_field_settings][] = node|working_paper|default
