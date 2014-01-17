@@ -98,16 +98,10 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
 
   if (!empty($doc->properties['cmis:contentStreamFileName']) && trim($doc->properties['cmis:contentStreamFileName']) != '') {
     gsb_cmis_log('writing field_document_name = '.$doc->properties['cmis:contentStreamFileName'], 'success');
-    $ewrapper->field_document_name = array(
-      'value' => $doc->properties['cmis:contentStreamFileName'],
-      'format' => 'full_html',
-    );  
+    $ewrapper->field_document_name->set($doc->properties['cm:contentStreamFileName']);
   } else {
-    $ewrapper->field_document_name = array(
-      'value' => '',
-      'format' => 'full_html',
-    );
-  }
+    $ewrapper->field_document_name->set('');
+  }  
 
   gsb_cmis_log('writing field_description', 'success');
 
