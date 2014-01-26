@@ -30,7 +30,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'weight' => 14,
       ),
       'teaser_listing' => array(
-        'label' => 'inline',
+        'label' => 'hidden',
         'module' => 'gsb_field_formatter',
         'settings' => array(
           'conditions' => array(),
