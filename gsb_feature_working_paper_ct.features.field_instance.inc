@@ -902,6 +902,75 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-working_paper-field_search_field'
+  $field_instances['node-working_paper-field_search_field'] = array(
+    'bundle' => 'working_paper',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'concat_field',
+        'settings' => array(
+          'conditions' => array(),
+        ),
+        'type' => 'concat_field_blank',
+        'weight' => 25,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser_listing' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_search_field',
+    'label' => 'Search field',
+    'required' => 0,
+    'settings' => array(
+      'selected_fields' => array(
+        'concat_field_entity_label' => 'concat_field_entity_label',
+        'field_academic_area_unlimited' => 'field_academic_area_unlimited',
+        'field_author' => 'field_author',
+        'field_author_sunet_id_reference' => 0,
+        'field_business_insight_topic' => 'field_business_insight_topic',
+        'field_citation' => 'field_citation',
+        'field_description' => 'field_description',
+        'field_document_name' => 0,
+        'field_document_uuid' => 0,
+        'field_item_id' => 0,
+        'field_learning_objective' => 'field_learning_objective',
+        'field_link_document' => 0,
+        'field_link_single' => 0,
+        'field_page_count' => 0,
+        'field_paper_copy' => 0,
+        'field_permissions_statement' => 0,
+        'field_product_type' => 0,
+        'field_tag' => 'field_tag',
+        'field_year' => 'field_year',
+      ),
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'concat_field',
+      'settings' => array(
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+      ),
+      'type' => 'concat_field_default',
+      'weight' => 22,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-working_paper-field_tag'
   $field_instances['node-working_paper-field_tag'] = array(
     'bundle' => 'working_paper',
@@ -1054,6 +1123,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
   t('Permission Statement');
   t('Product Type');
   t('Publication Year');
+  t('Search field');
   t('Tag');
 
   return $field_instances;
