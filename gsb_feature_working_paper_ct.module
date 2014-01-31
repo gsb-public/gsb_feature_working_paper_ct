@@ -251,16 +251,15 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   }  
   
   /*
-  
-  @todo Need to find out how to retrieve the tags from an Alfresco document
-  
+  @todo Need to uncomment when we are able to call alfresco service api on production
+
   gsb_cmis_log('writing field_tag', 'success');
 
-  if (!empty($doc->properties['gsb:cwoSetting']) && trim($doc->properties['gsb:cwoSetting']) != '') {
+  $tags = _gsb_feature_working_paper_ct_getTags($uuid);
+
+  if (!empty($tags)) {
     $ids = array();
     $term_list = array();
-    $tags = $doc->properties['gsb:cwoSetting'];
-    $tags = explode(",", $tags);
     _gsb_feature_working_paper_ct_add_tags($tags);
     foreach($tags as $term) {
       $results = taxonomy_get_term_by_name($term);
@@ -274,8 +273,7 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_tag->set($ids);
   } else {
     $ewrapper->field_tag = array();
-  }     
-  
+  }
   */
 
   gsb_cmis_log('saving node', 'success');
@@ -314,4 +312,77 @@ function _gsb_feature_working_paper_ct_add_tag_term($term, $vid) {
   $new_term->parent = null;
   taxonomy_term_save($new_term);
 }
+
+function _gsb_feature_working_paper_ct_force_protocol($url) {
+  if (!stristr($url,'http://') && !stristr($url,'https://')) {
+    return 'http://' . $url;
+  }
+  return $url;
+}
+
+function _gsb_feature_working_paper_ct_getTags($uuid) {
+
+  $tags = array();
+
+  $repo_info = variable_get('cmis_repositories', false);
+  if (!$repo_info) {
+    return $tags;
+  }
+
+  // get the id - striped down to just the number 
+
+  $id = str_replace('urn:uuid:', '', $uuid);
+
+  // put together the url for the alfresco service call - to get 'tags'
+
+  $url = $repo_info['default']['service_url'];
+  $url = $url . $id . '/tags';
+
+  // get the user and password
+
+  $user = $repo_info['default']['user'];
+  $password = $repo_info['default']['password'];
+
+  // setup the curl options
+
+  $session = curl_init();
+
+  curl_setopt($session, CURLOPT_URL, $url);
+  curl_setopt($session, CURLOPT_SSL_VERIFYPEER, FALSE);
+  curl_setopt($session, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($session, CURLOPT_FOLLOWLOCATION, 1);
+  curl_setopt($session, CURLOPT_COOKIEFILE, "");
+  curl_setopt($session, CURLOPT_USERPWD, $user. ":" . $password);
+  curl_setopt($session, CURLOPT_HTTPHEADER, array("Content-Type" => ""));
+  curl_setopt($session, CURLOPT_CUSTOMREQUEST, "GET");
+
+  // make the return value object
+
+  $retval = new stdClass();
+  $retval->url = $url;
+  $retval->method = "GET";
+  $retval->content_sent = null;
+  $retval->content_type_sent = "";
+
+  // make the curl call
+
+  $retval->body = curl_exec($session);
+
+  // set the return values
+
+  $retval->code = curl_getinfo($session, CURLINFO_HTTP_CODE);
+  $retval->content_type = curl_getinfo($session, CURLINFO_CONTENT_TYPE);
+  $retval->content_length = curl_getinfo($session, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
+
+  // close the curl session
+
+  curl_close($session);
+
+  if ($retval->code == '200') {
+    $tags = drupal_json_decode($retval->body);
+  }
+
+  return $tags;
+}
+
 
