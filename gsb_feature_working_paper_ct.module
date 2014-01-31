@@ -313,13 +313,6 @@ function _gsb_feature_working_paper_ct_add_tag_term($term, $vid) {
   taxonomy_term_save($new_term);
 }
 
-function _gsb_feature_working_paper_ct_force_protocol($url) {
-  if (!stristr($url,'http://') && !stristr($url,'https://')) {
-    return 'http://' . $url;
-  }
-  return $url;
-}
-
 function _gsb_feature_working_paper_ct_getTags($uuid) {
 
   $tags = array();
