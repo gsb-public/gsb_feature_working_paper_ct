@@ -410,16 +410,12 @@ function _gsb_feature_working_paper_ct_add_author($node, $entity_id) {
   $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_authors'));
   $field_collection_item->setHostEntity('node', $node);
 
-  $item = array();
-  $item[] = array('target_id' => $entity_id);
   $field_collection_item->field_person_fac_single_ref = array(
-    'und' => $item,
+    'und' => array(array('target_id' => $entity_id)),
   );
 
-  $item = array();
-  $item[] = array('value' => 'UseEntityReference');
   $field_collection_item->field_person_fac_or_other = array(
-    'und' => $item,
+    'und' => array(array('value' => 'UseEntityReference'))
   );
 
   $field_collection_item->field_first_name = array();
