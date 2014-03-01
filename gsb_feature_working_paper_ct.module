@@ -401,6 +401,22 @@ function _gsb_feature_working_paper_ct_import_authors($node,$ewrapper,$doc) {
     }
   }
 
+  // check for an 'default/empty' author field collection
+  // remove if this is the case, and we have authors to add
+  $found_default = FALSE;
+  if (count($authors) == 1) {
+    if (empty($authors[0]->field_first_name)) {
+      if (empty($authors[0]->field_last_name)) {
+        if (empty($authors[0]->field_person_fac_single_ref)) {
+          $found_default = TRUE;
+        }
+      }
+    }
+  }
+  if ($found_default && count($entity_ids) > 0) {
+    $ewrapper->field_authors->set(NULL);
+  }
+
   // add any new authors that came for the sunetids
   foreach ($entity_ids as $entity_id) {
     _gsb_feature_working_paper_ct_add_author($node, $entity_id);
