@@ -7,6 +7,15 @@
 include_once 'gsb_feature_working_paper_ct.features.inc';
 
 /**
+ * Implements hook_gsb_feature_base_fields_faculty_author_types().
+ */
+function gsb_feature_working_paper_ct_gsb_feature_base_fields_faculty_author_types() {
+  return array(
+    'working_paper',
+  );
+}
+
+/**
  * Sets up a callback function for handling the cmis import
  */
 function gsb_feature_working_paper_ct_gsb_cmis_content_type_import_info() {
