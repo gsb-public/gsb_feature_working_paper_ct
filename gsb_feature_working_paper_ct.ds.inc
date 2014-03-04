@@ -37,21 +37,6 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_author_sunet_id_reference' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_ds_field_expert',
-          'lb' => 'Faculty Authors',
-          'lb-col' => TRUE,
-          'ow' => TRUE,
-          'ow-el' => 'div',
-          'ow-cl' => '',
-          'ow-def-cl' => TRUE,
-          'ow-at' => '',
-          'ow-def-at' => FALSE,
-        ),
-      ),
-    ),
     'field_business_insight_topic' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -297,22 +282,23 @@ function gsb_feature_working_paper_ct_ds_layout_settings_info() {
     'regions' => array(
       'left' => array(
         0 => 'title',
-        1 => 'field_author',
-        2 => 'field_year',
-        3 => 'field_item_id',
-        4 => 'group_wrapper_topics',
-        5 => 'field_description',
-        6 => 'field_academic_area_unlimited',
-        7 => 'field_tag',
-        8 => 'field_business_insight_topic',
-        9 => 'field_link_document',
+        2 => 'field_author',
+        3 => 'field_year',
+        4 => 'field_item_id',
+        5 => 'group_wrapper_topics',
+        6 => 'field_description',
+        7 => 'field_academic_area_unlimited',
+        8 => 'field_tag',
+        9 => 'field_business_insight_topic',
+        10 => 'field_link_document',
       ),
       'right' => array(
-        10 => 'field_author_sunet_id_reference',
+        1 => 'gsb_feature_base_fields_faculty_authors',
       ),
     ),
     'fields' => array(
       'title' => 'left',
+      'gsb_feature_base_fields_faculty_authors' => 'right',
       'field_author' => 'left',
       'field_year' => 'left',
       'field_item_id' => 'left',
@@ -322,7 +308,6 @@ function gsb_feature_working_paper_ct_ds_layout_settings_info() {
       'field_tag' => 'left',
       'field_business_insight_topic' => 'left',
       'field_link_document' => 'left',
-      'field_author_sunet_id_reference' => 'right',
     ),
     'classes' => array(),
     'wrappers' => array(

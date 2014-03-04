@@ -83,7 +83,14 @@ function gsb_feature_working_paper_ct_strongarm() {
           'weight' => '18',
         ),
       ),
-      'display' => array(),
+      'display' => array(
+        'gsb_feature_base_fields_faculty_authors' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_node__working_paper'] = $strongarm;
