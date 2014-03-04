@@ -86,8 +86,30 @@ function gsb_feature_working_paper_ct_strongarm() {
       'display' => array(
         'gsb_feature_base_fields_faculty_authors' => array(
           'default' => array(
-            'weight' => '0',
+            'weight' => '8',
             'visible' => TRUE,
+          ),
+          'teaser' => array(
+            'weight' => '4',
+            'visible' => FALSE,
+          ),
+          'teaser_listing' => array(
+            'weight' => '7',
+            'visible' => FALSE,
+          ),
+        ),
+        'gsb_working_paper_listing_entity_view_1' => array(
+          'teaser' => array(
+            'weight' => '13',
+            'visible' => FALSE,
+          ),
+          'teaser_listing' => array(
+            'weight' => '15',
+            'visible' => FALSE,
+          ),
+          'default' => array(
+            'weight' => '10',
+            'visible' => FALSE,
           ),
         ),
       ),
