@@ -135,14 +135,6 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_link_document = array();
   }
 
-  gsb_cmis_log('writing field_author', 'success');
-  
-  if (!empty($doc->properties['cm:author']) && trim($doc->properties['cm:author']) != '') {
-    $ewrapper->field_author->set($doc->properties['cm:author']);
-  } else {
-    $ewrapper->field_author->set(NULL);
-  }
-
   gsb_cmis_log('writing field_permissions_statement', 'success');
 
   if (!empty($doc->properties['gsb:permisiionStatement']) && trim($doc->properties['gsb:permisiionStatement']) != '') {
