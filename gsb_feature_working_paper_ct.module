@@ -743,3 +743,39 @@ function _gsb_feature_working_paper_ct_add_author($node, $entity_id) {
 
 }
 
+/**
+ * Update Alfresco with the new properties for the Working Paper node.
+ */
+function _gsb_feature_working_paper_ct_updateAlfresco($node) {
+
+  module_load_include('api.inc', 'cmis');
+
+  $repository = cmis_get_repository('default');
+  dpm($repository);
+
+  // @todo - Need to clean this up to use the file id associated with 
+  // the working paper
+  $fid = '19231'; 
+  // @todo - Remove test folder 
+  //$folderpath = '/Research Papers';  
+  $folderpath = '/Research Papers/Greg';
+
+  $file = (array)file_load($fid);   
+  $filename = $file['filename'];
+
+  $folder = cmisapi_getObjectByPath($repository->repositoryId, drupal_encode_path($folderpath) );
+
+  $new_cmis_object = cmisapi_createDocument(
+    $repository->repositoryId,
+    $folder->id,
+    $filename,
+    array(),
+    @file_get_contents($file['uri']),
+    $file['filemime']
+  );
+  dpm($new_cmis_object);
+
+  $properties = cmisapi_getProperties($repository->repositoryId, $new_cmis_object->id);
+  dpm($properties);
+
+}
