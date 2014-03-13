@@ -367,6 +367,83 @@ function _gsb_feature_working_paper_ct_getTags($uuid) {
 }
 
 /**
+ * Set the list of tags to Alfresco
+ */
+function _gsb_feature_working_paper_ct_setTags($uuid, $tags) {
+
+  $tags = array();
+
+  $repo_info = variable_get('cmis_repositories', false);
+  if (!$repo_info) {
+    return $tags;
+  }
+
+  // get the id - striped down to just the number 
+
+  $id = str_replace('urn:uuid:', '', $uuid);
+
+  // put together the url for the alfresco service call - to get 'tags'
+
+  $url = $repo_info['default']['service_url'];
+  $url = $url . $id . '/tags';
+
+  // get the user and password
+
+  $user = $repo_info['default']['user'];
+  $password = $repo_info['default']['password'];
+
+  // setup the curl options
+
+  $session = curl_init();
+
+  curl_setopt($session, CURLOPT_URL, $url);
+  curl_setopt($session, CURLOPT_SSL_VERIFYPEER, FALSE);
+  curl_setopt($session, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($session, CURLOPT_FOLLOWLOCATION, 1);
+  curl_setopt($session, CURLOPT_COOKIEFILE, "");
+  curl_setopt($session, CURLOPT_USERPWD, $user. ":" . $password);
+  curl_setopt($session, CURLOPT_CUSTOMREQUEST, "POST");
+
+  // pass the tags as data in the header
+
+  $data_string = json_encode($tags);                                                                                   
+  curl_setopt($session, CURLOPT_POSTFIELDS, $data_string);                                                                                                                                 
+  curl_setopt($session, CURLOPT_HTTPHEADER, array(                                                                          
+      'Content-Type: application/json',                                                                                
+      'Content-Length: ' . strlen($data_string))                                                                       
+  );                                                                                                                   
+
+  // make the return value object
+
+  $retval = new stdClass();
+  $retval->url = $url;
+  $retval->method = "POST";
+  $retval->content_sent = null;
+  $retval->content_type_sent = "";
+
+  // make the curl call
+
+  $retval->body = curl_exec($session);
+
+  // set the return values
+
+  $retval->code = curl_getinfo($session, CURLINFO_HTTP_CODE);
+  $retval->content_type = curl_getinfo($session, CURLINFO_CONTENT_TYPE);
+  $retval->content_length = curl_getinfo($session, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
+
+  // close the curl session
+
+  curl_close($session);
+
+  if ($retval->code == '200') {
+    $result = drupal_json_decode($retval->body);
+  }
+
+  return $result;
+  
+}
+
+/**
  * Get authors from the Alfresco doc properties
  */
 function _gsb_feature_working_paper_ct_import_authors($node,$ewrapper,$doc) {
@@ -448,3 +525,4 @@ function _gsb_feature_working_paper_ct_add_author($node, $entity_id) {
   $field_collection_item->save();
 
 }
+
