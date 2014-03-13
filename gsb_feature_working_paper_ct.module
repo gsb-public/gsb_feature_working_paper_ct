@@ -135,46 +135,6 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_link_document = array();
   }
 
-  gsb_cmis_log('writing field_permissions_statement', 'success');
-
-  if (!empty($doc->properties['gsb:permisiionStatement']) && trim($doc->properties['gsb:permisiionStatement']) != '') {
-    $ewrapper->field_permissions_statement->set($doc->properties['gsb:permisiionStatement']);
-  } else {
-    $ewrapper->field_permissions_statement->set(NULL);
-  }
-
-  gsb_cmis_log('writing field_link_single', 'success');
-
-  if (!empty($doc->properties['gsb:cwoLinkAtHarvard']) && trim($doc->properties['gsb:cwoLinkAtHarvard']) != '') {
-    $ewrapper->field_link_single->url->set($doc->properties['gsb:cwoLinkAtHarvard']);
-  } else {
-    $ewrapper->field_link_single = array();
-  }
-
-  gsb_cmis_log('writing field_citation', 'success');
-
-  if (!empty($doc->properties['gsb:cwoCitation']) && trim($doc->properties['gsb:cwoCitation']) != '') {
-    $ewrapper->field_citation->set($doc->properties['gsb:cwoCitation']);
-  } else {
-    $ewrapper->field_citation->set(NULL);
-  }
-
-  gsb_cmis_log('writing field_learning_objective', 'success');
-
-  if (!empty($doc->properties['gsb:cwoLearningObjective']) && trim($doc->properties['gsb:cwoLearningObjective']) != '') {
-    $ewrapper->field_learning_objective->set($doc->properties['gsb:cwoLearningObjective']);
-  } else {
-    $ewrapper->field_learning_objective->set(NULL);
-  }
-
-  gsb_cmis_log('writing field_page_count', 'success');
-
-  if (!empty($doc->properties['gsb:cwoLength']) && trim($doc->properties['gsb:cwoLength']) != '') {
-    $ewrapper->field_page_count->set($doc->properties['gsb:cwoLength']);
-  } else {
-    $ewrapper->field_page_count->set(NULL);
-  }
-
   gsb_cmis_log('writing field_product_type', 'success');
 
   $ewrapper->field_product_type->set($product_type);
