@@ -590,11 +590,9 @@ function _gsb_feature_working_paper_ct_getTags($uuid) {
  */
 function _gsb_feature_working_paper_ct_setTags($uuid, $tags) {
 
-  $tags = array();
-
   $repo_info = variable_get('cmis_repositories', false);
   if (!$repo_info) {
-    return $tags;
+    return false;
   }
 
   // get the id - striped down to just the number 
@@ -623,9 +621,10 @@ function _gsb_feature_working_paper_ct_setTags($uuid, $tags) {
   curl_setopt($session, CURLOPT_USERPWD, $user. ":" . $password);
   curl_setopt($session, CURLOPT_CUSTOMREQUEST, "POST");
 
-  // pass the tags as data in the header
-
+  //$data = array("beverage", "wilbur"); // $tags;  
+  //$data = $tags;                                                                  
   $data_string = json_encode($tags);                                                                                   
+                                                                                                                                      
   curl_setopt($session, CURLOPT_POSTFIELDS, $data_string);                                                                                                                                 
   curl_setopt($session, CURLOPT_HTTPHEADER, array(                                                                          
       'Content-Type: application/json',                                                                                
