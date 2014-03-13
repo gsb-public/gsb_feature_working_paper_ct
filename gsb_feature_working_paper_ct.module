@@ -621,9 +621,8 @@ function _gsb_feature_working_paper_ct_setTags($uuid, $tags) {
   curl_setopt($session, CURLOPT_USERPWD, $user. ":" . $password);
   curl_setopt($session, CURLOPT_CUSTOMREQUEST, "POST");
 
-  //$data = array("beverage", "wilbur"); // $tags;  
-  //$data = $tags;                                                                  
-  $data_string = json_encode($tags);                                                                                   
+  // pass the tags as data in the header
+  $data_string = json_encode($tags);     
                                                                                                                                       
   curl_setopt($session, CURLOPT_POSTFIELDS, $data_string);                                                                                                                                 
   curl_setopt($session, CURLOPT_HTTPHEADER, array(                                                                          
