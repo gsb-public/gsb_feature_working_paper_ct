@@ -42,6 +42,7 @@ features[field_instance][] = node-working_paper-field_business_insight_topic
 features[field_instance][] = node-working_paper-field_description
 features[field_instance][] = node-working_paper-field_document_name
 features[field_instance][] = node-working_paper-field_document_uuid
+features[field_instance][] = node-working_paper-field_file_single_public
 features[field_instance][] = node-working_paper-field_item_id
 features[field_instance][] = node-working_paper-field_link_document
 features[field_instance][] = node-working_paper-field_paper_copy
