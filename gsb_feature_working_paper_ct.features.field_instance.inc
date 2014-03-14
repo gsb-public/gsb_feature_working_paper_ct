@@ -61,7 +61,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
       'module' => 'hs_taxonomy',
       'settings' => array(),
       'type' => 'taxonomy_hs',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -182,7 +182,7 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'taxonomy_hs',
-      'weight' => 6,
+      'weight' => 7,
     ),
     'workbench_access_field' => 0,
   );
@@ -317,7 +317,7 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -370,7 +370,60 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 10,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-working_paper-field_file_single_public'
+  $field_instances['node-working_paper-field_file_single_public'] = array(
+    'bundle' => 'working_paper',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(
+          'conditions' => array(),
+        ),
+        'type' => 'file_default',
+        'weight' => 27,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser_listing' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_file_single_public',
+    'label' => 'Paper',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'file_directory' => '',
+      'file_extensions' => 'pdf',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 5,
     ),
     'workbench_access_field' => 0,
   );
@@ -426,7 +479,7 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 9,
     ),
     'workbench_access_field' => 0,
   );
@@ -548,7 +601,7 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_select',
-      'weight' => 11,
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
@@ -594,7 +647,7 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_select',
-      'weight' => 12,
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -655,7 +708,7 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'concat_field_default',
-      'weight' => 13,
+      'weight' => 14,
     ),
     'workbench_access_field' => 0,
   );
@@ -708,7 +761,7 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 7,
+      'weight' => 8,
     ),
     'workbench_access_field' => 0,
   );
@@ -805,6 +858,7 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
   t('Item ID');
   t('Keywords');
   t('PDF');
+  t('Paper');
   t('Paper Copy');
   t('Product Type');
   t('Publication Year');
