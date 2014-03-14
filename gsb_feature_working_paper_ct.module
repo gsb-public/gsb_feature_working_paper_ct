@@ -7,6 +7,23 @@
 include_once 'gsb_feature_working_paper_ct.features.inc';
 
 /**
+ * Implements hook_form_FORM_ID_alter() for working paper node edit form.
+ */
+function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form, &$form_state) {
+
+  $language = $form['language']['#value'];
+
+  $form['title']['#description'] = 'Enter the title of the working paper (in title case). | e.g. The Timing and Frequency of Corporate Disclosures';
+
+  $form['field_document_uuid']['#access'] = FALSE;
+  $form['field_document_name']['#access'] = FALSE;
+  $form['field_paper_copy']['#access'] = FALSE;
+  $form['field_product_type']['#access'] = FALSE;
+  $form['field_item_id']['#access'] = FALSE;
+
+}  
+
+/**
  * Implements hook_gsb_feature_base_fields_faculty_author_types().
  */
 function gsb_feature_working_paper_ct_gsb_feature_base_fields_faculty_author_types() {
