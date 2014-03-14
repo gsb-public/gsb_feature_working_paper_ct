@@ -405,12 +405,12 @@ function _gsb_feature_working_paper_ct_setTags($uuid, $tags) {
   // pass the tags as data in the header
   $data_string = json_encode($tags);     
                                                                                                                                       
-  curl_setopt($session, CURLOPT_POSTFIELDS, $data_string);                                                                                                                                 
-  curl_setopt($session, CURLOPT_HTTPHEADER, array(                                                                          
-      'Content-Type: application/json',                                                                                
-      'Content-Length: ' . strlen($data_string))                                                                       
-  );                                                                                                                   
-
+  curl_setopt($session, CURLOPT_POSTFIELDS, $data_string);                                        
+  curl_setopt($session, CURLOPT_HTTPHEADER, array(                    
+    'Content-Type: application/json',
+    'Content-Length: ' . strlen($data_string)),
+  );
+  
   // make the return value object
 
   $retval = new stdClass();
