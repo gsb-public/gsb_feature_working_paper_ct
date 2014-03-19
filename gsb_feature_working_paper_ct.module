@@ -7,6 +7,36 @@
 include_once 'gsb_feature_working_paper_ct.features.inc';
 
 /**
+ * Implements hook_node_insert().
+ */
+function gsb_feature_working_paper_ct_node_insert($node) {
+  /*
+  dpm('in gsb_feature_working_paper_ct_node_insert');
+  dpm($node);
+  $language = $node->language;
+  $contact_email = $node->field_contact_email[$language][0]['value'];
+  $email_body = '';
+  if (isset($node->field_body[$language][0])) {
+    $email_body = $node->field_body[$language][0]['value'];
+  }
+  $research_db_tid = -1;
+  if (isset($node->field_research_databases[$language][0])) {
+    $research_db_tid = $node->field_research_databases['und'][0]['tid'];
+  }
+  dpm('contact_email = '.$contact_email);
+  dpm('email_body = '.$email_body);
+  dpm('research_db_tid = '.$research_db_tid);
+  */
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function gsb_feature_working_paper_ct_node_update($node) {
+  //dpm('in gsb_feature_working_paper_ct_node_update');
+}
+
+/**
  * Implements hook_form_FORM_ID_alter() for working paper node edit form.
  */
 function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form, &$form_state) {
