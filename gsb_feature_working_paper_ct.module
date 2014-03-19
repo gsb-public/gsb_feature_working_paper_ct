@@ -7,23 +7,54 @@
 include_once 'gsb_feature_working_paper_ct.features.inc';
 
 /**
+ * Implements hook_menu().
+ */
+function gsb_feature_working_paper_ct_menu() {
+  $items = array();  
+  $items['admin/config/gsb/working-paper-refresh-db-email/settings'] = array(
+    'title' => 'Working Paper Refresh DB Email Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gsb_feature_working_paper_ct_refresh_db_email_settings_form'),
+    'access arguments' => array('administer working paper refresh db email'),
+    'file' => 'gsb_feature_working_paper_ct.admin.inc',
+    //'type' => MENU_LOCAL_TASK,
+  );
+  return $items;
+}
+
+/**
  * Implements hook_node_insert().
  */
 function gsb_feature_working_paper_ct_node_insert($node) {
+
   /*
   dpm('in gsb_feature_working_paper_ct_node_insert');
   dpm($node);
+
   $language = $node->language;
-  $research_db_tid = -1;
-  if (isset($node->field_research_databases[$language][0])) {
-    $research_db_tid = $node->field_research_databases['und'][0]['tid'];
+
+  $research_db_list = array();
+  if (isset($node->field_research_databases[$language])) {
+    foreach ($node->field_research_databases[$language] as $key => $value) {
+      $tid = $node->field_research_databases[$language][$key]['tid'];
+      $research_db = taxonomy_term_load($tid);
+      $research_db_list[] = $research_db->name;
+      dpm($research_db);
+      dpm('tid = '.$tid);
+    }
   }
+
   $contact_email = variable_get('gsb_feature_working_paper_ct_refresh_db_contact_email', t(''));
+
+  // [node:nid]
   $email_body = variable_get('gsb_feature_working_paper_ct_refresh_db_email_body', t(''));
+  $email_body = token_replace($email_body, array('node' => $node));
+
   dpm('contact_email = '.$contact_email);
   dpm('email_body = '.$email_body);
-  dpm('research_db_tid = '.$research_db_tid);
+  dpm('research_db = '.implode(",", $research_db_list));
   */
+
 }
 
 /**
@@ -40,7 +71,15 @@ function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form,
 
   $language = $form['language']['#value'];
 
-  $form['title']['#description'] = 'Enter the title of the working paper (in title case). | e.g. The Timing and Frequency of Corporate Disclosures';
+  dpm($form);
+
+  $form['title']['#prefix'] =
+  'Fields with a red asterisk (*) are required.<br><br>' 
+  . 'For help with adding or editing working papers, <a href="https://remedyweb.stanford.edu/helpsu/gsb" target="_blank">submit a HelpSU ticket</a>.<br><br>';
+
+  $form['title']['#description'] = 'Enter the title of the working paper (in title case). | <strong>Example</strong>: The Timing and Frequency of Corporate Disclosures';
+
+  //$form['field_year_of_publication']['und'][0]['#description'] = 'test';
 
   $form['field_document_uuid']['#access'] = FALSE;
   $form['field_document_name']['#access'] = FALSE;
@@ -167,16 +206,6 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_description->set($doc->properties['cm:description']);
   } else {
     $ewrapper->field_description->set(NULL);
-  }
-
-  gsb_cmis_log('writing field_link_document', 'success');
-  
-  $url = gsb_cmis_api_getObjectURL('default', $doc);
-
-  if (!empty($url) && trim($url) != '') {
-    $ewrapper->field_link_document->url->set($url);
-  } else {
-    $ewrapper->field_link_document = array();
   }
 
   gsb_cmis_log('writing field_product_type', 'success');
