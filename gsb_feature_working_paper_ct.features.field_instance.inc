@@ -652,6 +652,55 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-working_paper-field_research_databases'
+  $field_instances['node-working_paper-field_research_databases'] = array(
+    'bundle' => 'working_paper',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(
+          'conditions' => array(),
+        ),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 28,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser_listing' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_research_databases',
+    'label' => 'Please publish this working paper on the following databases',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+      ),
+      'type' => 'options_buttons',
+      'weight' => 21,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-working_paper-field_search_field'
   $field_instances['node-working_paper-field_search_field'] = array(
     'bundle' => 'working_paper',
@@ -906,6 +955,7 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
   t('PDF');
   t('Paper');
   t('Paper Copy');
+  t('Please publish this working paper on the following databases');
   t('Product Type');
   t('Publication Year');
   t('Search field');
