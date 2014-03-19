@@ -14,15 +14,12 @@ function gsb_feature_working_paper_ct_node_insert($node) {
   dpm('in gsb_feature_working_paper_ct_node_insert');
   dpm($node);
   $language = $node->language;
-  $contact_email = $node->field_contact_email[$language][0]['value'];
-  $email_body = '';
-  if (isset($node->field_body[$language][0])) {
-    $email_body = $node->field_body[$language][0]['value'];
-  }
   $research_db_tid = -1;
   if (isset($node->field_research_databases[$language][0])) {
     $research_db_tid = $node->field_research_databases['und'][0]['tid'];
   }
+  $contact_email = variable_get('gsb_feature_working_paper_ct_refresh_db_contact_email', t(''));
+  $email_body = variable_get('gsb_feature_working_paper_ct_refresh_db_email_body', t(''));
   dpm('contact_email = '.$contact_email);
   dpm('email_body = '.$email_body);
   dpm('research_db_tid = '.$research_db_tid);
