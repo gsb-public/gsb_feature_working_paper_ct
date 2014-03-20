@@ -13,6 +13,36 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_posted_date|node|working_paper|form';
+  $field_group->group_name = 'group_posted_date';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'working_paper';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Posted Date',
+    'weight' => '2',
+    'children' => array(
+      0 => 'field_year_of_publication',
+      1 => 'field_pub_date_month',
+      2 => 'field_pub_date_day',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Posted Date',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'classes' => '',
+        'description' => '',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $export['group_posted_date|node|working_paper|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_tagging|node|working_paper|form';
   $field_group->group_name = 'group_tagging';
   $field_group->entity_type = 'node';
@@ -21,7 +51,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Tagging',
-    'weight' => '7',
+    'weight' => '5',
     'children' => array(
       0 => 'field_business_insight_topic',
       1 => 'field_tag',
