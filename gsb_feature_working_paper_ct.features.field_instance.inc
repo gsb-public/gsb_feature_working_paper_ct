@@ -71,7 +71,8 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'default_value' => NULL,
     'deleted' => 0,
     'description' => 'To add yourself or another Stanford GSB faculty member as an author, click the button next to "Faculty," then enter the first few characters of the first or last name. The lookup feature will display potential matches; click on the desired name.<br><br> 
-To add a non-Stanford-GSB author, enter the first and last name of the individual in their respective fields. If you would like to include a middle initial, enter it in the "First Name" field.',
+To add a non-Stanford-GSB author, enter the first and last name of the individual in their respective fields. If you would like to include a middle initial, enter it in the "First Name" field.<br><br>
+To list authors in a specific order, grab the handle icon <img src="/sites/gsb/files/styles/566x_variable/public/icon-handle-drag-drop.png?itok=boIYoP_K" height="25" width="25" /> next to an author and drag it up or down to the desired position.<br><br>',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -379,7 +380,7 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
   $field_instances['node-working_paper-field_file_single_public'] = array(
     'bundle' => 'working_paper',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Click "Choose File," select the file, click "Open," then click "Upload."',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -484,82 +485,6 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-working_paper-field_link_document'
-  $field_instances['node-working_paper-field_link_document'] = array(
-    'bundle' => 'working_paper',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'link',
-        'settings' => array(
-          'conditions' => array(),
-        ),
-        'type' => 'link_default',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'link',
-        'settings' => array(
-          'conditions' => array(),
-        ),
-        'type' => 'link_label',
-        'weight' => 2,
-      ),
-      'teaser_listing' => array(
-        'label' => 'hidden',
-        'module' => 'link',
-        'settings' => array(
-          'conditions' => array(),
-        ),
-        'type' => 'link_label',
-        'weight' => 1,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'node',
-    'field_name' => 'field_link_document',
-    'label' => 'PDF',
-    'required' => 0,
-    'settings' => array(
-      'attributes' => array(
-        'class' => '',
-        'configurable_title' => 0,
-        'rel' => '',
-        'target' => '_blank',
-        'title' => '',
-      ),
-      'display' => array(
-        'url_cutoff' => 80,
-      ),
-      'enable_tokens' => 1,
-      'linkit' => array(
-        'enable' => 0,
-        'insert_plugin' => '',
-      ),
-      'rel_remove' => 'default',
-      'title' => 'value',
-      'title_maxlength' => 128,
-      'title_value' => 'Download',
-      'url' => 'optional',
-      'user_register_form' => FALSE,
-      'validate_url' => 1,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'link',
-      'settings' => array(
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-      ),
-      'type' => 'link_field',
-      'weight' => 6,
-    ),
-    'workbench_access_field' => 0,
-  );
-
   // Exported field_instance: 'node-working_paper-field_paper_copy'
   $field_instances['node-working_paper-field_paper_copy'] = array(
     'bundle' => 'working_paper',
@@ -600,8 +525,8 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
       'settings' => array(
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
-      'type' => 'options_select',
-      'weight' => 15,
+      'type' => 'link_field',
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -647,6 +572,120 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_select',
+      'weight' => 15,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-working_paper-field_pub_date_day'
+  $field_instances['node-working_paper-field_pub_date_day'] = array(
+    'bundle' => 'working_paper',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'conditions' => array(),
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_integer',
+        'weight' => 31,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser_listing' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_pub_date_day',
+    'label' => 'Day',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+      ),
+      'type' => 'number',
+      'weight' => 3,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-working_paper-field_pub_date_month'
+  $field_instances['node-working_paper-field_pub_date_month'] = array(
+    'bundle' => 'working_paper',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Enter the numeric equivalent for desired month (1-12).',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'conditions' => array(),
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_integer',
+        'weight' => 30,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser_listing' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_pub_date_month',
+    'label' => 'Month',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+      ),
+      'type' => 'options_select',
       'weight' => 17,
     ),
     'workbench_access_field' => 0,
@@ -684,7 +723,7 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_research_databases',
-    'label' => 'Please publish this working paper on the following databases',
+    'label' => 'Publish this working paper on the following databases',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -696,7 +735,7 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_buttons',
-      'weight' => 21,
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -861,18 +900,18 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-working_paper-field_year'
-  $field_instances['node-working_paper-field_year'] = array(
+  // Exported field_instance: 'node-working_paper-field_year_of_publication'
+  $field_instances['node-working_paper-field_year_of_publication'] = array(
     'bundle' => 'working_paper',
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
         'module' => 'date',
         'settings' => array(
           'conditions' => array(),
-          'format_type' => 'year',
+          'format_type' => 'long',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
@@ -880,43 +919,26 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
           'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
-        'weight' => 2,
+        'weight' => 29,
       ),
       'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'date',
-        'settings' => array(
-          'conditions' => array(),
-          'format_type' => 'year',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_repeat_rule' => 'show',
-        ),
-        'type' => 'date_default',
-        'weight' => 2,
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser_listing' => array(
-        'label' => 'hidden',
-        'module' => 'date',
-        'settings' => array(
-          'conditions' => array(),
-          'format_type' => 'year',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_repeat_rule' => 'show',
-        ),
-        'type' => 'date_default',
-        'weight' => 3,
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
-    'field_name' => 'field_year',
-    'label' => 'Publication Year',
-    'required' => FALSE,
+    'field_name' => 'field_year_of_publication',
+    'label' => 'Year',
+    'required' => 0,
     'settings' => array(
       'default_value' => 'now',
       'default_value2' => 'same',
@@ -925,6 +947,7 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'date',
       'settings' => array(
         'display_all_day' => 0,
@@ -932,6 +955,7 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
         'input_format' => 'M j Y - g:i:sa',
         'input_format_custom' => '',
         'label_position' => 'above',
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
         'repeat_collapsed' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
@@ -939,6 +963,7 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
       'type' => 'date_text',
       'weight' => 4,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Translatables
@@ -947,21 +972,24 @@ To add a non-Stanford-GSB author, enter the first and last name of the individua
   t('Academic Area');
   t('Additional Topic');
   t('Authors');
+  t('Click "Choose File," select the file, click "Open," then click "Upload."');
+  t('Day');
   t('Document Name');
   t('Document UUID');
   t('Enter a one-paragraph abstract. Multiple paragraphs will be merged into one.');
+  t('Enter the numeric equivalent for desired month (1-12).');
   t('Item ID');
   t('Keywords');
-  t('PDF');
+  t('Month');
   t('Paper');
   t('Paper Copy');
-  t('Please publish this working paper on the following databases');
   t('Product Type');
-  t('Publication Year');
+  t('Publish this working paper on the following databases');
   t('Search field');
   t('Submit');
   t('To add yourself or another Stanford GSB faculty member as an author, click the button next to "Faculty," then enter the first few characters of the first or last name. The lookup feature will display potential matches; click on the desired name.<br><br> 
 To add a non-Stanford-GSB author, enter the first and last name of the individual in their respective fields. If you would like to include a middle initial, enter it in the "First Name" field.');
+  t('Year');
 
   return $field_instances;
 }
