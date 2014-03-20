@@ -17,30 +17,83 @@ function gsb_feature_working_paper_ct_menu() {
     'page arguments' => array('gsb_feature_working_paper_ct_refresh_db_email_settings_form'),
     'access arguments' => array('administer working paper refresh db email'),
     'file' => 'gsb_feature_working_paper_ct.admin.inc',
-    //'type' => MENU_LOCAL_TASK,
   );
   return $items;
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function gsb_feature_working_paper_ct_token_info() {
+  $types['refresh_databases'] = array(
+    'name' => t("Refresh Databases Tokens"),
+    'description' => t("Tokens from the refresh database email."),
+  );  
+  $tokens = array();
+  $tokens['deletes'] = array(
+    'name' => t('Refresh Databases that have been deleted'),
+    'description' => t('Get the names of the deleted refresh databases, if any.'),
+  );
+  $tokens['adds'] = array(
+    'name' => t('Refresh Databases that have been added'),
+    'description' => t('Get the names of the added refresh databases, if any.'),
+  );  
+  return array(
+    'types' => $types,
+    'tokens' => array(
+      'refresh_databases' => $tokens,
+    ),
+  );  
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function gsb_feature_working_paper_ct_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  if ($type == 'refresh_databases') {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'deletes':
+          $deletes = $data['refresh_databases']['deletes'];
+          if (empty($deletes)) {
+            $deletes = '(no changes)';
+          }
+          $replacements[$original] = $deletes; 
+          break;
+        case 'adds':
+          $adds = $data['refresh_databases']['adds'];
+          if (empty($adds)) {
+            $adds = '(no changes)';
+          }
+          $replacements[$original] = $adds;
+          break;        
+      }
+    }
+  }
+  return $replacements;
 }
 
 /**
  * Implements hook_node_insert().
  */
 function gsb_feature_working_paper_ct_node_insert($node) {
-  //dpm('in gsb_feature_working_paper_ct_node_insert');
-  //dpm($node);
-  _gsb_feature_working_paper_ct_saveResearchDatabases($node);
+  _gsb_feature_working_paper_ct_sendResearchDatabasesEmail($node);
 }
 
 /**
  * Implements hook_node_update().
  */
 function gsb_feature_working_paper_ct_node_update($node) {
-  //dpm('in gsb_feature_working_paper_ct_node_update');
-  //dpm($node);
-  _gsb_feature_working_paper_ct_saveResearchDatabases($node);
+  _gsb_feature_working_paper_ct_sendResearchDatabasesEmail($node);
 }
 
-function _gsb_feature_working_paper_ct_saveResearchDatabases($node) {
+/**
+ * Send Research Databases email notification
+ */
+function _gsb_feature_working_paper_ct_sendResearchDatabasesEmail($node) {
+
+  global $user;
 
   $language = $node->language;
 
@@ -49,11 +102,9 @@ function _gsb_feature_working_paper_ct_saveResearchDatabases($node) {
   if (!empty($node->original)) {
     $currrent_research_dbs = _gsb_feature_working_paper_ct_getResearchDatabases($node->original);
   }
-  //dpm($currrent_research_dbs);
 
   // get new list of research databases from insert/update node
   $new_research_dbs = _gsb_feature_working_paper_ct_getResearchDatabases($node);
-  //dpm($new_research_dbs);
 
   // get list of research databases deleted and added
   list($deletes, $adds) = _gsb_feature_working_paper_ct_key_deletes_adds($currrent_research_dbs, $new_research_dbs);
@@ -62,24 +113,67 @@ function _gsb_feature_working_paper_ct_saveResearchDatabases($node) {
   $delete_names = _gsb_feature_working_paper_ct_getTermNames($deletes);
   $add_names = _gsb_feature_working_paper_ct_getTermNames($adds);
 
+  // if there haven't been any changes in the refresh database settings, 
+  // then no need to send an email
+  if (empty($delete_names) && empty($add_names)) {
+    return;
+  }  
+
   // get the setting for contact mail
   $contact_email = variable_get('gsb_feature_working_paper_ct_refresh_db_contact_email', t(''));
 
   // get the setting for email body - which will contain tokens
-  // [node:nid]
   $email_body = variable_get('gsb_feature_working_paper_ct_refresh_db_email_body', t(''));
 
   // replace the tokens in the email body
-  $email_body = token_replace($email_body, array('node' => $node));
+  $email_body = token_replace(
+    $email_body,
+    array(
+      'node' => $node,
+      'refresh_databases' => array('deletes' => implode(",", $delete_names), 'adds' => implode(",", $add_names))
+    )
+  );
 
   // email the notice of delete and adds to contact email address
-  //dpm('contact_email = '.$contact_email);
-  //dpm('email_body = '.$email_body);
-  //dpm('deleted research dbs = '.implode(",", $delete_names));
-  //dpm('added research dbs = '.implode(",", $add_names));
+
+  $params = array(
+    'body' => array($email_body),
+    'subject' => 'Working Paper Updated',
+  );
+
+  $email_from = 'admin@stanford.edu';
+  $message = drupal_mail(
+    'gsb_feature_working_paper_ct',
+    'update_working_paper',
+    $contact_email,
+    $language,
+    $params,
+    $email_from,
+    TRUE
+  );
 
 }
 
+/**
+ * Implements hook_mail().
+ */
+function gsb_feature_working_paper_ct_mail($key, &$message, $params) {
+  $headers = array(
+    'MIME-Version' => '1.0',
+    'Content-Type' => 'text/html; charset=UTF-8;',
+    'Content-Transfer-Encoding' => '8Bit',
+    'X-Mailer' => 'Drupal'
+  );
+  foreach ($headers as $key => $value) {
+    $message['headers'][$key] = $value;
+  }
+  $message['subject'] = $params['subject'];
+  $message['body'] = $params['body'];
+}
+
+/**
+ * Returns a list of term names for a given list of tids
+ */
 function _gsb_feature_working_paper_ct_getTermNames($tids) {
   $names = array();
   foreach ($tids as $key) {
@@ -89,6 +183,9 @@ function _gsb_feature_working_paper_ct_getTermNames($tids) {
   return $names;
 }
 
+/**
+ * Finds the deletes and adds between old and new arrays
+ */
 function _gsb_feature_working_paper_ct_key_deletes_adds($old, $new) {
   $intersect = array_intersect_key($old,$new);
   foreach ($intersect as $key) {
@@ -102,6 +199,9 @@ function _gsb_feature_working_paper_ct_key_deletes_adds($old, $new) {
   return array($deletes, $adds);
 }
 
+/**
+ * Gets the list of Research Databases set on the node.
+ */
 function _gsb_feature_working_paper_ct_getResearchDatabases($node) {
   $language = $node->language;
   $research_db_list = array();
