@@ -26,35 +26,9 @@ function gsb_feature_working_paper_ct_menu() {
  * Implements hook_node_insert().
  */
 function gsb_feature_working_paper_ct_node_insert($node) {
-
-  /*
-  dpm('in gsb_feature_working_paper_ct_node_insert');
-  dpm($node);
-
-  $language = $node->language;
-
-  $research_db_list = array();
-  if (isset($node->field_research_databases[$language])) {
-    foreach ($node->field_research_databases[$language] as $key => $value) {
-      $tid = $node->field_research_databases[$language][$key]['tid'];
-      $research_db = taxonomy_term_load($tid);
-      $research_db_list[] = $research_db->name;
-      dpm($research_db);
-      dpm('tid = '.$tid);
-    }
-  }
-
-  $contact_email = variable_get('gsb_feature_working_paper_ct_refresh_db_contact_email', t(''));
-
-  // [node:nid]
-  $email_body = variable_get('gsb_feature_working_paper_ct_refresh_db_email_body', t(''));
-  $email_body = token_replace($email_body, array('node' => $node));
-
-  dpm('contact_email = '.$contact_email);
-  dpm('email_body = '.$email_body);
-  dpm('research_db = '.implode(",", $research_db_list));
-  */
-
+  //dpm('in gsb_feature_working_paper_ct_node_insert');
+  //dpm($node);
+  _gsb_feature_working_paper_ct_saveResearchDatabases($node);
 }
 
 /**
@@ -62,6 +36,82 @@ function gsb_feature_working_paper_ct_node_insert($node) {
  */
 function gsb_feature_working_paper_ct_node_update($node) {
   //dpm('in gsb_feature_working_paper_ct_node_update');
+  //dpm($node);
+  _gsb_feature_working_paper_ct_saveResearchDatabases($node);
+}
+
+function _gsb_feature_working_paper_ct_saveResearchDatabases($node) {
+
+  $language = $node->language;
+
+  // get current list of research databases from the original node
+  $currrent_research_dbs = array();
+  if (!empty($node->original)) {
+    $currrent_research_dbs = _gsb_feature_working_paper_ct_getResearchDatabases($node->original);
+  }
+  //dpm($currrent_research_dbs);
+
+  // get new list of research databases from insert/update node
+  $new_research_dbs = _gsb_feature_working_paper_ct_getResearchDatabases($node);
+  //dpm($new_research_dbs);
+
+  // get list of research databases deleted and added
+  list($deletes, $adds) = _gsb_feature_working_paper_ct_key_deletes_adds($currrent_research_dbs, $new_research_dbs);
+
+  // get term names for deleted and added research databases
+  $delete_names = _gsb_feature_working_paper_ct_getTermNames($deletes);
+  $add_names = _gsb_feature_working_paper_ct_getTermNames($adds);
+
+  // get the setting for contact mail
+  $contact_email = variable_get('gsb_feature_working_paper_ct_refresh_db_contact_email', t(''));
+
+  // get the setting for email body - which will contain tokens
+  // [node:nid]
+  $email_body = variable_get('gsb_feature_working_paper_ct_refresh_db_email_body', t(''));
+
+  // replace the tokens in the email body
+  $email_body = token_replace($email_body, array('node' => $node));
+
+  // email the notice of delete and adds to contact email address
+  //dpm('contact_email = '.$contact_email);
+  //dpm('email_body = '.$email_body);
+  //dpm('deleted research dbs = '.implode(",", $delete_names));
+  //dpm('added research dbs = '.implode(",", $add_names));
+
+}
+
+function _gsb_feature_working_paper_ct_getTermNames($tids) {
+  $names = array();
+  foreach ($tids as $key) {
+    $taxonomy = taxonomy_term_load($key);
+    $names[] = $taxonomy->name;
+  }
+  return $names;
+}
+
+function _gsb_feature_working_paper_ct_key_deletes_adds($old, $new) {
+  $intersect = array_intersect_key($old,$new);
+  foreach ($intersect as $key) {
+    unset($old[$key]);
+  }
+  $deletes = $old;
+  foreach ($intersect as $key) {
+    unset($new[$key]);
+  }
+  $adds = $new;
+  return array($deletes, $adds);
+}
+
+function _gsb_feature_working_paper_ct_getResearchDatabases($node) {
+  $language = $node->language;
+  $research_db_list = array();
+  if (isset($node->field_research_databases[$language])) {
+    foreach ($node->field_research_databases[$language] as $key => $value) {
+      $tid = $node->field_research_databases[$language][$key]['tid'];
+      $research_db_list[$tid] = $tid;
+    }
+  }
+  return $research_db_list;
 }
 
 /**
@@ -70,8 +120,6 @@ function gsb_feature_working_paper_ct_node_update($node) {
 function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form, &$form_state) {
 
   $language = $form['language']['#value'];
-
-  dpm($form);
 
   $form['title']['#prefix'] =
   'Fields with a red asterisk (*) are required.<br><br>' 
