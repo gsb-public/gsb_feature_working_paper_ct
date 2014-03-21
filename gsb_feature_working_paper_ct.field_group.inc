@@ -83,8 +83,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
     'label' => 'Working paper title',
     'weight' => '0',
     'children' => array(
-      0 => 'field_link_document',
-      1 => 'title',
+      0 => 'title',
     ),
     'format_type' => 'div',
     'format_settings' => array(
