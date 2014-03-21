@@ -521,11 +521,11 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'link',
+      'module' => 'options',
       'settings' => array(
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
-      'type' => 'link_field',
+      'type' => 'options_buttons',
       'weight' => 8,
     ),
     'workbench_access_field' => 0,
