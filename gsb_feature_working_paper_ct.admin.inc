@@ -16,5 +16,11 @@ function gsb_feature_working_paper_ct_refresh_db_email_settings_form($form, &$fo
     '#type' => 'textarea',
     '#default_value' => variable_get('gsb_feature_working_paper_ct_refresh_db_email_body', t('')),
   );
+  $types = menu_token_get_plugin_types();
+  $form['menu_token_replacement_patterns']['patterns'] = array(
+    '#theme' => 'token_tree',
+    '#token_types' => array_keys($types),
+    '#dialog' => TRUE,
+  );
   return system_settings_form($form);
 }
