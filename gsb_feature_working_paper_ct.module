@@ -22,6 +22,17 @@ function gsb_feature_working_paper_ct_menu() {
 }
 
 /**
+ * Implements hook_permission().
+ */
+function gsb_feature_working_paper_ct_permission() {
+  return array(
+    'administer working paper refresh db email' => array(
+      'title' => t('Administer Working Paper Refresh DB Email Settings'),
+    ),
+  );
+}
+
+/**
  * Implements hook_token_info().
  */
 function gsb_feature_working_paper_ct_token_info() {
