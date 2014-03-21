@@ -265,7 +265,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 5,
+      'weight' => 4,
     ),
     'workbench_access_field' => 0,
   );
@@ -318,7 +318,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -371,7 +371,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 10,
     ),
     'workbench_access_field' => 0,
   );
@@ -424,7 +424,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 7,
+      'weight' => 5,
     ),
     'workbench_access_field' => 0,
   );
@@ -480,7 +480,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 9,
     ),
     'workbench_access_field' => 0,
   );
@@ -521,12 +521,12 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
+      'module' => 'link',
       'settings' => array(
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'link_field',
-      'weight' => 6,
+      'weight' => 8,
     ),
     'workbench_access_field' => 0,
   );
@@ -572,7 +572,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
@@ -629,7 +629,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'number',
-      'weight' => 3,
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -681,12 +681,12 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     ),
     'widget' => array(
       'active' => 0,
-      'module' => 'number',
+      'module' => 'options',
       'settings' => array(
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_select',
-      'weight' => 17,
+      'weight' => 5,
     ),
     'workbench_access_field' => 0,
   );
@@ -735,7 +735,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 7,
     ),
     'workbench_access_field' => 0,
   );
@@ -796,7 +796,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'concat_field_default',
-      'weight' => 18,
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -988,7 +988,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
   t('Search field');
   t('Submit');
   t('To add yourself or another Stanford GSB faculty member as an author, click the button next to "Faculty," then enter the first few characters of the first or last name. The lookup feature will display potential matches; click on the desired name.<br><br> 
-To add a non-Stanford-GSB author, enter the first and last name of the individual in their respective fields. If you would like to include a middle initial, enter it in the "First Name" field.');
+To add a non-Stanford-GSB author, enter the first and last name of the individual in their respective fields. If you would like to include a middle initial, enter it in the "First Name" field.<br><br>
+To list authors in a specific order, grab the handle icon <img src="/sites/gsb/files/styles/566x_variable/public/icon-handle-drag-drop.png?itok=boIYoP_K" height="25" width="25" /> next to an author and drag it up or down to the desired position.<br><br>');
   t('Year');
 
   return $field_instances;

@@ -38,6 +38,10 @@ function gsb_feature_working_paper_ct_token_info() {
     'name' => t('Refresh Databases that have been added'),
     'description' => t('Get the names of the added refresh databases, if any.'),
   );  
+  $tokens['file_url'] = array(
+    'name' => t('File url associated with the working paper'),
+    'description' => t('Get the file url associated with the working paper.'),
+  );
   return array(
     'types' => $types,
     'tokens' => array(
@@ -67,7 +71,14 @@ function gsb_feature_working_paper_ct_tokens($type, $tokens, array $data = array
             $adds = '(no changes)';
           }
           $replacements[$original] = $adds;
-          break;        
+          break;
+        case 'file_url':
+          $file_url = '';
+          if (!empty($data['refresh_databases']['file_url'])) {
+            $file_url = $data['refresh_databases']['file_url'];
+          }
+          $replacements[$original] = $file_url;
+          break;
       }
     }
   }
@@ -125,12 +136,24 @@ function _gsb_feature_working_paper_ct_sendResearchDatabasesEmail($node) {
   // get the setting for email body - which will contain tokens
   $email_body = variable_get('gsb_feature_working_paper_ct_refresh_db_email_body', t(''));
 
+  // get the file url
+  $file_url = '';
+  if (!empty($node->field_file_single_public[$language])) {
+    $fid = $node->field_file_single_public[$language][0]['fid'];
+    $file_path = file_load($fid)->uri;
+    $file_url = file_create_url($file_path);
+  }
+
   // replace the tokens in the email body
   $email_body = token_replace(
     $email_body,
     array(
       'node' => $node,
-      'refresh_databases' => array('deletes' => implode(",", $delete_names), 'adds' => implode(",", $add_names))
+      'refresh_databases' => array(
+        'deletes' => implode(",", $delete_names),
+        'adds' => implode(",", $add_names),
+        'file_url' => $file_url,
+      )
     )
   );
 

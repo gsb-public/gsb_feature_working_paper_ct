@@ -21,11 +21,11 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Posted Date',
-    'weight' => '2',
+    'weight' => '3',
     'children' => array(
-      0 => 'field_year_of_publication',
+      0 => 'field_pub_date_day',
       1 => 'field_pub_date_month',
-      2 => 'field_pub_date_day',
+      2 => 'field_year_of_publication',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -51,7 +51,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Tagging',
-    'weight' => '8',
+    'weight' => '6',
     'children' => array(
       0 => 'field_business_insight_topic',
       1 => 'field_tag',
