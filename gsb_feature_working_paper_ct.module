@@ -338,21 +338,6 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     }  
   }
 
-  gsb_cmis_log('writing field_year', 'success');
-
-  if (!empty($doc->properties['gsb:cwoPublicationYear']) && trim($doc->properties['gsb:cwoPublicationYear']) != '') {
-    $year = $doc->properties['gsb:cwoPublicationYear'];
-    gsb_cmis_log('year = '.$year, 'success');
-    if (is_numeric($year)) {
-      $date = new DateTime($year."-01-01");
-      $ewrapper->field_year->set($date->getTimestamp());
-    } else {
-      $ewrapper->field_year = NULL;
-    }
-  } else {
-    $ewrapper->field_year = NULL;
-  }
-
   gsb_cmis_log('writing field_document_name', 'success');
 
   if (!empty($doc->properties['cmis:contentStreamFileName']) && trim($doc->properties['cmis:contentStreamFileName']) != '') {
