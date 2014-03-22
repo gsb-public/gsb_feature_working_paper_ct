@@ -188,6 +188,72 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-working_paper-field_date'
+  $field_instances['node-working_paper-field_date'] = array(
+    'bundle' => 'working_paper',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'conditions' => array(),
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 32,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser_listing' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_date',
+    'label' => 'Version Date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'display_all_day' => 0,
+        'increment' => 15,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'none',
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'repeat_collapsed' => 0,
+        'text_parts' => array(),
+        'year_range' => '-30:+1',
+      ),
+      'type' => 'date_popup',
+      'weight' => 4,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-working_paper-field_description'
   $field_instances['node-working_paper-field_description'] = array(
     'bundle' => 'working_paper',
@@ -265,7 +331,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 4,
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -318,7 +384,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 16,
     ),
     'workbench_access_field' => 0,
   );
@@ -371,7 +437,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -424,7 +490,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 5,
+      'weight' => 7,
     ),
     'workbench_access_field' => 0,
   );
@@ -480,7 +546,83 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 13,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-working_paper-field_link_document'
+  $field_instances['node-working_paper-field_link_document'] = array(
+    'bundle' => 'working_paper',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'link',
+        'settings' => array(
+          'conditions' => array(),
+        ),
+        'type' => 'link_default',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'link',
+        'settings' => array(
+          'conditions' => array(),
+        ),
+        'type' => 'link_label',
+        'weight' => 2,
+      ),
+      'teaser_listing' => array(
+        'label' => 'hidden',
+        'module' => 'link',
+        'settings' => array(
+          'conditions' => array(),
+        ),
+        'type' => 'link_label',
+        'weight' => 1,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_link_document',
+    'label' => 'Document Link',
+    'required' => 0,
+    'settings' => array(
+      'attributes' => array(
+        'class' => '',
+        'configurable_title' => 0,
+        'rel' => '',
+        'target' => '_blank',
+        'title' => '',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'linkit' => array(
+        'enable' => 0,
+        'insert_plugin' => '',
+      ),
+      'rel_remove' => 'default',
+      'title' => 'value',
+      'title_maxlength' => 128,
+      'title_value' => 'Download',
+      'url' => 'optional',
+      'user_register_form' => FALSE,
+      'validate_url' => 1,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'link',
+      'settings' => array(
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+      ),
+      'type' => 'link_field',
+      'weight' => 24,
     ),
     'workbench_access_field' => 0,
   );
@@ -526,7 +668,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_buttons',
-      'weight' => 8,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -572,7 +714,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_select',
-      'weight' => 12,
+      'weight' => 17,
     ),
     'workbench_access_field' => 0,
   );
@@ -735,7 +877,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_buttons',
-      'weight' => 7,
+      'weight' => 9,
     ),
     'workbench_access_field' => 0,
   );
@@ -794,7 +936,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'concat_field_default',
-      'weight' => 13,
+      'weight' => 19,
     ),
     'workbench_access_field' => 0,
   );
@@ -898,6 +1040,86 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-working_paper-field_year'
+  $field_instances['node-working_paper-field_year'] = array(
+    'bundle' => 'working_paper',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'date',
+        'settings' => array(
+          'conditions' => array(),
+          'format_type' => 'year',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'date',
+        'settings' => array(
+          'conditions' => array(),
+          'format_type' => 'year',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 2,
+      ),
+      'teaser_listing' => array(
+        'label' => 'hidden',
+        'module' => 'date',
+        'settings' => array(
+          'conditions' => array(),
+          'format_type' => 'year',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_year',
+    'label' => 'Publication Year',
+    'required' => FALSE,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'date',
+      'settings' => array(
+        'display_all_day' => 0,
+        'increment' => 15,
+        'input_format' => 'M j Y - g:i:sa',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'repeat_collapsed' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 10,
+    ),
+  );
+
   // Exported field_instance: 'node-working_paper-field_year_of_publication'
   $field_instances['node-working_paper-field_year_of_publication'] = array(
     'bundle' => 'working_paper',
@@ -972,6 +1194,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
   t('Authors');
   t('Click "Choose File," select the file, click "Open," then click "Upload."');
   t('Day');
+  t('Document Link');
   t('Document Name');
   t('Document UUID');
   t('Enter a one-paragraph abstract. Multiple paragraphs will be merged into one.');
@@ -982,12 +1205,14 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
   t('Paper');
   t('Paper Copy');
   t('Product Type');
+  t('Publication Year');
   t('Publish this working paper on the following databases');
   t('Search field');
   t('Submit');
   t('To add yourself or another Stanford GSB faculty member as an author, click the button next to "Faculty," then enter the first few characters of the first or last name. The lookup feature will display potential matches; click on the desired name.<br><br> 
 To add a non-Stanford-GSB author, enter the first and last name of the individual in their respective fields. If you would like to include a middle initial, enter it in the "First Name" field.<br><br>
 To list authors in a specific order, grab the handle icon <img src="/sites/gsb/files/styles/566x_variable/public/icon-handle-drag-drop.png?itok=boIYoP_K" height="25" width="25" /> next to an author and drag it up or down to the desired position.<br><br>');
+  t('Version Date');
   t('Year');
 
   return $field_instances;
