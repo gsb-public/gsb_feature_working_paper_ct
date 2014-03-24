@@ -823,11 +823,11 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     ),
     'widget' => array(
       'active' => 0,
-      'module' => 'options',
+      'module' => 'number',
       'settings' => array(
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
-      'type' => 'options_select',
+      'type' => 'number',
       'weight' => 5,
     ),
     'workbench_access_field' => 0,
