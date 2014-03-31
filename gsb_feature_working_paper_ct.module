@@ -256,8 +256,7 @@ function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form,
   $language = $form['language']['#value'];
 
   $form['title']['#prefix'] =
-  'Fields with a red asterisk (*) are required.<br><br>' 
-  . 'For help with adding or editing working papers, <a href="https://remedyweb.stanford.edu/helpsu/gsb" target="_blank">submit a HelpSU ticket</a>.<br><br>';
+  'For help with adding or editing working papers, <a href="https://remedyweb.stanford.edu/helpsu/gsb" target="_blank">submit a HelpSU ticket</a>.<br><br>';
 
   $form['title']['#description'] = 'Enter the title of the working paper (in title case). | <strong>Example</strong>: The Timing and Frequency of Corporate Disclosures';
 
