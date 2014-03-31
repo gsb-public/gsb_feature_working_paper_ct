@@ -20,7 +20,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Posted Date',
+    'label' => 'Version Date',
     'weight' => '5',
     'children' => array(
       0 => 'field_pub_date_day',
@@ -29,7 +29,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Posted Date',
+      'label' => 'Version Date',
       'instance_settings' => array(
         'required_fields' => 1,
         'classes' => '',

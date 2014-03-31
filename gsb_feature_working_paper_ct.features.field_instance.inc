@@ -55,6 +55,8 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'label' => 'Academic Area',
     'required' => FALSE,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -68,6 +70,8 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
   // Exported field_instance: 'node-working_paper-field_authors'
   $field_instances['node-working_paper-field_authors'] = array(
     'bundle' => 'working_paper',
+    'custom_add_another' => 'Add Another Author',
+    'custom_remove' => 'Remove Author',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => 'To add yourself or another Stanford GSB faculty member as an author, click the button next to "Faculty," then enter the first few characters of the first or last name. The lookup feature will display potential matches; click on the desired name.<br><br> 
@@ -111,9 +115,11 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_authors',
-    'label' => 'Authors',
+    'label' => 'Author & Co-Authors',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -174,6 +180,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Additional Topic',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -228,6 +236,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Version Date',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'default_value' => 'now',
       'default_value2' => 'same',
       'default_value_code' => '',
@@ -313,6 +323,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Abstract',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'linkit' => array(
         'enable' => 0,
         'insert_plugin' => '',
@@ -368,6 +380,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Document Name',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'linkit' => array(
         'enable' => 0,
         'insert_plugin' => '',
@@ -421,6 +435,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Document UUID',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'linkit' => array(
         'enable' => 0,
         'insert_plugin' => '',
@@ -445,6 +461,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
   // Exported field_instance: 'node-working_paper-field_file_single_public'
   $field_instances['node-working_paper-field_file_single_public'] = array(
     'bundle' => 'working_paper',
+    'custom_add_another' => '',
+    'custom_remove' => '',
     'deleted' => 0,
     'description' => 'Click "Choose File," select the file, click "Open," then click "Upload."',
     'display' => array(
@@ -473,9 +491,11 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_file_single_public',
-    'label' => 'Paper',
+    'label' => 'File',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'description_field' => 0,
       'file_directory' => '',
       'file_extensions' => 'pdf',
@@ -530,6 +550,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Item ID',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'linkit' => array(
         'enable' => 0,
         'insert_plugin' => '',
@@ -592,6 +614,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Document Link',
     'required' => 0,
     'settings' => array(
+      0 => 'title_label_use_field_label',
       'attributes' => array(
         'class' => '',
         'configurable_title' => 0,
@@ -599,6 +622,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'target' => '_blank',
         'title' => '',
       ),
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'display' => array(
         'url_cutoff' => 80,
       ),
@@ -659,6 +684,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Paper Copy',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -705,6 +732,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Product Type',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -758,6 +787,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Day',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'max' => '',
       'min' => '',
       'prefix' => '',
@@ -815,6 +846,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Month',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'max' => '',
       'min' => '',
       'prefix' => '',
@@ -868,6 +901,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Publish this working paper on the following databases',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -913,6 +948,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Search field',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'selected_fields' => array(
         'concat_field_entity_label' => 'concat_field_entity_label',
         'field_academic_area_unlimited' => 'field_academic_area_unlimited',
@@ -973,6 +1010,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Submit',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1024,6 +1063,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Keywords',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1097,6 +1138,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Publication Year',
     'required' => FALSE,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'default_value' => 'now',
       'default_value2' => 'same',
       'default_value_code' => '',
@@ -1160,6 +1203,8 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'label' => 'Year',
     'required' => 0,
     'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'default_value' => 'now',
       'default_value2' => 'same',
       'default_value_code' => '',
@@ -1191,7 +1236,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
   t('Abstract');
   t('Academic Area');
   t('Additional Topic');
-  t('Authors');
+  t('Author & Co-Authors');
   t('Click "Choose File," select the file, click "Open," then click "Upload."');
   t('Day');
   t('Document Link');
@@ -1199,10 +1244,10 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
   t('Document UUID');
   t('Enter a one-paragraph abstract. Multiple paragraphs will be merged into one.');
   t('Enter the numeric equivalent for desired month (1-12).');
+  t('File');
   t('Item ID');
   t('Keywords');
   t('Month');
-  t('Paper');
   t('Paper Copy');
   t('Product Type');
   t('Publication Year');
