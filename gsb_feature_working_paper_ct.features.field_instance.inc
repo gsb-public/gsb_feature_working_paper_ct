@@ -177,7 +177,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_business_insight_topic',
-    'label' => 'Additional Topic',
+    'label' => 'Additional Topics',
     'required' => 0,
     'settings' => array(
       'custom_add_another' => '',
@@ -1235,7 +1235,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
   // Included for use with string extractors like potx.
   t('Abstract');
   t('Academic Area');
-  t('Additional Topic');
+  t('Additional Topics');
   t('Author & Co-Authors');
   t('Click "Choose File," select the file, click "Open," then click "Upload."');
   t('Day');
