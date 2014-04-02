@@ -796,65 +796,6 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-working_paper-field_pub_date_month'
-  $field_instances['node-working_paper-field_pub_date_month'] = array(
-    'bundle' => 'working_paper',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Enter the numeric equivalent for desired month (1-12).',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'conditions' => array(),
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_integer',
-        'weight' => 30,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser_listing' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'node',
-    'field_name' => 'field_pub_date_month',
-    'label' => 'Month',
-    'required' => 0,
-    'settings' => array(
-      'custom_add_another' => '',
-      'custom_remove' => '',
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'options',
-      'settings' => array(
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-      ),
-      'type' => 'options_select',
-      'weight' => 5,
-    ),
-    'workbench_access_field' => 0,
-  );
-
   // Exported field_instance: 'node-working_paper-field_research_databases'
   $field_instances['node-working_paper-field_research_databases'] = array(
     'bundle' => 'working_paper',
@@ -1150,7 +1091,6 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
   t('Document Name');
   t('Document UUID');
   t('Enter a one-paragraph abstract. Multiple paragraphs will be merged into one.');
-  t('Enter the numeric equivalent for desired month (1-12).');
   t('File');
   t('Item ID');
   t('Keywords');
