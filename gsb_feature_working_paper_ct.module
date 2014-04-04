@@ -688,7 +688,6 @@ function _gsb_feature_working_paper_ct_set_other_authors($data) {
     }
 
     $ewrapper = entity_metadata_wrapper('node', $node);
-    //dpm(_wrapper_debug($ewrapper));    
     if (empty($ewrapper->field_authors)) {
       continue;
     }
@@ -701,18 +700,16 @@ function _gsb_feature_working_paper_ct_set_other_authors($data) {
     $found = false;
     foreach($authors as $author) {
       $ewrap_author = entity_metadata_wrapper('field_collection_item', $author);
-      //dpm(_wrapper_debug($ewrap_author));
       $fn = $ewrap_author->field_first_name->value();
       $ln = $ewrap_author->field_last_name->value();
       if ($fn == $first_name && $ln == $last_name) {
-        //dpm('first_name = '.$first_name.' fn = '+$fn);
         $found = true;
         break;
       }
     }    
 
     if ($found) {
-      //dpm('found matching name = '.$first_name.' '.$last_name);
+      print 'found matching name = '.$first_name.' '.$last_name.PHP_EOL;
     } else {
       _gsb_feature_working_paper_ct_add_other_author($node, $first_name, $last_name);
     } 
@@ -720,14 +717,4 @@ function _gsb_feature_working_paper_ct_set_other_authors($data) {
   }
 
 }
-
-/*
-function _wrapper_debug($w) {
-  $values = array();
-  foreach ($w->getPropertyInfo() as $key => $val) {
-    $values[$key] = $w->$key->value();
-  }
-  return $values;
-}
-*/
 
