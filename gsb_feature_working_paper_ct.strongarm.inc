@@ -86,15 +86,15 @@ function gsb_feature_working_paper_ct_strongarm() {
       'display' => array(
         'gsb_feature_base_fields_faculty_authors' => array(
           'default' => array(
-            'weight' => '8',
+            'weight' => '10',
             'visible' => TRUE,
           ),
           'teaser' => array(
-            'weight' => '4',
+            'weight' => '17',
             'visible' => FALSE,
           ),
           'teaser_listing' => array(
-            'weight' => '7',
+            'weight' => '18',
             'visible' => FALSE,
           ),
         ),
