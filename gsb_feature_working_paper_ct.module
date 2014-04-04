@@ -638,3 +638,96 @@ function _gsb_feature_working_paper_ct_add_author($node, $entity_id) {
   $field_collection_item->save();
 
 }
+
+/**
+ * Add an author entity 'other' info (via field_authors field collection) 
+ * to the first and last name given.
+ */
+function _gsb_feature_working_paper_ct_add_other_author($node, $first_name, $last_name) {
+
+  $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_authors'));
+  $field_collection_item->setHostEntity('node', $node);
+
+  $field_collection_item->field_person_fac_single_ref = array();
+
+  $field_collection_item->field_person_fac_or_other =  array(
+    'und' => array(array('value' => 'Other')),
+  );
+
+  $field_collection_item->field_first_name = array(
+    'und' => array(array('value' => $first_name)),
+  );
+
+  $field_collection_item->field_last_name = array(
+    'und' => array(array('value' => $last_name)),
+  );
+
+  $field_collection_item->field_profile_visibility =  array(
+    'und' => array(array('value' => '1')),
+  );
+
+  $field_collection_item->save();
+
+}
+
+/**
+ * Set the 'Other Authors' values
+ */
+function _gsb_feature_working_paper_ct_set_other_authors($data) {
+
+  foreach($data as $value) {
+    
+    $nid = $value['nid'];
+    $first_name = $value['first_name'];
+    $last_name = $value['last_name'];
+    
+    $node = node_load($nid);
+    if (!$node) {
+      print 'no node for nid = '.$nid.PHP_EOL;
+      continue;
+    }
+
+    $ewrapper = entity_metadata_wrapper('node', $node);
+    //dpm(_wrapper_debug($ewrapper));    
+    if (empty($ewrapper->field_authors)) {
+      continue;
+    }
+
+    print 'nid = '.$nid.PHP_EOL;
+
+    // get the current list of authors saved with the node
+    $authors = $ewrapper->field_authors->value();  
+
+    $found = false;
+    foreach($authors as $author) {
+      $ewrap_author = entity_metadata_wrapper('field_collection_item', $author);
+      //dpm(_wrapper_debug($ewrap_author));
+      $fn = $ewrap_author->field_first_name->value();
+      $ln = $ewrap_author->field_last_name->value();
+      if ($fn == $first_name && $ln == $last_name) {
+        //dpm('first_name = '.$first_name.' fn = '+$fn);
+        $found = true;
+        break;
+      }
+    }    
+
+    if ($found) {
+      //dpm('found matching name = '.$first_name.' '.$last_name);
+    } else {
+      _gsb_feature_working_paper_ct_add_other_author($node, $first_name, $last_name);
+    } 
+
+  }
+
+}
+
+/*
+function _wrapper_debug($w) {
+  $values = array();
+  foreach ($w->getPropertyInfo() as $key => $val) {
+    $values[$key] = $w->$key->value();
+  }
+  return $values;
+}
+*/
+
