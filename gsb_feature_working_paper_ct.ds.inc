@@ -34,8 +34,7 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_expert',
-          'lb' => 'Working Paper No.',
-          'lb-col' => TRUE,
+          'prefix' => 'Working Paper No. ',
           'ow' => TRUE,
           'ow-el' => 'span',
           'ow-cl' => '',
@@ -60,19 +59,6 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_year' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_ds_field_expert',
-          'ow' => TRUE,
-          'ow-el' => 'span',
-          'ow-cl' => '',
-          'ow-def-cl' => TRUE,
-          'ow-at' => '',
-          'ow-def-at' => FALSE,
-        ),
-      ),
-    ),
     'field_academic_area_unlimited' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -87,6 +73,47 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
           'lb' => 'By',
           'lb-el' => 'span',
           'lb-col' => TRUE,
+        ),
+      ),
+    ),
+    'field_pub_date_day' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+          'prefix' => ' ',
+          'suffix' => ', ',
+          'ow' => TRUE,
+          'ow-el' => 'span',
+          'ow-cl' => '',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'field_year_of_publication' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+          'ow' => TRUE,
+          'ow-el' => 'span',
+          'ow-cl' => '',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'field_month' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+          'ow' => TRUE,
+          'ow-el' => 'span',
+          'ow-cl' => '',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
         ),
       ),
     ),
@@ -127,6 +154,40 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_authors' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+        ),
+      ),
+    ),
+    'field_pub_date_day' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+          'suffix' => ', ',
+          'ow' => TRUE,
+          'ow-el' => 'span',
+          'ow-cl' => '',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'field_year_of_publication' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+          'ow' => TRUE,
+          'ow-el' => 'span',
+          'ow-cl' => '',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
     'field_link_document' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -142,23 +203,17 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_year' => array(
+    'field_month' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_expert',
+          'suffix' => ' ',
           'ow' => TRUE,
-          'ow-el' => 'div',
+          'ow-el' => 'span',
           'ow-cl' => '',
           'ow-def-cl' => TRUE,
           'ow-at' => '',
           'ow-def-at' => FALSE,
-        ),
-      ),
-    ),
-    'field_authors' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_ds_field_expert',
         ),
       ),
     ),
@@ -226,6 +281,62 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_pub_date_day' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+          'suffix' => ', ',
+          'ow' => TRUE,
+          'ow-el' => 'span',
+          'ow-cl' => '',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'field_year_of_publication' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+          'ow' => TRUE,
+          'ow-el' => 'span',
+          'ow-cl' => '',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'field_link_document' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+          'lb' => 'PDF',
+          'prefix' => ' | ',
+          'ow' => TRUE,
+          'ow-el' => 'span',
+          'ow-cl' => '',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'field_month' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+          'suffix' => ' ',
+          'ow' => TRUE,
+          'ow-el' => 'span',
+          'ow-cl' => '',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
   );
   $export['node|working_paper|teaser_listing'] = $ds_fieldsetting;
 
@@ -250,30 +361,34 @@ function gsb_feature_working_paper_ct_ds_layout_settings_info() {
       'left' => array(
         0 => 'title',
         1 => 'field_authors',
-        2 => 'field_year',
-        3 => 'field_item_id',
-        4 => 'group_wrapper_topics',
-        5 => 'field_description',
-        6 => 'field_academic_area_unlimited',
-        7 => 'field_tag',
-        8 => 'field_link_document',
-        9 => 'field_business_insight_topic',
+        2 => 'field_month',
+        3 => 'field_pub_date_day',
+        4 => 'field_year_of_publication',
+        5 => 'field_item_id',
+        6 => 'group_wrapper_topics',
+        7 => 'field_academic_area_unlimited',
+        8 => 'field_business_insight_topic',
+        9 => 'field_description',
+        10 => 'field_tag',
+        11 => 'field_link_document',
       ),
       'right' => array(
-        10 => 'gsb_feature_base_fields_faculty_authors',
+        12 => 'gsb_feature_base_fields_faculty_authors',
       ),
     ),
     'fields' => array(
       'title' => 'left',
       'field_authors' => 'left',
-      'field_year' => 'left',
+      'field_month' => 'left',
+      'field_pub_date_day' => 'left',
+      'field_year_of_publication' => 'left',
       'field_item_id' => 'left',
       'group_wrapper_topics' => 'left',
-      'field_description' => 'left',
       'field_academic_area_unlimited' => 'left',
+      'field_business_insight_topic' => 'left',
+      'field_description' => 'left',
       'field_tag' => 'left',
       'field_link_document' => 'left',
-      'field_business_insight_topic' => 'left',
       'gsb_feature_base_fields_faculty_authors' => 'right',
     ),
     'classes' => array(),
@@ -302,17 +417,21 @@ function gsb_feature_working_paper_ct_ds_layout_settings_info() {
         0 => 'group_wrapper_title',
         1 => 'field_authors',
         2 => 'title',
-        3 => 'field_link_document',
-        4 => 'field_year',
-        5 => 'field_description',
+        3 => 'field_month',
+        4 => 'field_pub_date_day',
+        5 => 'field_year_of_publication',
+        6 => 'field_link_document',
+        7 => 'field_description',
       ),
     ),
     'fields' => array(
       'group_wrapper_title' => 'ds_content',
       'field_authors' => 'ds_content',
       'title' => 'ds_content',
+      'field_month' => 'ds_content',
+      'field_pub_date_day' => 'ds_content',
+      'field_year_of_publication' => 'ds_content',
       'field_link_document' => 'ds_content',
-      'field_year' => 'ds_content',
       'field_description' => 'ds_content',
     ),
     'classes' => array(),
@@ -340,22 +459,26 @@ function gsb_feature_working_paper_ct_ds_layout_settings_info() {
         0 => 'title',
         1 => 'field_link_document',
         2 => 'field_authors',
-        3 => 'field_year',
-        4 => 'field_description',
-        5 => 'group_wrapper_topics',
+        3 => 'field_month',
+        4 => 'field_pub_date_day',
+        5 => 'field_year_of_publication',
         6 => 'field_academic_area_unlimited',
-        7 => 'field_business_insight_topic',
+        7 => 'field_description',
+        8 => 'field_business_insight_topic',
+        9 => 'group_wrapper_topics',
       ),
     ),
     'fields' => array(
       'title' => 'ds_content',
       'field_link_document' => 'ds_content',
       'field_authors' => 'ds_content',
-      'field_year' => 'ds_content',
-      'field_description' => 'ds_content',
-      'group_wrapper_topics' => 'ds_content',
+      'field_month' => 'ds_content',
+      'field_pub_date_day' => 'ds_content',
+      'field_year_of_publication' => 'ds_content',
       'field_academic_area_unlimited' => 'ds_content',
+      'field_description' => 'ds_content',
       'field_business_insight_topic' => 'ds_content',
+      'group_wrapper_topics' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(

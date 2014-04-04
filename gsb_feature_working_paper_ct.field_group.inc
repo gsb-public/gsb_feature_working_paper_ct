@@ -113,7 +113,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Topics',
-    'weight' => '4',
+    'weight' => '6',
     'children' => array(
       0 => 'field_business_insight_topic',
       1 => 'field_academic_area_unlimited',
@@ -141,7 +141,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Topics',
-    'weight' => '5',
+    'weight' => '8',
     'children' => array(
       0 => 'field_business_insight_topic',
       1 => 'field_academic_area_unlimited',
