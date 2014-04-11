@@ -274,7 +274,7 @@ function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form,
     $default_value = array();
     foreach ($research_field as $key => $value) {
       $taxonomy_term = taxonomy_term_load($key);
-      if ($taxonomy_term->field_default_checkbox_status[$language][0]['value']) {
+      if (!empty($taxonomy_term->field_default_checkbox_status[$language][0]['value'])) {
         $default_value[] = $key;
       }
     }
