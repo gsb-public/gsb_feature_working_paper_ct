@@ -627,8 +627,8 @@ function _gsb_feature_working_paper_ct_setTags($uuid, $tags) {
   curl_setopt($session, CURLOPT_POSTFIELDS, $data_string);                                        
   curl_setopt($session, CURLOPT_HTTPHEADER, array(                    
     'Content-Type: application/json',
-    'Content-Length: ' . strlen($data_string)),
-  );
+    'Content-Length: ' . strlen($data_string),
+  ));
   
   // make the return value object
 
