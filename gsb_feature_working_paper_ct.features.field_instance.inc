@@ -563,6 +563,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
       ),
       'rel_remove' => 'default',
       'title' => 'value',
+      'title_label_use_field_label' => FALSE,
       'title_maxlength' => 128,
       'title_value' => 'Download',
       'url' => 'optional',
@@ -1105,7 +1106,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 4,
+      'weight' => 8,
     ),
     'workbench_access_field' => 0,
   );

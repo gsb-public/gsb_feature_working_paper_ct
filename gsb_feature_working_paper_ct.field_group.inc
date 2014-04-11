@@ -24,9 +24,8 @@ function gsb_feature_working_paper_ct_field_group_info() {
     'weight' => '4',
     'children' => array(
       0 => 'field_pub_date_day',
-      1 => 'field_pub_date_month',
-      2 => 'field_year_of_publication',
-      3 => 'field_month',
+      1 => 'field_year_of_publication',
+      2 => 'field_month',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
