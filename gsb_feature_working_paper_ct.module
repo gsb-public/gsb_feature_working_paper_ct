@@ -268,6 +268,19 @@ function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form,
   $form['field_product_type']['#access'] = FALSE;
   $form['field_item_id']['#access'] = FALSE;
 
+  // Research databases taxonomy field checkbox alter
+  if (empty($form['nid']['#value'])) {
+    $research_field = $form['field_research_databases'][$language]['#options'];
+    $default_value = array();
+    foreach ($research_field as $key => $value) {
+      $taxonomy_term = taxonomy_term_load($key);
+      if ($taxonomy_term->field_default_checkbox_status[$language][0]['value']) {
+        $default_value[] = $key;
+      }
+    }
+    $form['field_research_databases'][$language]['#default_value'] = $default_value;
+  }
+
 }  
 
 /**
