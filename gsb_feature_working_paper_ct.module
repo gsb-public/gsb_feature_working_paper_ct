@@ -744,6 +744,22 @@ function _gsb_feature_working_paper_ct_add_author($node, $entity_id) {
 }
 
 /**
+ * Debugging function to get an Alfresco Object.
+ */
+function _gsb_feature_working_paper_ct_getObject($uuid) {
+  module_load_include('api.inc', 'cmis');
+  
+  $repository = cmis_get_repository('default');
+  dpm($repository);  
+
+  $object = gsb_cmis_api_getDocumentObject('default', $uuid);
+
+  $properties = cmisapi_getProperties($repository->repositoryId, $object->id);
+  dpm($properties);
+
+}  
+
+/**
  * Implements hook_node_presave().
  */
 function gsb_feature_working_paper_ct_node_presave($node) {
