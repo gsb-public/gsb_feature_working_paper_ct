@@ -876,7 +876,7 @@ function _gsb_feature_working_paper_ct_setProperties($uuid,$node) {
   // put together the url for the alfresco service call - to get 'tags'
 
   $url = $repo_info['default']['service_url'];
-  $url = str_replace('api/node/workspace/SpacesStore/','gsb/helloworldform',$url);
+  $url = str_replace('api/node/workspace/SpacesStore/','gsb/updateworkingpaper',$url);
 
   // get the user and password
 
