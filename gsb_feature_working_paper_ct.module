@@ -562,16 +562,13 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
   }
 
   $repository = cmis_get_repository('default');
+  $working_paper_folder = variable_get('gsb_feature_working_paper_ct_alfresco_folder', '/Research Papers');
 
   $fid = $node->field_file_single_public['und'][0]['fid'];
-  // @todo - Remove test folder 
-  //$folderpath = '/Research Papers';  
-  $folderpath = '/Research Papers/Greg';
-
   $file = (array)file_load($fid);   
   $filename = $file['filename'];
 
-  $folder = cmisapi_getObjectByPath($repository->repositoryId, drupal_encode_path($folderpath) );
+  $folder = cmisapi_getObjectByPath($repository->repositoryId, drupal_encode_path($working_paper_folder) );
 
   if ($uuid == -1) {
     $cmis_object = cmisapi_createDocument(
