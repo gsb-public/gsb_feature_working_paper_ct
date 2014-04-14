@@ -506,15 +506,17 @@ function _gsb_feature_working_paper_ct_import_authors($node,$ewrapper,$doc) {
  */
 function _gsb_feature_working_paper_ct_add_author($node, $entity_id) {
 
+  $language = $node->language;
+
   $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_authors'));
   $field_collection_item->setHostEntity('node', $node);
 
   $field_collection_item->field_person_fac_single_ref = array(
-    'und' => array(array('target_id' => $entity_id)),
+    $language => array(array('target_id' => $entity_id)),
   );
 
   $field_collection_item->field_person_fac_or_other = array(
-    'und' => array(array('value' => 'UseEntityReference')),
+    $language => array(array('value' => 'UseEntityReference')),
   );
 
   $field_collection_item->field_first_name = array();
@@ -556,15 +558,17 @@ function gsb_feature_working_paper_ct_node_presave($node) {
 function _gsb_feature_working_paper_ct_updateAlfresco($node) {
   module_load_include('api.inc', 'cmis');
 
+  $language = $node->language;
+
   $uuid = -1;
-  if (!empty($node->field_document_uuid['und'][0])) {
-    $uuid = $node->field_document_uuid['und'][0]['value'];
+  if (!empty($node->field_document_uuid[$language][0])) {
+    $uuid = $node->field_document_uuid[$language][0]['value'];
   }
 
   $repository = cmis_get_repository('default');
   $working_paper_folder = variable_get('gsb_feature_working_paper_ct_alfresco_folder', '/Research Papers');
 
-  $fid = $node->field_file_single_public['und'][0]['fid'];
+  $fid = $node->field_file_single_public[$language][0]['fid'];
   $file = (array)file_load($fid);   
   $filename = $file['filename'];
 
@@ -589,7 +593,7 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
 
   // set the node properties to match the values held by Alfresco
 
-  $node->field_document_uuid['und'][0]['value'] = $properties->uuid;
+  $node->field_document_uuid[$language][0]['value'] = $properties->uuid;
 
   // set the alfresco properties via post to a WebScript
 
@@ -602,6 +606,8 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
  */
 function _gsb_feature_working_paper_ct_setProperties($uuid,$node) {
 
+  $language = $node->language;
+
   $repo_info = variable_get('cmis_repositories', false);
   if (!$repo_info) {
     return false;
@@ -613,37 +619,41 @@ function _gsb_feature_working_paper_ct_setProperties($uuid,$node) {
   $cwoProductType = 'Working Paper';
 
   $publication_year = '';
-  if (!empty($node->field_year_of_publication['und'][0])) {
-    $publication_year = $node->field_year_of_publication['und'][0]['value'];
+  if (!empty($node->field_year_of_publication[$language][0])) {
+    $publication_year = $node->field_year_of_publication[$language][0]['value'];
     $publication_year = substr($publication_year, 0, 4);    
   }
 
   $description = '';
-  if (!empty($node->field_description['und'][0])) {
-    $description = $node->field_description['und'][0]['value'];  
+  if (!empty($node->field_description[$language][0])) {
+    $description = $node->field_description[$language][0]['value'];  
   }  
 
-  // @todo: need to check into what we need to do with itemid
-  //$cwoItemId = $node->field_item_id['und'][0]['value'];
-  $cwoItemId = '';
+  $newItemId = false;
+  $cwoItemId = variable_get('gsb_feature_working_paper_ct_current_itemid', 3000);
+  if (!empty($node->field_item_id[$language][0])) {
+    $cwoItemId = $node->field_item_id[$language][0]['value'];  
+  } else {  
+    $newItemId = true;
+  }   
   
   $cwoAcademicArea = '';
-  if (!empty($node->field_academic_area_unlimited['und'][0])) {
-    $academic_area_tid = $node->field_academic_area_unlimited['und'][0]['tid'];
+  if (!empty($node->field_academic_area_unlimited[$language][0])) {
+    $academic_area_tid = $node->field_academic_area_unlimited[$language][0]['tid'];
     $academic_area_term = taxonomy_term_load($academic_area_tid); 
     $cwoAcademicArea = $academic_area_term->name;
   }
 
   $cwoBusinessTopics = '';
-  if (!empty($node->field_business_insight_topic['und'][0])) {
-    $bi_topic_tid = $node->field_business_insight_topic['und'][0]['tid'];
+  if (!empty($node->field_business_insight_topic[$language][0])) {
+    $bi_topic_tid = $node->field_business_insight_topic[$language][0]['tid'];
     $bi_topic_term = taxonomy_term_load($bi_topic_tid);
     $cwoBusinessTopics = $bi_topic_term->name;
   }
 
   $authorSunetIds = array();
   $authors = array();
-  if (!empty($node->field_authors['und'][0])) {
+  if (!empty($node->field_authors[$language][0])) {
     list($authorSunetIds, $authors) = _gsb_feature_working_paper_ct_getAuthorProperties($node);
   }  
 
@@ -734,6 +744,12 @@ function _gsb_feature_working_paper_ct_setProperties($uuid,$node) {
   $result = '';
   if ($retval->code == '200') {
     $result = drupal_json_decode($retval->body);
+    if ($newItemId) {
+      $node->field_item_id[$language][0]['value'] = $cwoItemId;
+      $cwoItemId++;
+      variable_set('gsb_feature_working_paper_ct_current_itemid', $cwoItemId);
+      $node->field_product_type[$language][0]['value'] = 'Working Paper';
+    }
   }
 
   return $result;
@@ -742,14 +758,16 @@ function _gsb_feature_working_paper_ct_setProperties($uuid,$node) {
 
 function _gsb_feature_working_paper_ct_getAuthorProperties($node) {
 
+  $language = $node->language;
+
   $authorSunetIds = array();
   $authors = array();
 
-  if (empty($node->field_authors['und'][0])) {
+  if (empty($node->field_authors[$language][0])) {
     return array($authorSunetIds, $authors);
   }  
 
-  foreach($node->field_authors['und'] as $author_item) {
+  foreach($node->field_authors[$language] as $author_item) {
 
     $authors_nid = $author_item['value'];
 
@@ -759,7 +777,7 @@ function _gsb_feature_working_paper_ct_getAuthorProperties($node) {
     if ($ref) {
       $authors_nid = $ref->nid;
       $author_node = node_load($authors_nid);
-      $authorSunetIds[] = $author_node->field_sunetid['und'][0]['value'];  
+      $authorSunetIds[] = $author_node->field_sunetid[$language][0]['value'];  
     } else {
       $first_name = $ewrap_author->field_first_name->value();
       $last_name = $ewrap_author->field_last_name->value();
