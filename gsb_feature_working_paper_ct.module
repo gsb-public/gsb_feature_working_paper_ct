@@ -262,8 +262,10 @@ function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form,
 
   //$form['field_year_of_publication']['und'][0]['#description'] = 'test';
 
-  $form['field_document_uuid']['#access'] = FALSE;
-  $form['field_document_name']['#access'] = FALSE;
+  $form['field_document_uuid']['#disabled'] = TRUE;
+  $form['field_link_document']['#disabled'] = TRUE;
+  $form['field_document_name']['#disabled'] = TRUE;
+
   $form['field_paper_copy']['#access'] = FALSE;
   $form['field_product_type']['#access'] = FALSE;
   $form['field_item_id']['#access'] = FALSE;
@@ -767,7 +769,7 @@ function _gsb_feature_working_paper_ct_getObject($uuid) {
 function gsb_feature_working_paper_ct_node_presave($node) {
   // Update Alfresco with node properties
   if ($node->type == 'working_paper') {
-    _gsb_feature_working_paper_ct_updateAlfresco($node);
+    $result = _gsb_feature_working_paper_ct_updateAlfresco($node);
   }
 }
 
@@ -787,13 +789,23 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
   $repository = cmis_get_repository('default');
   $working_paper_folder = variable_get('gsb_feature_working_paper_ct_alfresco_folder', '/Research Papers');
 
-  $fid = $node->field_file_single_public[$language][0]['fid'];
-  $file = (array)file_load($fid);   
-  $filename = $file['filename'];
-
-  $folder = cmisapi_getObjectByPath($repository->repositoryId, drupal_encode_path($working_paper_folder) );
+  $file = null;
+  $filename = '';
+  if (!empty($node->field_file_single_public[$language])) {
+    $fid = $node->field_file_single_public[$language][0]['fid'];
+    $file = (array)file_load($fid);   
+    $filename = $file['filename'];
+  } 
 
   if ($uuid == -1) {
+
+    if (empty($file['uri'])) {
+      drupal_set_message(t('Error: No file uploaded when creating a new document on Alfresco'), 'status', FALSE);
+      return false;
+    }
+
+    $folder = cmisapi_getObjectByPath($repository->repositoryId, drupal_encode_path($working_paper_folder) );    
+    
     $cmis_object = cmisapi_createDocument(
       $repository->repositoryId,
       $folder->id,
@@ -802,8 +814,24 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
       @file_get_contents($file['uri']),
       $file['filemime']
     );    
+
   } else {
+
     $cmis_object = gsb_cmis_api_getDocumentObject('default', $uuid);
+    
+    if (!empty($file['uri'])) {
+      
+      $file_content = file_get_contents($file['uri']);
+      
+      cmisapi_setContentStream(
+        $repository->repositoryId,
+        $cmis_object->id,
+        $file_content, 
+        $cmis_object->properties['cmis:contentStreamMimeType']
+      );
+    
+    }
+
   }
 
   // get the properties for the object from Alfresco
@@ -816,14 +844,16 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
 
   // set the alfresco properties via post to a WebScript
 
-  _gsb_feature_working_paper_ct_setProperties($properties->uuid,$node);
+  _gsb_feature_working_paper_ct_setProperties($properties->uuid,$node,$filename);
+
+  return true;
 
 }
 
 /**
  * Set the properties to Alfresco
  */
-function _gsb_feature_working_paper_ct_setProperties($uuid,$node) {
+function _gsb_feature_working_paper_ct_setProperties($uuid,$node,$filename) {
 
   $language = $node->language;
 
@@ -833,6 +863,10 @@ function _gsb_feature_working_paper_ct_setProperties($uuid,$node) {
   }
 
   // get the data properties from the node
+
+  if (!empty($filename)) {
+    $docname = $filename;
+  }
 
   $title = $node->title;
   $cwoProductType = 'Working Paper';
@@ -906,6 +940,7 @@ function _gsb_feature_working_paper_ct_setProperties($uuid,$node) {
 
   $data = array(
     'uuid' => $id,    
+    'docname' => $docname,
     'title' => $title,
     'description' => $description,    
     'cwoPublicationYear' => $publication_year,

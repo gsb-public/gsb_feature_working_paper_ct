@@ -6,6 +6,7 @@
 
         uuid:<input name="uuid"><br/>  
 
+        docname:<input name="docname"><br/> 
         title:<input name="title"><br/> 
         description:<input name="description"><br/> 
         author:<input name="author"><br/> 
