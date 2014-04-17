@@ -278,6 +278,9 @@ function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form,
   $form['field_product_type']['#access'] = FALSE;
   $form['field_item_id']['#access'] = FALSE;
 
+  // Add markup for the docname if we have a doc on Alfresco
+  _gsb_feature_working_paper_ct_addDocName($form);
+
   // Research databases taxonomy field checkbox alter
   if (empty($form['nid']['#value'])) {
     $research_field = $form['field_research_databases'][$language]['#options'];
@@ -801,13 +804,13 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
   $filename = '';
   if (!empty($node->field_file_single_public[$language])) {
     $fid = $node->field_file_single_public[$language][0]['fid'];
-    $file = (array)file_load($fid);   
-    $filename = $file['filename'];
+    $file = file_load($fid);   
+    $filename = $file->filename;
   } 
 
   if ($uuid == -1) {
 
-    if (empty($file['uri'])) {
+    if (empty($file->uri)) {
       drupal_set_message(t('Error: No file uploaded when creating a new document on Alfresco'), 'status', FALSE);
       return false;
     }
@@ -819,17 +822,17 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
       $folder->id,
       $filename,
       array(),
-      @file_get_contents($file['uri']),
-      $file['filemime']
+      @file_get_contents($file->uri),
+      $file->filemime
     );    
 
   } else {
 
     $cmis_object = gsb_cmis_api_getDocumentObject('default', $uuid);
     
-    if (!empty($file['uri'])) {
+    if (!empty($file->uri)) {
       
-      $file_content = file_get_contents($file['uri']);
+      $file_content = file_get_contents($file->uri);
       
       cmisapi_setContentStream(
         $repository->repositoryId,
@@ -854,6 +857,19 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
 
   _gsb_feature_working_paper_ct_setProperties($properties->uuid,$node,$filename);
 
+  // remove file from the Drupal system
+
+  if ($file) {
+    $usage = file_usage_list($file);
+    if (!empty($usage)) {
+      if (count($usage['file']['node']) == 1 && !empty($usage['file']['node'][$node->nid])) {
+        file_delete($file,TRUE);
+      }
+    } else {
+      file_delete($file);
+    }
+  }
+
   return true;
 
 }
@@ -872,6 +888,7 @@ function _gsb_feature_working_paper_ct_setProperties($uuid,$node,$filename) {
 
   // get the data properties from the node
 
+  $docname = '';
   if (!empty($filename)) {
     $docname = $filename;
   }
@@ -1018,6 +1035,9 @@ function _gsb_feature_working_paper_ct_setProperties($uuid,$node,$filename) {
   
 }
 
+/**
+ * Get the Author properties 
+ */
 function _gsb_feature_working_paper_ct_getAuthorProperties($node) {
 
   $language = $node->language;
@@ -1050,4 +1070,36 @@ function _gsb_feature_working_paper_ct_getAuthorProperties($node) {
 
   return array($authorSunetIds, $authors);
 
+}
+
+/**
+ * Add the docname as a prefix for the file upload field
+ */
+function _gsb_feature_working_paper_ct_addDocName(&$form) {
+  module_load_include('api.inc', 'cmis');
+
+  $language = $form['language']['#value'];
+  $uuid = -1;
+  $docname = '';
+
+  if (!empty($form['nid'])) {    
+    if (empty($form['nid']['#value'])) {
+      $form['field_file_single_public'][$language][0]['#title'] = 'Add Document';
+      return;
+    }
+    $nid = $form['nid']['#value'];
+    $node = node_load($nid);
+    if (!empty($node->field_document_uuid[$language][0])) {
+      $uuid = $node->field_document_uuid[$language][0]['value'];
+    }
+    if ($uuid != -1) {      
+      $repository = cmis_get_repository('default');       
+      $object = gsb_cmis_api_getDocumentObject('default', $uuid);
+      $docname = $object->properties['cmis:contentStreamFileName'];
+      if ($docname) {
+        $form['field_file_single_public']['#prefix'] = 'Current document: <a href="/gsb-cmis/gsb_cmis_download_doc/'.$nid.'">'.$docname.'</a>';
+        $form['field_file_single_public'][$language][0]['#title'] = 'Update Document';
+      }      
+    }
+  }
 }
