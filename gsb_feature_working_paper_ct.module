@@ -253,6 +253,8 @@ function _gsb_feature_working_paper_ct_getResearchDatabases($node) {
  */
 function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form, &$form_state) {
 
+  global $user;
+
   $language = $form['language']['#value'];
 
   $form['title']['#prefix'] =
@@ -262,9 +264,15 @@ function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form,
 
   //$form['field_year_of_publication']['und'][0]['#description'] = 'test';
 
-  $form['field_document_uuid']['#disabled'] = TRUE;
-  $form['field_link_document']['#disabled'] = TRUE;
-  $form['field_document_name']['#disabled'] = TRUE;
+  if (in_array('administrator', array_values($user->roles))) {
+    $form['field_document_uuid']['#disabled'] = TRUE;
+    $form['field_link_document']['#disabled'] = TRUE;
+    $form['field_document_name']['#disabled'] = TRUE;
+  } else {
+    $form['field_document_uuid']['#access'] = FALSE;
+    $form['field_link_document']['#access'] = FALSE;
+    $form['field_document_name']['#access'] = FALSE;    
+  }
 
   $form['field_paper_copy']['#access'] = FALSE;
   $form['field_product_type']['#access'] = FALSE;
