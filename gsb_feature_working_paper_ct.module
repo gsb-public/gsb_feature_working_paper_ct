@@ -302,7 +302,6 @@ function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form,
  * Validates the working paper node edit form.
  */
 function gsb_feature_working_paper_ct_form_validate($form, &$form_state) {
-  //dpm($form_state);
   if ($form_state['values']['field_document_uuid']['und'][0]['value'] == '') {
     if ($form_state['values']['field_file_single_public']['und'][0]['fid'] == 0) {
       form_set_error('field_file_single_public', t('Please upload a file to be saved to Alfresco'));
@@ -851,7 +850,7 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
   }
 
   if ($cmis_object == null) {
-    drupal_set_message(t('Error: Creating/Updating document on Alfresco'), 'status', FALSE);
+    drupal_set_message(t('Error: Creating/Updating document on Alfresco'), 'error', FALSE);
     return false;
   }
 
@@ -1126,7 +1125,7 @@ function _gsb_feature_working_paper_ct_addDocName(&$form) {
 function _gsb_working_paper_ct_createDocument($repository, $file, $folder) {
   $cmis_object = null;
   if (empty($file->uri)) {
-    drupal_set_message(t('Error: No file uploaded(required) to create a new document on Alfresco'), 'status', FALSE);
+    drupal_set_message(t('Error: No file uploaded(required) to create a new document on Alfresco'), 'error', FALSE);
     return $cmis_object;
   }
   $filename = $file->filename;
@@ -1141,9 +1140,9 @@ function _gsb_working_paper_ct_createDocument($repository, $file, $folder) {
     );      
   } catch (Exception $ex) {
     if (strpos($ex->getMessage(), "FileExistsException")) {
-      drupal_set_message(t('Error: Unable to create document on Alfresco - file already exists '.$filename), 'status', FALSE);
+      drupal_set_message(t('Error: Unable to create document on Alfresco - file already exists '.$filename), 'error', FALSE);
     } else {
-      drupal_set_message(t('Error: Unable to create document on Alfresco'), 'status', FALSE);
+      drupal_set_message(t('Error: Unable to create document on Alfresco'), 'error', FALSE);
     }
   }   
   return $cmis_object;
