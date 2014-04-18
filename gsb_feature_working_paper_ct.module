@@ -294,6 +294,20 @@ function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form,
     $form['field_research_databases'][$language]['#default_value'] = $default_value;
   }
 
+  $form['#validate'][] = 'gsb_feature_working_paper_ct_form_validate';
+
+}  
+
+/**
+ * Validates the working paper node edit form.
+ */
+function gsb_feature_working_paper_ct_form_validate($form, &$form_state) {
+  //dpm($form_state);
+  if ($form_state['values']['field_document_uuid']['und'][0]['value'] == '') {
+    if ($form_state['values']['field_file_single_public']['und'][0]['fid'] == 0) {
+      form_set_error('field_file_single_public', t('Please upload a file to be saved to Alfresco'));
+    }
+  }
 }  
 
 /**
