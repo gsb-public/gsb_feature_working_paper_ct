@@ -2,7 +2,9 @@ model.name = args.testname;
 
 var found_node = search.findNode("workspace://SpacesStore/" + args.uuid);
 
-found_node.properties['cm:name'] = args.docname;
+//if (args.docname != '') {
+  //found_node.properties['cm:name'] = args.docname;
+//}
 found_node.properties['cm:title'] = args.title;
 found_node.properties['cm:description'] =args.description;
 found_node.properties['cm:author'] = args.author;
