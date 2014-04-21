@@ -257,6 +257,13 @@ function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form,
 
   $language = $form['language']['#value'];
 
+  $form['title']['#prefix'] =
+  'For help with adding or editing working papers, <a href="https://remedyweb.stanford.edu/helpsu/gsb" target="_blank">submit a HelpSU ticket</a>.<br><br>';
+
+  $form['title']['#description'] = 'Enter the title of the working paper (in title case). | <strong>Example</strong>: The Timing and Frequency of Corporate Disclosures';
+
+  //$form['field_year_of_publication']['und'][0]['#description'] = 'test';
+
   if (in_array('administrator', array_values($user->roles))) {
     $form['field_document_uuid']['#disabled'] = TRUE;
     $form['field_link_document']['#disabled'] = TRUE;
@@ -295,12 +302,33 @@ function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form,
  * Validates the working paper node edit form.
  */
 function gsb_feature_working_paper_ct_form_validate($form, &$form_state) {
-  if ($form_state['values']['field_document_uuid']['und'][0]['value'] == '') {
-    if ($form_state['values']['field_file_single_public']['und'][0]['fid'] == 0) {
-      form_set_error('field_file_single_public', t('Please upload a file to be saved to Alfresco'));
+  $language = $form_state['values']['language'];
+  if ($form_state['values']['nid'] != null) {
+    return;
+  }
+  // For any new nodes we are adding we need to check that a file is uploaded
+  // and that is has a unique name.
+  if ($form_state['values']['field_file_single_public'][$language][0]['fid'] == 0) {
+    form_set_error('field_file_single_public', t('Please upload a file to be saved to Alfresco'));
+  } else {
+    // Check if the file already exists  
+    $fid = $form_state['values']['field_file_single_public'][$language][0]['fid'];
+    $file = file_load($fid);
+    $filename = $file->filename;
+    $form_state['values']['field_document_name']['und'][0]['value'] = $filename;  
+    $object = _gsb_working_paper_ct_getObjectByPath('', '/'.$filename);
+    if ($object != null) {
+      // The name already exists, so see if we can come up with a new unique name.
+      $new_name = _gsb_working_paper_ct_getUniqueName('', $filename);
+      if (empty($new_name)) {
+        form_set_error('field_file_single_public', 
+          'File: '.$filename.' already exists. Please use another file name.');
+      } else {
+        $form_state['values']['field_document_name']['und'][0]['value'] = $new_name;
+      }
     }
   }
-}  
+}
 
 /**
  * Sets up a callback function for handling the cmis import
@@ -795,13 +823,13 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
   // get info about the uploaded file
 
   $file = null;
-  $filename = '';
   if (!empty($node->field_file_single_public[$language])) {
     $fid = $node->field_file_single_public[$language][0]['fid'];
     $file = file_load($fid);   
-    $filename = $file->filename;
   } 
   $folder = cmisapi_getObjectByPath($repository->repositoryId, drupal_encode_path($working_paper_folder) );   
+
+  $filename = $node->field_document_name[$language][0]['value'];
 
   $cmis_object = null;
 
@@ -812,7 +840,7 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
     // we don't have a uuid, so create a document/file on Alfresco
     
     // create a new document on Alfresco
-    $cmis_object = _gsb_working_paper_ct_createDocument($repository, $file, $folder); 
+    $cmis_object = _gsb_working_paper_ct_createDocument($repository, $file, $folder, $filename); 
 
   } else {
 
@@ -1115,13 +1143,12 @@ function _gsb_feature_working_paper_ct_addDocName(&$form) {
 /**
  * Create a document on Alfresco
  */
-function _gsb_working_paper_ct_createDocument($repository, $file, $folder) {
+function _gsb_working_paper_ct_createDocument($repository, $file, $folder, $filename) {
   $cmis_object = null;
   if (empty($file->uri)) {
     drupal_set_message(t('Error: No file uploaded(required) to create a new document on Alfresco'), 'error', FALSE);
     return $cmis_object;
   }
-  $filename = $file->filename;
   try {
     $cmis_object = cmisapi_createDocument(
       $repository->repositoryId,
@@ -1140,3 +1167,52 @@ function _gsb_working_paper_ct_createDocument($repository, $file, $folder) {
   }   
   return $cmis_object;
 }
+
+/**
+ * Get the cmis object for a given path and filename. 
+ * If path is empty, assumes default path to our Working Papers.
+ */
+function _gsb_working_paper_ct_getObjectByPath($path, $filename) {
+  module_load_include('api.inc', 'cmis');
+
+  $working_paper_folder = variable_get('gsb_feature_working_paper_ct_alfresco_folder', '/Research Papers');
+
+  $repository = cmis_get_repository('default');
+
+  if (empty($path)) {
+    $path = $working_paper_folder . $filename;  
+  } else {
+    $path = $path . $filename;        
+  }
+  
+  try {  
+    $object = cmisapi_getObjectByPath($repository->repositoryId, drupal_encode_path($path));
+  } catch (Exception $ex) {
+    return null;
+  }  
+ 
+  return $object;  
+}
+
+/**
+ * Get a unique name so we can add the doc into Alfresco.
+ * Note: We will only make 10 attempts to come up with a unique name. 
+ * If no unique name is found, we will give back an empty string.
+ */
+function _gsb_working_paper_ct_getUniqueName($path, $filename) {
+  $parts = explode('.', $filename);
+  $new_filename = $filename;
+  $found = false;
+  for($index = 1; $index < 10; $index++) {
+    $new_filename = $parts[0].'-'.$index.'.'.$parts[1];
+    $object = _gsb_working_paper_ct_getObjectByPath($path, '/'.$new_filename);
+    if ($object == null) {
+      $found = true;
+      break;
+    }
+  }
+  if (!$found) {
+    return '';
+  }
+  return $new_filename;
+}  
