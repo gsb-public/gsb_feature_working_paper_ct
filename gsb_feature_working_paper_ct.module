@@ -1099,7 +1099,7 @@ function _gsb_feature_working_paper_ct_addDocName(&$form) {
         $object = gsb_cmis_api_getDocumentObject('default', $uuid);
         $docname = $object->properties['cmis:contentStreamFileName'];
         if ($docname) {
-          $form['field_file_single_public']['#prefix'] = 'Current document: <a href="/gsb-cmis/gsb_cmis_download_doc/'.$nid.'">'.$docname.'</a>';
+          $form['field_file_single_public']['#prefix'] = 'Current document: <a href="/gsb-cmis/gsb-cmis-download-doc/'.$nid.'">'.$docname.'</a>';
           $form['field_file_single_public'][$language][0]['#title'] = 'Update Document';
         }
       } catch (Exception $ex) {
