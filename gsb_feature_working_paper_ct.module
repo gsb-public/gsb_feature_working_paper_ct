@@ -454,12 +454,6 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_academic_area_unlimited = array();
   }
 
-  gsb_cmis_log('writing field_authors', 'success');
-
-  if (!empty($doc->properties['gsb:authorsSunetId']) && trim($doc->properties['gsb:authorsSunetId']) != '') {
-    _gsb_feature_working_paper_ct_import_authors($node,$ewrapper,$doc);
-  }
-
   gsb_cmis_log('writing field_paper_copy', 'success');
 
   if (!empty($doc->properties['gsb:cwoPaperCopy']) && trim($doc->properties['gsb:cwoPaperCopy']) != '') {
@@ -514,10 +508,16 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_tag = array();
   }
 
+  gsb_cmis_log('writing field_authors', 'success');
+
+  if (!empty($doc->properties['gsb:authorsSunetId']) && trim($doc->properties['gsb:authorsSunetId']) != '') {
+    _gsb_feature_working_paper_ct_import_sunet_authors($node,$ewrapper,$doc);
+  }
+
   gsb_cmis_log('saving node', 'success');
 
   $ewrapper->save();
-  
+
 }
 
 /**
@@ -703,7 +703,7 @@ function _gsb_feature_working_paper_ct_setTags($uuid, $tags) {
 /**
  * Get authors from the Alfresco doc properties
  */
-function _gsb_feature_working_paper_ct_import_authors($node,$ewrapper,$doc) {
+function _gsb_feature_working_paper_ct_import_sunet_authors($node,$ewrapper,$doc) {
 
   // get the list of sunetids from Alfresco's returned data
   $sunet_ids = array_map('trim', explode(',', $doc->properties['gsb:authorsSunetId']));
@@ -714,24 +714,32 @@ function _gsb_feature_working_paper_ct_import_authors($node,$ewrapper,$doc) {
   $query->condition('su.field_sunetid_value',$sunet_ids,'IN');
   $result = $query->execute();
 
-  // keep these node ids in a list
-  $entity_ids = array();
+  // gather a list of entity ids to add and remove
+  $add_entity_ids = array();
+  $del_field_collection_items = array();
+
+  // start by putting all these node ids in the add list
   foreach ($result as $record) {
-    $entity_ids[$record->entity_id] = $record->entity_id;
+    $add_entity_ids[$record->entity_id] = $record->entity_id;
   }
 
   // get the current list of authors saved with the node
   $authors = $ewrapper->field_authors->value();
 
   // if any of the author ids match one of the sunetid node ids, then
-  // we don't need to add it, and can remove it from our list
+  // we don't need to add it, and can remove it from our add list.
+  // also... 
+  // if an author id isn't in the add list, then it needs to be removed
+  // so we'll add it to our delete list.
   foreach($authors as $author) {
     $ewrap_author = entity_metadata_wrapper('field_collection_item', $author);
     $ref = $ewrap_author->field_person_fac_single_ref->value();
     if ($ref) {
       $author_nid = $ref->nid;
-      if (!empty($entity_ids[$author_nid])) {
-        unset($entity_ids[$author_nid]);
+      if (!empty($add_entity_ids[$author_nid])) {
+        unset($add_entity_ids[$author_nid]);
+      } else {
+        $del_field_collection_items[] = $author;
       }
     }
   }
@@ -748,14 +756,19 @@ function _gsb_feature_working_paper_ct_import_authors($node,$ewrapper,$doc) {
       }
     }
   }
-  if ($found_default && count($entity_ids) > 0) {
+  if ($found_default && count($add_entity_ids) > 0) {
     $ewrapper->field_authors->set(NULL);
   }
 
   // add any new authors that came for the sunetids
-  foreach ($entity_ids as $entity_id) {
+  foreach ($add_entity_ids as $entity_id) {
     _gsb_feature_working_paper_ct_add_author($node, $entity_id);
   }  
+
+  // delete any authors that are no longer sunetids in Alfresco
+  foreach($del_field_collection_items as $item) {
+    $item->delete();
+  }
 
 }  
 
@@ -786,12 +799,44 @@ function _gsb_feature_working_paper_ct_add_author($node, $entity_id) {
 }
 
 /**
+ * Add an author entity 'other' info (via field_authors field collection) 
+ * to the first and last name given.
+ */
+function _gsb_feature_working_paper_ct_add_other_author($node, $first_name, $last_name) {
+
+  $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_authors'));
+  $field_collection_item->setHostEntity('node', $node);
+
+  $field_collection_item->field_person_fac_single_ref = array();
+
+  $field_collection_item->field_person_fac_or_other =  array(
+    'und' => array(array('value' => 'Other')),
+  );
+
+  $field_collection_item->field_first_name = array(
+    'und' => array(array('value' => $first_name)),
+  );
+
+  $field_collection_item->field_last_name = array(
+    'und' => array(array('value' => $last_name)),
+  );
+
+  $field_collection_item->field_profile_visibility =  array(
+    'und' => array(array('value' => '1')),
+  );
+
+  $field_collection_item->save();
+
+}
+
+/**
  * Implements hook_node_presave().
  */
 function gsb_feature_working_paper_ct_node_presave($node) {
   // Update Alfresco with node properties
-  if ($node->type == 'working_paper') {
-    $result = _gsb_feature_working_paper_ct_updateAlfresco($node);
+  //$importing = variable_get('gsb_feature_working_paper_ct_import_in_progress', false);
+  if ($node->type == 'working_paper' && !$importing) {
+    //$result = _gsb_feature_working_paper_ct_updateAlfresco($node);
   }
 }
 
@@ -1083,6 +1128,9 @@ function _gsb_feature_working_paper_ct_getAuthorProperties($node) {
       $authors_nid = $ref->nid;
       $author_node = node_load($authors_nid);
       $authorSunetIds[] = $author_node->field_sunetid[$language][0]['value'];  
+      $first_name = $author_node->field_first_name['und'][0]['value'];
+      $last_name = $author_node->field_last_name['und'][0]['value'];
+      $authors[] = $first_name . ' ' . $last_name;      
     } else {
       $first_name = $ewrap_author->field_first_name->value();
       $last_name = $ewrap_author->field_last_name->value();
@@ -1208,4 +1256,4 @@ function _gsb_working_paper_ct_getUniqueName($path, $filename) {
     return '';
   }
   return $new_filename;
-}  
+}
