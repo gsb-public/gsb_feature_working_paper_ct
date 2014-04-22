@@ -587,11 +587,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'bundle' => 'working_paper',
     'custom_add_another' => '',
     'custom_remove' => '',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
