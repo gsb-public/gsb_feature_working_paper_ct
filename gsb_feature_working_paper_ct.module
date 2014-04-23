@@ -944,7 +944,7 @@ function _gsb_feature_working_paper_ct_add_other_author($node, $first_name, $las
  */
 function gsb_feature_working_paper_ct_node_presave($node) {
   // Update Alfresco with node properties
-  if ($node->type == 'working_paper' && empty($node->importing) || !$node->importing) {
+  if ($node->type == 'working_paper' && (empty($node->importing) || !$node->importing)) {
     $result = _gsb_feature_working_paper_ct_updateAlfresco($node);
   }
 }
