@@ -308,6 +308,7 @@ function gsb_feature_working_paper_ct_form_validate($form, &$form_state) {
     $fid = $form_state['values']['field_file_single_public'][$language][0]['fid'];
     $file = file_load($fid);
     $filename = $file->filename;
+    $filename = preg_replace("/[^A-Za-z0-9\s.&; ]/", '', htmlentities($filename));    
     $form_state['values']['field_document_name']['und'][0]['value'] = $filename;  
     $object = _gsb_working_paper_ct_getObjectByPath('', '/'.$filename);
     if ($object != null) {
@@ -379,6 +380,8 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   if ($node->type != 'working_paper') {
     return;
   }
+
+  $node->importing = true;
 
   gsb_cmis_log('uuid = '.$uuid, 'success');
 
@@ -508,15 +511,23 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_tag = array();
   }
 
-  gsb_cmis_log('writing field_authors', 'success');
+  gsb_cmis_log('writing sunet field_authors', 'success');
 
   if (!empty($doc->properties['gsb:authorsSunetId']) && trim($doc->properties['gsb:authorsSunetId']) != '') {
     _gsb_feature_working_paper_ct_import_sunet_authors($node,$ewrapper,$doc);
   }
 
+  gsb_cmis_log('writing other field_authors', 'success');
+
+  if (!empty($doc->properties['cm:author']) && trim($doc->properties['cm:author']) != '') {
+    _gsb_feature_working_paper_ct_import_other_authors($node,$doc);
+  }  
+
   gsb_cmis_log('saving node', 'success');
 
   $ewrapper->save();
+
+  $node->importing = false;
 
 }
 
@@ -701,7 +712,7 @@ function _gsb_feature_working_paper_ct_setTags($uuid, $tags) {
 }
 
 /**
- * Get authors from the Alfresco doc properties
+ * Get sunet authors from the Alfresco doc properties
  */
 function _gsb_feature_working_paper_ct_import_sunet_authors($node,$ewrapper,$doc) {
 
@@ -773,6 +784,105 @@ function _gsb_feature_working_paper_ct_import_sunet_authors($node,$ewrapper,$doc
 }  
 
 /**
+ * Get 'Other Authors' from the Alfresco doc properties
+ */
+function _gsb_feature_working_paper_ct_import_other_authors($node,$doc) {
+
+  $language = $node->language;
+
+  // get the list of sunetids from Alfresco's returned data
+  $sunet_ids = array();
+  if (!empty($doc->properties['gsb:authorsSunetId']) && trim($doc->properties['gsb:authorsSunetId']) != '') {
+    $sunet_ids = array_map('trim', explode(',', $doc->properties['gsb:authorsSunetId']));
+  }
+
+  // get the current list of authors saved with the node
+  $ewrapper = entity_metadata_wrapper('node', $node);
+  $current_authors = $ewrapper->field_authors->value();
+
+  $other_authors = $doc->properties['cm:author'];
+  $other_authors = explode(',', $other_authors);
+
+  // loop thru the list of current authors
+  // and remove any that are not in the list
+  // of other authors from Alfresco
+  foreach($current_authors as $author) {
+    $ewrap_author = entity_metadata_wrapper('field_collection_item', $author);
+    $fn = $ewrap_author->field_first_name->value();
+    $ln = $ewrap_author->field_last_name->value();
+    $ref = $ewrap_author->field_person_fac_single_ref->value();
+    $author_node = null;
+    if ($ref) {
+      $authors_nid = $ref->nid;
+      $author_node = node_load($authors_nid);
+      $fn = $author_node->field_first_name['und'][0]['value'];
+      $ln = $author_node->field_last_name['und'][0]['value'];
+    }
+    $found = false;
+    foreach($other_authors as $other_author) {
+      $other_author = trim($other_author);
+      $other_author = explode(' ',$other_author);
+      $first_name = $other_author[0];
+      $last_name = $other_author[1];
+      if ($fn == $first_name && $ln == $last_name) {
+        $found = true;
+        break;
+      }
+    }
+    if (!$found) {
+      if ($author_node && !empty($sunet_ids)) {
+        // give it one last try to see if the author is in the list of sunetids on Alfresco
+        $sunetid = '';
+        if (!empty($author_node->field_sunetid[$language][0])) {
+          $sunetid = $author_node->field_sunetid[$language][0]['value'];
+        }
+        if (in_array($sunetid, $sunet_ids)) {
+          $found = true;
+        }
+      }
+      if (!$found) {
+        //dpm('remove first_name = '.$fn.' last_name = '+$ln);
+        $author->delete();
+      }
+    }
+  }
+
+  // loop thru the list of other authors
+  // and add any that are not in the list
+  // of current authors
+  foreach($other_authors as $other_author) {
+    $other_author = trim($other_author);
+    $other_author = explode(' ',$other_author);
+    $first_name = $other_author[0];
+    $last_name = $other_author[1];
+    $found = false;
+    if (empty($ewrapper->field_authors)) {
+      // add any all other authors
+    } else {
+      foreach($current_authors as $author) {
+        $ewrap_author = entity_metadata_wrapper('field_collection_item', $author);
+        $fn = $ewrap_author->field_first_name->value();
+        $ln = $ewrap_author->field_last_name->value();
+        $ref = $ewrap_author->field_person_fac_single_ref->value();
+        if ($ref) {
+          $authors_nid = $ref->nid;
+          $author_node = node_load($authors_nid);
+          $fn = $author_node->field_first_name['und'][0]['value'];
+          $ln = $author_node->field_last_name['und'][0]['value'];
+        }
+        if ($fn == $first_name && $ln == $last_name) {
+          $found = true;
+          break;
+        }
+      }
+    }
+    if (!$found) {
+      _gsb_feature_working_paper_ct_add_other_author($node, $first_name, $last_name);
+    }
+  }
+}
+
+/**
  * Add an author entity ref (via field_authors field collection) 
  * to the node's current list
  */
@@ -834,9 +944,8 @@ function _gsb_feature_working_paper_ct_add_other_author($node, $first_name, $las
  */
 function gsb_feature_working_paper_ct_node_presave($node) {
   // Update Alfresco with node properties
-  //$importing = variable_get('gsb_feature_working_paper_ct_import_in_progress', false);
-  if ($node->type == 'working_paper' && !$importing) {
-    //$result = _gsb_feature_working_paper_ct_updateAlfresco($node);
+  if ($node->type == 'working_paper' && empty($node->importing) || !$node->importing) {
+    $result = _gsb_feature_working_paper_ct_updateAlfresco($node);
   }
 }
 
@@ -868,6 +977,7 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
   $folder = cmisapi_getObjectByPath($repository->repositoryId, drupal_encode_path($working_paper_folder) );   
 
   $filename = $node->field_document_name[$language][0]['value'];
+  $filename = preg_replace("/[^A-Za-z0-9\s.&; ]/", '', htmlentities($filename));
 
   $cmis_object = null;
 
@@ -889,7 +999,7 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
     } catch (Exception $ex) {
       if (strpos($ex->getMessage(), "CMISObjectNotFoundException")) {      
         // we weren't able to find the document on Alfresco, so we will attempt to re-create it   
-        $cmis_object = _gsb_working_paper_ct_createDocument($repository, $file, $folder);  
+        $cmis_object = _gsb_working_paper_ct_createDocument($repository, $file, $folder, $filename);
       }
     }
     
@@ -1245,7 +1355,7 @@ function _gsb_working_paper_ct_getUniqueName($path, $filename) {
   $new_filename = $filename;
   $found = false;
   for($index = 1; $index < 10; $index++) {
-    $new_filename = $parts[0].'-'.$index.'.'.$parts[1];
+    $new_filename = $parts[0].' copy'.$index.'.'.$parts[1];
     $object = _gsb_working_paper_ct_getObjectByPath($path, '/'.$new_filename);
     if ($object == null) {
       $found = true;
