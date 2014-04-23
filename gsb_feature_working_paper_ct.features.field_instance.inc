@@ -520,20 +520,14 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'link',
-        'settings' => array(
-          'conditions' => array(),
-        ),
-        'type' => 'link_label',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 6,
       ),
       'teaser_listing' => array(
         'label' => 'hidden',
-        'module' => 'link',
-        'settings' => array(
-          'conditions' => array(),
-        ),
-        'type' => 'link_label',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 1,
       ),
     ),
