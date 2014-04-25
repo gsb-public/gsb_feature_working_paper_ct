@@ -129,7 +129,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'field_collection_embed',
-      'weight' => 2,
+      'weight' => 3,
     ),
     'workbench_access_field' => 0,
   );
@@ -275,7 +275,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 4,
+      'weight' => 5,
     ),
     'workbench_access_field' => 0,
   );
@@ -439,7 +439,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 5,
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -732,7 +732,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_select',
-      'weight' => 13,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -853,7 +853,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_buttons',
-      'weight' => 7,
+      'weight' => 2,
     ),
     'workbench_access_field' => 0,
   );
@@ -914,7 +914,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'concat_field_default',
-      'weight' => 14,
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
