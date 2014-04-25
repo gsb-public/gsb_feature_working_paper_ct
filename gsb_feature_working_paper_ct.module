@@ -115,6 +115,7 @@ function gsb_feature_working_paper_ct_node_update($node) {
  */
 function _gsb_feature_working_paper_ct_sendResearchDatabasesEmail($node) {
 
+  global $base_root, $base_path;
   global $user;
 
   $language = $node->language;
@@ -148,12 +149,7 @@ function _gsb_feature_working_paper_ct_sendResearchDatabasesEmail($node) {
   $email_body = variable_get('gsb_feature_working_paper_ct_refresh_db_email_body', t(''));
 
   // get the file url
-  $file_url = '';
-  if (!empty($node->field_file_single_public[$language])) {
-    $fid = $node->field_file_single_public[$language][0]['fid'];
-    $file_path = file_load($fid)->uri;
-    $file_url = file_create_url($file_path);
-  }
+  $file_url = $base_root.$base_path.'/gsb-cmis/gsb-cmis-download-doc/'.$node->nid;
 
   // replace the tokens in the email body
   $email_body = token_replace(
