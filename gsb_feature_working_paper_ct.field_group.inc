@@ -21,7 +21,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Alfresco Metadata',
-    'weight' => '12',
+    'weight' => '10',
     'children' => array(
       0 => 'field_document_name',
       1 => 'field_document_uuid',
@@ -51,7 +51,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Version Date',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'field_pub_date_day',
       1 => 'field_year_of_publication',
@@ -85,7 +85,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Tagging',
-    'weight' => '6',
+    'weight' => '7',
     'children' => array(
       0 => 'field_business_insight_topic',
       1 => 'field_tag',
