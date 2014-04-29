@@ -822,7 +822,7 @@ function _gsb_feature_working_paper_ct_import_other_authors($node,$doc) {
       $other_author = trim($other_author);
       $other_author = explode(' ',$other_author);
       $first_name = $other_author[0];
-      $last_name = $other_author[1];
+      $last_name = $other_author[count($other_author)-1];
       if ($fn == $first_name && $ln == $last_name) {
         $found = true;
         break;
@@ -853,7 +853,7 @@ function _gsb_feature_working_paper_ct_import_other_authors($node,$doc) {
     $other_author = trim($other_author);
     $other_author = explode(' ',$other_author);
     $first_name = $other_author[0];
-    $last_name = $other_author[1];
+    $last_name = $other_author[count($other_author)-1];
     $found = false;
     if (empty($ewrapper->field_authors)) {
       // add any all other authors
