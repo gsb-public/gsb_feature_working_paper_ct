@@ -913,6 +913,22 @@ function _gsb_feature_working_paper_ct_add_author($node, $entity_id) {
  */
 function _gsb_feature_working_paper_ct_add_other_author($node, $first_name, $last_name) {
 
+  // Make a quick check to see if the author being added
+  // has faculty node and if so add them using their node ref
+  dpm('seaching for node ref '.$first_name.' '.$last_name);
+  $query = new EntityFieldQuery('node');
+  $results = $query
+    ->entityCondition('bundle', 'faculty')
+    ->fieldCondition('field_first_name', 'value', $first_name)
+    ->fieldCondition('field_last_name', 'value', $last_name)
+    ->execute();
+  if (!empty($results['node'])) {
+    dpm('found a node ref for '.$first_name.' '.$last_name);
+    $entity_id = key($results['node']);
+    _gsb_feature_working_paper_ct_add_author($node, $entity_id);
+    return;
+  }  
+
   $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_authors'));
   $field_collection_item->setHostEntity('node', $node);
 
