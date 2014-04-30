@@ -26,6 +26,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       0 => 'field_document_name',
       1 => 'field_document_uuid',
       2 => 'field_link_document',
+      3 => 'field_has_pdf',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

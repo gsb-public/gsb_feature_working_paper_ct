@@ -444,6 +444,60 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-working_paper-field_has_pdf'
+  $field_instances['node-working_paper-field_has_pdf'] = array(
+    'bundle' => 'working_paper',
+    'custom_add_another' => '',
+    'custom_remove' => '',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(
+          'conditions' => array(),
+        ),
+        'type' => 'list_default',
+        'weight' => 26,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser_listing' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_has_pdf',
+    'label' => 'Has PDF',
+    'required' => 0,
+    'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+      ),
+      'type' => 'options_onoff',
+      'weight' => 13,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-working_paper-field_item_id'
   $field_instances['node-working_paper-field_item_id'] = array(
     'bundle' => 'working_paper',
@@ -1114,6 +1168,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
   t('Document UUID');
   t('Enter a one-paragraph abstract. Multiple paragraphs will be merged into one.');
   t('File');
+  t('Has PDF');
   t('Item ID');
   t('Keywords');
   t('Month');
