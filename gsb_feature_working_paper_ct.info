@@ -36,7 +36,6 @@ features[ds_layout_settings][] = node|working_paper|teaser
 features[ds_layout_settings][] = node|working_paper|teaser_listing
 features[ds_view_modes][] = teaser_listing
 features[features_api][] = api:2
-features[field_base][] = field_has_pdf
 features[field_group][] = group_alfresco_metadata|node|working_paper|form
 features[field_group][] = group_posted_date|node|working_paper|form
 features[field_group][] = group_tagging|node|working_paper|form
