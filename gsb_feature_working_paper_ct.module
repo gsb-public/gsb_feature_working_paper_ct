@@ -840,7 +840,6 @@ function _gsb_feature_working_paper_ct_import_other_authors($node,$doc) {
         }
       }
       if (!$found) {
-        //dpm('remove first_name = '.$fn.' last_name = '+$ln);
         $author->delete();
       }
     }
@@ -915,7 +914,6 @@ function _gsb_feature_working_paper_ct_add_other_author($node, $first_name, $las
 
   // Make a quick check to see if the author being added
   // has faculty node and if so add them using their node ref
-  dpm('seaching for node ref '.$first_name.' '.$last_name);
   $query = new EntityFieldQuery('node');
   $results = $query
     ->entityCondition('bundle', 'faculty')
@@ -923,7 +921,6 @@ function _gsb_feature_working_paper_ct_add_other_author($node, $first_name, $las
     ->fieldCondition('field_last_name', 'value', $last_name)
     ->execute();
   if (!empty($results['node'])) {
-    dpm('found a node ref for '.$first_name.' '.$last_name);
     $entity_id = key($results['node']);
     _gsb_feature_working_paper_ct_add_author($node, $entity_id);
     return;
