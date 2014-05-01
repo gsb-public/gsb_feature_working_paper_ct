@@ -382,6 +382,7 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
 
   $node->importing = true;
 
+  gsb_cmis_log('node id = '.$node->nid, 'success');
   gsb_cmis_log('uuid = '.$uuid, 'success');
 
   $ewrapper = entity_metadata_wrapper('node', $node);
