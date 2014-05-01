@@ -964,6 +964,7 @@ function gsb_feature_working_paper_ct_node_presave($node) {
     $result = _gsb_feature_working_paper_ct_updateAlfresco($node);
   }
 }
+
 /**
  * Update Alfresco with the new properties for the Working Paper node.
  */
