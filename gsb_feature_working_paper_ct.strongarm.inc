@@ -86,7 +86,7 @@ function gsb_feature_working_paper_ct_strongarm() {
       'display' => array(
         'gsb_feature_base_fields_faculty_authors' => array(
           'default' => array(
-            'weight' => '10',
+            'weight' => '11',
             'visible' => TRUE,
           ),
           'teaser' => array(
@@ -110,6 +110,12 @@ function gsb_feature_working_paper_ct_strongarm() {
           'default' => array(
             'weight' => '10',
             'visible' => FALSE,
+          ),
+        ),
+        'gsb_cmis_download_button' => array(
+          'default' => array(
+            'weight' => '9',
+            'visible' => TRUE,
           ),
         ),
       ),
