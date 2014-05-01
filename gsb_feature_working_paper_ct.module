@@ -510,6 +510,14 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
     $ewrapper->field_tag = array();
   }
 
+  gsb_cmis_log('writing field_has_pdf', 'success');
+
+  if (!empty($doc->properties['cmis:contentStreamFileName']) && trim($doc->properties['cmis:contentStreamFileName']) != '') {
+    $ewrapper->field_has_pdf->set("1");
+  } else {
+    $ewrapper->field_has_pdf->set("0");
+  }
+
   gsb_cmis_log('writing sunet field_authors', 'success');
 
   if (!empty($doc->properties['gsb:authorsSunetId']) && trim($doc->properties['gsb:authorsSunetId']) != '') {
