@@ -74,9 +74,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'custom_remove' => 'Remove Author',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'To add yourself or another Stanford GSB faculty member as an author, click the button next to "Faculty," then enter the first few characters of the first or last name. The lookup feature will display potential matches; click on the desired name.<br><br> 
-To add a non-Stanford-GSB author, enter the first and last name of the individual in their respective fields. If you would like to include a middle initial, enter it in the "First Name" field.<br><br>
-To list authors in a specific order, grab the handle icon <img src="/sites/gsb/files/styles/566x_variable/public/icon-handle-drag-drop.png?itok=boIYoP_K" height="25" width="25" /> next to an author and drag it up or down to the desired position.<br><br>',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -396,7 +394,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
     'custom_add_another' => '',
     'custom_remove' => '',
     'deleted' => 0,
-    'description' => 'Click "Choose File," select the file, click "Open," then click "Upload."',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1161,7 +1159,6 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
   t('Academic Area');
   t('Additional Topics');
   t('Author & Co-Authors');
-  t('Click "Choose File," select the file, click "Open," then click "Upload."');
   t('Day');
   t('Document Link');
   t('Document Name');
@@ -1177,9 +1174,6 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
   t('Publish this working paper on the following databases');
   t('Search field');
   t('Submit');
-  t('To add yourself or another Stanford GSB faculty member as an author, click the button next to "Faculty," then enter the first few characters of the first or last name. The lookup feature will display potential matches; click on the desired name.<br><br> 
-To add a non-Stanford-GSB author, enter the first and last name of the individual in their respective fields. If you would like to include a middle initial, enter it in the "First Name" field.<br><br>
-To list authors in a specific order, grab the handle icon <img src="/sites/gsb/files/styles/566x_variable/public/icon-handle-drag-drop.png?itok=boIYoP_K" height="25" width="25" /> next to an author and drag it up or down to the desired position.<br><br>');
   t('Year');
 
   return $field_instances;
