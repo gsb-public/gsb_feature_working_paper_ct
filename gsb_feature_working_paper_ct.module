@@ -111,6 +111,19 @@ function gsb_feature_working_paper_ct_node_update($node) {
 }
 
 /**
+ * Implements hook_field_views_data_alter().
+ */
+function gsb_feature_working_paper_ct_field_views_data_alter(&$data, $field, $module) {
+  if ($field['field_name'] == 'field_has_pdf') {
+    foreach ($data as $table_name => $table_data) {
+      if (isset($table_data[$field['field_name']]['field'])) {
+        $data[$table_name][$field['field_name']]['field']['handler'] = 'gsb_feature_working_paper_ct_handler_field_has_pdf';
+      }
+    }
+  }
+}
+
+/**
  * Send Research Databases email notification
  */
 function _gsb_feature_working_paper_ct_sendResearchDatabasesEmail($node) {
@@ -295,15 +308,10 @@ function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form,
  */
 function gsb_feature_working_paper_ct_form_validate($form, &$form_state) {
   $language = $form_state['values']['language'];
-  if ($form_state['values']['nid'] != null) {
-    return;
-  }
-  // For any new nodes we are adding we need to check that a file is uploaded
-  // and that is has a unique name.
+  // If we have a new file to upload... 
+  // check if the file already exists  
   if ($form_state['values']['field_file_single_public'][$language][0]['fid'] == 0) {
-    form_set_error('field_file_single_public', t('Please upload a file to be saved to Alfresco'));
-  } else {
-    // Check if the file already exists  
+  } else {  
     $fid = $form_state['values']['field_file_single_public'][$language][0]['fid'];
     $file = file_load($fid);
     $filename = $file->filename;
@@ -382,7 +390,11 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
 
   $node->importing = true;
 
-  gsb_cmis_log('node id = '.$node->nid, 'success');
+  if (!empty($node->nid)) {
+    gsb_cmis_log('node id = '.$node->nid, 'success');
+  } else {
+    gsb_cmis_log('creating new node', 'success');
+  }
   gsb_cmis_log('uuid = '.$uuid, 'success');
 
   $ewrapper = entity_metadata_wrapper('node', $node);
@@ -532,6 +544,9 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   }  
 
   gsb_cmis_log('saving node', 'success');
+
+  $node->status = 1;
+  $node->workbench_moderation['updating_live_revision'] = 1;
 
   $ewrapper->save();
 
@@ -1001,8 +1016,11 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
   } 
   $folder = cmisapi_getObjectByPath($repository->repositoryId, drupal_encode_path($working_paper_folder) );   
 
-  $filename = $node->field_document_name[$language][0]['value'];
-  $filename = preg_replace("/[^A-Za-z0-9\s.&; ]/", '', htmlentities($filename));
+  $filename = "";
+  if (!empty($node->field_document_name[$language][0])) {
+    $filename = $node->field_document_name[$language][0]['value'];
+    $filename = preg_replace("/[^A-Za-z0-9\s.&; ]/", '', htmlentities($filename));    
+  }
 
   $cmis_object = null;
 
@@ -1010,9 +1028,14 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
 
   if ($uuid == -1) {
 
-    // we don't have a uuid, so create a document/file on Alfresco
-    
-    // create a new document on Alfresco
+    // we don't have a uuid, and we don't have a document so...
+    // nothing to add to Alfresco so... hit it and quit
+    if (empty($filename)) {
+      return false;
+    }
+
+    // or... we don't have a uuid, but we have a document so... 
+    // create a document/file on Alfresco
     $cmis_object = _gsb_working_paper_ct_createDocument($repository, $file, $folder, $filename); 
 
   } else {
