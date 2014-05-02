@@ -986,10 +986,10 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
   $filename = '';
   $new_item_id = '';
   if (!empty($node->field_item_id[$language][0])) {
-    $filename = 'RP' . (integer)$node->field_item_id[$language][0]['value'] . '.pdf';
+    $filename = 'RP' . (integer)$node->field_item_id[$language][0]['value'];
   } else {
     $new_item_id = (integer)variable_get('gsb_feature_working_paper_ct_item_id');
-    $filename = 'RP' . $new_item_id . '.pdf';
+    $filename = 'RP' . $new_item_id;
     $conf['gsb_feature_working_paper_ct_item_id'] = $new_item_id + 1;
     variable_set('gsb_feature_working_paper_ct_item_id', $conf['gsb_feature_working_paper_ct_item_id']);
   }
