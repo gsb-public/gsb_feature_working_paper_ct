@@ -24,7 +24,6 @@ dependencies[] = strongarm
 dependencies[] = submit_field
 dependencies[] = taxonomy
 dependencies[] = text
-files[] = gsb_feature_working_paper_ct_handler_field_has_pdf.inc
 datestamp = 1398189336
 features[ctools][] = ds:ds:1
 features[ctools][] = field_group:field_group:1
