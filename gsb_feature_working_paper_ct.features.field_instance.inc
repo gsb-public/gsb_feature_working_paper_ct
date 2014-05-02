@@ -493,7 +493,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_onoff',
-      'weight' => 13,
+      'weight' => 14,
     ),
     'workbench_access_field' => 0,
   );
@@ -551,7 +551,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
@@ -625,7 +625,7 @@ To list authors in a specific order, grab the handle icon <img src="/sites/gsb/f
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'link_field',
-      'weight' => 12,
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
