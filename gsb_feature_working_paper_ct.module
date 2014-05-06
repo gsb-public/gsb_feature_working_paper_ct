@@ -950,6 +950,10 @@ function gsb_feature_working_paper_ct_node_presave($node) {
     if (!$repo_info) {
       return;
     }    
+    $block_update = variable_get('gsb_feature_working_paper_ct_block_update', false);
+    if ($block_update) {
+      return;
+    }         
     $result = _gsb_feature_working_paper_ct_updateAlfresco($node);
   }
 }
