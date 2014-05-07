@@ -1055,7 +1055,16 @@ function _gsb_feature_working_paper_ct_updateAlfresco($node) {
   } 
 
   // set the product type
+
   $node->field_product_type[$language][0]['value'] = 'Working Paper';
+
+  // set the 'has pdf' checkbox
+  
+  if ($properties->properties['cmis:contentStreamLength'] > 0) {
+    $node->field_has_pdf[$language][0]['value'] = '1';
+  } else {
+    $node->field_has_pdf[$language][0]['value'] = '0';
+  }
 
   // set the alfresco properties via post to a WebScript
 
