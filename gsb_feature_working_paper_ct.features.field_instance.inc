@@ -197,6 +197,8 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
   // Exported field_instance: 'node-working_paper-field_description'
   $field_instances['node-working_paper-field_description'] = array(
     'bundle' => 'working_paper',
+    'custom_add_another' => '',
+    'custom_remove' => '',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => 'Enter a one-paragraph abstract. Multiple paragraphs will be merged into one.',
@@ -259,7 +261,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'enable' => 0,
         'insert_plugin' => '',
       ),
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
