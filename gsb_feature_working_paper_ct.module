@@ -393,11 +393,17 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   gsb_cmis_log('writing field_description', 'success');
 
   if (!empty($doc->properties['cm:description']) && trim($doc->properties['cm:description']) != '') {
-    $ewrapper->field_description->set($doc->properties['cm:description']);
+    $ewrapper->field_description = array(
+      'value' => $doc->properties['cm:description'],
+      'format' => 'full_html',
+    );    
   } else {
-    $ewrapper->field_description->set(NULL);
+    $ewrapper->field_description = array(
+      'value' => '',
+      'format' => 'full_html',
+    );  
   }
-
+  
   gsb_cmis_log('writing field_product_type', 'success');
 
   $ewrapper->field_product_type->set($product_type);
