@@ -395,12 +395,12 @@ function gsb_feature_working_paper_ct_cmis_import($doc, $uuid) {
   if (!empty($doc->properties['cm:description']) && trim($doc->properties['cm:description']) != '') {
     $ewrapper->field_description = array(
       'value' => $doc->properties['cm:description'],
-      'format' => 'full_html',
+      'format' => 'gsb_wysiwyg_text',
     );    
   } else {
     $ewrapper->field_description = array(
       'value' => '',
-      'format' => 'full_html',
+      'format' => 'gsb_wysiwyg_text',
     );  
   }
   
