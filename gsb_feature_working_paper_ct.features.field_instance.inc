@@ -858,6 +858,59 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-working_paper-field_region'
+  $field_instances['node-working_paper-field_region'] = array(
+    'bundle' => 'working_paper',
+    'custom_add_another' => '',
+    'custom_remove' => '',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(
+          'conditions' => array(),
+        ),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 27,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser_listing' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_region',
+    'label' => 'Region of Interest',
+    'required' => 0,
+    'settings' => array(
+      'custom_add_another' => '',
+      'custom_remove' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'hs_taxonomy',
+      'settings' => array(
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+      ),
+      'type' => 'taxonomy_hs',
+      'weight' => 9,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-working_paper-field_research_databases'
   $field_instances['node-working_paper-field_research_databases'] = array(
     'bundle' => 'working_paper',
@@ -1073,7 +1126,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 9,
+      'weight' => 10,
     ),
     'workbench_access_field' => 0,
   );
@@ -1183,6 +1236,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
   t('Paper Copy');
   t('Product Type');
   t('Publish this working paper on the following databases');
+  t('Region of Interest');
   t('Search field');
   t('Submit');
   t('Year');

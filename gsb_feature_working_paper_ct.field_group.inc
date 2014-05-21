@@ -92,6 +92,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       0 => 'field_business_insight_topic',
       1 => 'field_tag',
       2 => 'field_academic_area_unlimited',
+      3 => 'field_region',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

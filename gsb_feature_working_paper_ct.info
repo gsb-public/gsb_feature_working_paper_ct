@@ -56,6 +56,7 @@ features[field_instance][] = node-working_paper-field_month
 features[field_instance][] = node-working_paper-field_paper_copy
 features[field_instance][] = node-working_paper-field_product_type
 features[field_instance][] = node-working_paper-field_pub_date_day
+features[field_instance][] = node-working_paper-field_region
 features[field_instance][] = node-working_paper-field_research_databases
 features[field_instance][] = node-working_paper-field_search_field
 features[field_instance][] = node-working_paper-field_submit
