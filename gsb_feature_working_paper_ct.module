@@ -1261,21 +1261,17 @@ function _gsb_feature_working_paper_ct_getAuthorProperties($node) {
 
   foreach($node->field_authors[$language] as $author_item) {
 
-    $authors_nid = $author_item['value'];
+    $authors_nid = $author_item['field_person_fac_single_ref'][$language][0]['target_id'];
 
-    $ewrap_author = entity_metadata_wrapper('field_collection_item', $authors_nid);
-    $ref = $ewrap_author->field_person_fac_single_ref->value();
-
-    if ($ref) {
-      $authors_nid = $ref->nid;
+    if (!empty($authors_nid)) {
       $author_node = node_load($authors_nid);
       $authorSunetIds[] = $author_node->field_sunetid[$language][0]['value'];  
       $first_name = $author_node->field_first_name['und'][0]['value'];
       $last_name = $author_node->field_last_name['und'][0]['value'];
       $authors[] = $first_name . ' ' . $last_name;      
     } else {
-      $first_name = $ewrap_author->field_first_name->value();
-      $last_name = $ewrap_author->field_last_name->value();
+      $first_name = $author_item['field_first_name'][$language][0]['value'];
+      $last_name = $author_item['field_last_name'][$language][0]['value'];
       $authors[] = $first_name . ' ' . $last_name;
     } 
 
