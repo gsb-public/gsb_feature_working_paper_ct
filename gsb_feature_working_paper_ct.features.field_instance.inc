@@ -201,7 +201,6 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'custom_remove' => '',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Enter a one-paragraph abstract. Multiple paragraphs will be merged into one.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
