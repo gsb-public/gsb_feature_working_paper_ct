@@ -201,6 +201,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'custom_remove' => '',
     'default_value' => NULL,
     'deleted' => 0,
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -254,6 +255,36 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'label' => 'Abstract',
     'required' => 0,
     'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'full_html' => 0,
+          'gsb_html_text' => 0,
+          'gsb_wysiwyg_text' => 'gsb_wysiwyg_text',
+          'plain_text' => 0,
+          'slideshow' => 0,
+        ),
+        'allowed_formats_toggle' => 1,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'full_html' => array(
+              'weight' => 1,
+            ),
+            'gsb_html_text' => array(
+              'weight' => -9,
+            ),
+            'gsb_wysiwyg_text' => array(
+              'weight' => -10,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+            'slideshow' => array(
+              'weight' => 0,
+            ),
+          ),
+        ),
+      ),
       'custom_add_another' => '',
       'custom_remove' => '',
       'linkit' => array(
@@ -1173,7 +1204,6 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
   t('Document Link');
   t('Document Name');
   t('Document UUID');
-  t('Enter a one-paragraph abstract. Multiple paragraphs will be merged into one.');
   t('File');
   t('Has PDF');
   t('Item ID');
