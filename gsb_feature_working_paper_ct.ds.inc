@@ -122,6 +122,49 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
 
   $ds_fieldsetting = new stdClass();
   $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|working_paper|idea_story_related';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'working_paper';
+  $ds_fieldsetting->view_mode = 'idea_story_related';
+  $ds_fieldsetting->settings = array(
+    'title' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'link' => '1',
+        'wrapper' => 'h2',
+        'class' => '',
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => '',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+        'conditions' => array(),
+      ),
+    ),
+    'field_authors' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => '',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
+  );
+  $export['node|working_paper|idea_story_related'] = $ds_fieldsetting;
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
   $ds_fieldsetting->id = 'node|working_paper|teaser';
   $ds_fieldsetting->entity_type = 'node';
   $ds_fieldsetting->bundle = 'working_paper';
@@ -335,8 +378,8 @@ function gsb_feature_working_paper_ct_ds_layout_settings_info() {
         3 => 'field_pub_date_day',
         4 => 'field_year_of_publication',
         5 => 'field_item_id',
-        6 => 'field_academic_area_unlimited',
-        7 => 'group_wrapper_topics',
+        6 => 'group_wrapper_topics',
+        7 => 'field_academic_area_unlimited',
         8 => 'field_description',
         9 => 'field_business_insight_topic',
         10 => 'field_tag',
@@ -353,8 +396,8 @@ function gsb_feature_working_paper_ct_ds_layout_settings_info() {
       'field_pub_date_day' => 'left',
       'field_year_of_publication' => 'left',
       'field_item_id' => 'left',
-      'field_academic_area_unlimited' => 'left',
       'group_wrapper_topics' => 'left',
+      'field_academic_area_unlimited' => 'left',
       'field_description' => 'left',
       'field_business_insight_topic' => 'left',
       'field_tag' => 'left',
@@ -373,6 +416,36 @@ function gsb_feature_working_paper_ct_ds_layout_settings_info() {
     'layout_link_custom' => '',
   );
   $export['node|working_paper|default'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|working_paper|idea_story_related';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'working_paper';
+  $ds_layout->view_mode = 'idea_story_related';
+  $ds_layout->layout = 'ds_1col';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'ds_content' => array(
+        0 => 'title',
+        1 => 'field_authors',
+      ),
+    ),
+    'fields' => array(
+      'title' => 'ds_content',
+      'field_authors' => 'ds_content',
+    ),
+    'classes' => array(),
+    'wrappers' => array(
+      'ds_content' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+  );
+  $export['node|working_paper|idea_story_related'] = $ds_layout;
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
