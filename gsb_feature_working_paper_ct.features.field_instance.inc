@@ -893,7 +893,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'bundle' => 'working_paper',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Must have PDF uploaded to submit to SSRN or EBSCO',
     'display' => array(
       'default' => array(
         'label' => 'above',
