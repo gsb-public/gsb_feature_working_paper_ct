@@ -30,6 +30,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'type' => 'gsb_field_formatter_path_term_separator',
         'weight' => 6,
       ),
+      'insight_featured_card' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -83,6 +89,17 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
           'conditions' => array(),
           'separator' => ', ',
           'view_mode' => 'full',
+        ),
+        'type' => 'gsb_field_formatter_field_collection_separator',
+        'weight' => 1,
+      ),
+      'insight_featured_card' => array(
+        'label' => 'hidden',
+        'module' => 'gsb_field_formatter',
+        'settings' => array(
+          'conditions' => array(),
+          'separator' => ',',
+          'view_mode' => 'existing_node_teaser',
         ),
         'type' => 'gsb_field_formatter_field_collection_separator',
         'weight' => 1,
@@ -152,6 +169,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'type' => 'gsb_field_formatter_path_term_separator',
         'weight' => 7,
       ),
+      'insight_featured_card' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -211,6 +234,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         ),
         'type' => 'text_default',
         'weight' => 7,
+      ),
+      'insight_featured_card' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -323,6 +352,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 18,
       ),
+      'insight_featured_card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -377,6 +412,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 20,
+      ),
+      'insight_featured_card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 21,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -434,6 +475,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 23,
       ),
+      'insight_featured_card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 24,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -485,12 +532,15 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'conditions' => array(),
-        ),
-        'type' => 'list_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 26,
+      ),
+      'insight_featured_card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 27,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -544,6 +594,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 5,
       ),
+      'insight_featured_card' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -595,12 +651,15 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'link',
-        'settings' => array(
-          'conditions' => array(),
-        ),
-        'type' => 'link_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 9,
+      ),
+      'insight_featured_card' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 16,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -678,6 +737,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'type' => 'list_default',
         'weight' => 2,
       ),
+      'insight_featured_card' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'list',
@@ -732,6 +797,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 19,
       ),
+      'insight_featured_card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 20,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -779,6 +850,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 21,
+      ),
+      'insight_featured_card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 22,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -834,6 +911,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         ),
         'type' => 'number_integer',
         'weight' => 3,
+      ),
+      'insight_featured_card' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -901,6 +984,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 24,
       ),
+      'insight_featured_card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 25,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -949,6 +1038,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 22,
+      ),
+      'insight_featured_card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 23,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1018,6 +1113,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 25,
       ),
+      'insight_featured_card' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 26,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1070,6 +1171,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         ),
         'type' => 'ds_taxonomy_separator',
         'weight' => 8,
+      ),
+      'insight_featured_card' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1128,6 +1235,12 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         ),
         'type' => 'date_default',
         'weight' => 4,
+      ),
+      'insight_featured_card' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
       ),
       'teaser' => array(
         'label' => 'hidden',
