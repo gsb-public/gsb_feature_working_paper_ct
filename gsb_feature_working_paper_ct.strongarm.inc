@@ -67,6 +67,9 @@ function gsb_feature_working_paper_ct_strongarm() {
       'idea_story_related' => array(
         'custom_settings' => TRUE,
       ),
+      'insight_featured_card' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -104,6 +107,10 @@ function gsb_feature_working_paper_ct_strongarm() {
             'weight' => '18',
             'visible' => FALSE,
           ),
+          'insight_featured_card' => array(
+            'weight' => '18',
+            'visible' => FALSE,
+          ),
         ),
         'gsb_working_paper_listing_entity_view_1' => array(
           'teaser' => array(
@@ -122,6 +129,10 @@ function gsb_feature_working_paper_ct_strongarm() {
             'weight' => '10',
             'visible' => FALSE,
           ),
+          'insight_featured_card' => array(
+            'weight' => '10',
+            'visible' => FALSE,
+          ),
         ),
         'gsb_cmis_download_button' => array(
           'default' => array(
@@ -129,6 +140,10 @@ function gsb_feature_working_paper_ct_strongarm() {
             'visible' => TRUE,
           ),
           'idea_story_related' => array(
+            'weight' => '17',
+            'visible' => FALSE,
+          ),
+          'insight_featured_card' => array(
             'weight' => '17',
             'visible' => FALSE,
           ),
