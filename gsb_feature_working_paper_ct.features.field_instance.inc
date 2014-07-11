@@ -719,6 +719,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 16,
+      ),
       'insight_featured_card' => array(
         'label' => 'hidden',
         'settings' => array(),
