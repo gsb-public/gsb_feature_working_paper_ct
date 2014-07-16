@@ -31,7 +31,7 @@ function gsb_feature_working_paper_ct_permission() {
     ),
     'administer working paper metadata' => array(
       'title' => t('Administer Working Paper Metadata'),
-    );
+    ),
   );
 }
 
