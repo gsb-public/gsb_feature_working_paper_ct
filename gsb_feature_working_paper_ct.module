@@ -29,6 +29,9 @@ function gsb_feature_working_paper_ct_permission() {
     'administer working paper refresh db email' => array(
       'title' => t('Administer Working Paper Refresh DB Email Settings'),
     ),
+    'administer working paper metadata' => array(
+      'title' => t('Administer Working Paper Metadata'),
+    );
   );
 }
 
@@ -262,10 +265,12 @@ function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form,
     gsb_feature_base_fields_hide_fieldgroups($form, $groups);
   } 
 
-  $form['field_document_uuid']['#disabled'] = TRUE;
-  $form['field_link_document']['#disabled'] = TRUE;
-  $form['field_document_name']['#disabled'] = TRUE;
-  $form['field_item_id']['#disabled'] = TRUE;
+  if (!user_access('administer working paper metadata')) {
+    $form['field_document_uuid']['#disabled'] = TRUE;
+    $form['field_link_document']['#disabled'] = TRUE;
+    $form['field_document_name']['#disabled'] = TRUE;
+    $form['field_item_id']['#disabled'] = TRUE;
+  }
 
   $form['field_paper_copy']['#access'] = FALSE;
   $form['field_product_type']['#access'] = FALSE;
