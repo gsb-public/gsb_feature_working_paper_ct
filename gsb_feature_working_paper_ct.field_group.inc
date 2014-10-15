@@ -13,6 +13,60 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_academic_area|node|working_paper|form';
+  $field_group->group_name = 'group_academic_area';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'working_paper';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_tagging';
+  $field_group->data = array(
+    'label' => 'Academic Area',
+    'weight' => '19',
+    'children' => array(
+      0 => 'field_academic_area_unlimited',
+    ),
+    'format_type' => 'tab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $export['group_academic_area|node|working_paper|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_additional_topics|node|working_paper|form';
+  $field_group->group_name = 'group_additional_topics';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'working_paper';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_tagging';
+  $field_group->data = array(
+    'label' => 'Additional Topics',
+    'weight' => '20',
+    'children' => array(
+      0 => 'field_business_insight_topic',
+    ),
+    'format_type' => 'tab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $export['group_additional_topics|node|working_paper|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_alfresco_metadata|node|working_paper|form';
   $field_group->group_name = 'group_alfresco_metadata';
   $field_group->entity_type = 'node';
@@ -89,22 +143,46 @@ function gsb_feature_working_paper_ct_field_group_info() {
     'label' => 'Tagging',
     'weight' => '7',
     'children' => array(
-      0 => 'field_business_insight_topic',
-      1 => 'field_tag',
-      2 => 'field_academic_area_unlimited',
+      0 => 'group_academic_area',
+      1 => 'group_additional_topics',
+      2 => 'group_tags',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'tabs',
     'format_settings' => array(
-      'label' => 'Tagging',
+      'formatter' => '',
       'instance_settings' => array(
-        'required_fields' => 1,
         'classes' => '',
-        'description' => '',
       ),
-      'formatter' => 'collapsed',
     ),
   );
   $export['group_tagging|node|working_paper|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_tags|node|working_paper|form';
+  $field_group->group_name = 'group_tags';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'working_paper';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_tagging';
+  $field_group->data = array(
+    'label' => 'Tags',
+    'weight' => '21',
+    'children' => array(
+      0 => 'field_tag',
+    ),
+    'format_type' => 'tab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $export['group_tags|node|working_paper|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
