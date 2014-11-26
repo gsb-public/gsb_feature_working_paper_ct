@@ -552,6 +552,26 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
       'description_field' => 0,
       'file_directory' => '',
       'file_extensions' => 'pdf',
+      'filefield_paths' => array(
+        'active_updating' => 0,
+        'file_name' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
+        ),
+        'file_path' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '',
+        ),
+        'replace_existing_files' => 0,
+        'retroactive_update' => 0,
+      ),
+      'filefield_paths_enabled' => 0,
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
@@ -1441,6 +1461,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
   t('Item ID');
   t('Keywords');
   t('Month');
+  t('Must have PDF uploaded to submit to SSRN or EBSCO');
   t('Paper Copy');
   t('Product Type');
   t('Publish this working paper on the following databases');
