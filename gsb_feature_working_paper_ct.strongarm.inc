@@ -62,13 +62,28 @@ function gsb_feature_working_paper_ct_strongarm() {
         'custom_settings' => TRUE,
       ),
       'views_content_pane' => array(
-        'custom_settings' => FALSE,
+        'custom_settings' => TRUE,
       ),
       'idea_story_related' => array(
         'custom_settings' => TRUE,
       ),
       'insight_featured_card' => array(
         'custom_settings' => TRUE,
+      ),
+      'alumni_reunion_agenda_list' => array(
+        'custom_settings' => FALSE,
+      ),
+      'alumni_featured_content' => array(
+        'custom_settings' => FALSE,
+      ),
+      'idea_story_latest_stories' => array(
+        'custom_settings' => FALSE,
+      ),
+      'idea_story_top_stories' => array(
+        'custom_settings' => FALSE,
+      ),
+      'news_listing' => array(
+        'custom_settings' => FALSE,
       ),
     ),
     'extra_fields' => array(
@@ -111,6 +126,10 @@ function gsb_feature_working_paper_ct_strongarm() {
             'weight' => '18',
             'visible' => FALSE,
           ),
+          'views_content_pane' => array(
+            'weight' => '18',
+            'visible' => FALSE,
+          ),
         ),
         'gsb_working_paper_listing_entity_view_1' => array(
           'teaser' => array(
@@ -133,6 +152,10 @@ function gsb_feature_working_paper_ct_strongarm() {
             'weight' => '10',
             'visible' => FALSE,
           ),
+          'views_content_pane' => array(
+            'weight' => '10',
+            'visible' => FALSE,
+          ),
         ),
         'gsb_cmis_download_button' => array(
           'default' => array(
@@ -145,6 +168,10 @@ function gsb_feature_working_paper_ct_strongarm() {
           ),
           'insight_featured_card' => array(
             'weight' => '17',
+            'visible' => FALSE,
+          ),
+          'views_content_pane' => array(
+            'weight' => '16',
             'visible' => FALSE,
           ),
         ),
