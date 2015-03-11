@@ -232,5 +232,12 @@ function gsb_feature_working_paper_ct_strongarm() {
   $strongarm->value = 0;
   $export['workbench_access_node_type_working_paper'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_moderation_default_state_working_paper';
+  $strongarm->value = 'draft';
+  $export['workbench_moderation_default_state_working_paper'] = $strongarm;
+
   return $export;
 }

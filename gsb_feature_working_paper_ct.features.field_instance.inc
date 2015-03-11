@@ -831,6 +831,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       0 => 'title_label_use_field_label',
+      'absolute_url' => 1,
       'attributes' => array(
         'class' => '',
         'configurable_title' => 0,
