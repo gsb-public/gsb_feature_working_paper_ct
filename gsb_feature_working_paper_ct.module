@@ -103,14 +103,18 @@ function gsb_feature_working_paper_ct_tokens($type, $tokens, array $data = array
  * Implements hook_node_insert().
  */
 function gsb_feature_working_paper_ct_node_insert($node) {
-  _gsb_feature_working_paper_ct_sendResearchDatabasesEmail($node);
+  if ($node->type == 'working_paper') {
+    _gsb_feature_working_paper_ct_sendResearchDatabasesEmail($node);
+  }
 }
 
 /**
  * Implements hook_node_update().
  */
 function gsb_feature_working_paper_ct_node_update($node) {
-  _gsb_feature_working_paper_ct_sendResearchDatabasesEmail($node);
+  if ($node->type == 'working_paper') {
+    _gsb_feature_working_paper_ct_sendResearchDatabasesEmail($node);
+  }
 }
 
 /**
