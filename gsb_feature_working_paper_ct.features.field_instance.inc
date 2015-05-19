@@ -412,7 +412,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 20,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -485,7 +485,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 22,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -559,7 +559,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 23,
+        'weight' => 25,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -648,13 +648,13 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'file',
         'settings' => array(
           'conditions' => array(),
         ),
         'type' => 'file_default',
-        'weight' => 30,
+        'weight' => 5,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -746,7 +746,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 26,
+        'weight' => 28,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -889,7 +889,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 19,
       ),
       'idea_story_related' => array(
         'label' => 'hidden',
@@ -978,13 +978,13 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'link',
         'settings' => array(
           'conditions' => array(),
         ),
         'type' => 'link_default',
-        'weight' => 31,
+        'weight' => 4,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -1156,7 +1156,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 21,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -1221,14 +1221,15 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
           'conditions' => array(),
-          'link' => FALSE,
+          'links' => 0,
+          'view_mode' => 'people_fpp',
         ),
-        'type' => 'entityreference_label',
-        'weight' => 27,
+        'type' => 'entityreference_entity_view',
+        'weight' => 1,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -1296,7 +1297,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 21,
+        'weight' => 23,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -1459,14 +1460,15 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
           'conditions' => array(),
-          'link' => FALSE,
+          'links' => 0,
+          'view_mode' => 'idea_story_related',
         ),
-        'type' => 'entityreference_label',
-        'weight' => 28,
+        'type' => 'entityreference_entity_view',
+        'weight' => 2,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -1533,18 +1535,14 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'field_collection',
+        'label' => 'hidden',
+        'module' => 'gsb_field_formatter',
         'settings' => array(
-          'add' => 'Add',
           'conditions' => array(),
-          'delete' => 'Delete',
-          'description' => TRUE,
-          'edit' => 'Edit',
           'view_mode' => 'full',
         ),
-        'type' => 'field_collection_view',
-        'weight' => 29,
+        'type' => 'gsb_field_formatter_related_items_field_collection',
+        'weight' => 3,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -1608,7 +1606,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 24,
+        'weight' => 26,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -1675,7 +1673,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 22,
+        'weight' => 24,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -1761,7 +1759,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 25,
+        'weight' => 27,
       ),
       'idea_story_related' => array(
         'label' => 'above',
