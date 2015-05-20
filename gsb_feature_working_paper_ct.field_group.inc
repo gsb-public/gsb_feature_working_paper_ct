@@ -223,7 +223,27 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group->bundle = 'working_paper';
   $field_group->mode = 'default';
   $field_group->parent_name = '';
-  $field_group->data = '';
+  $field_group->data = array(
+    'label' => 'Related',
+    'weight' => '',
+    'children' => array(
+      0 => 'field_file_unlimited_public',
+      1 => 'field_link_unlimited',
+      2 => 'field_person_ref_unlimited',
+      3 => 'field_related_idea_story',
+      4 => 'field_related_other_unlimited',
+      5 => 'related_title',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Related',
+      'instance_settings' => array(
+        'classes' => '',
+        'description' => '',
+      ),
+      'formatter' => 'collapsed',
+    ),
+  );
   $export['group_wrapper_related|node|working_paper|default'] = $field_group;
 
   $field_group = new stdClass();
