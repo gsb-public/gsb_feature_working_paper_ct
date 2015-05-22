@@ -654,7 +654,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
           'conditions' => array(),
         ),
         'type' => 'file_default',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -984,7 +984,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
           'conditions' => array(),
         ),
         'type' => 'link_default',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -1229,7 +1229,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
           'view_mode' => 'people_fpp',
         ),
         'type' => 'entityreference_entity_view',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -1468,7 +1468,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
           'view_mode' => 'idea_story_related',
         ),
         'type' => 'entityreference_entity_view',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'idea_story_related' => array(
         'label' => 'above',
@@ -1542,7 +1542,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
           'view_mode' => 'full',
         ),
         'type' => 'gsb_field_formatter_related_items_field_collection',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'idea_story_related' => array(
         'label' => 'above',

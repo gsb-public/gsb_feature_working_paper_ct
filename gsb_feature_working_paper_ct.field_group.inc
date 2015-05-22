@@ -232,7 +232,8 @@ function gsb_feature_working_paper_ct_field_group_info() {
       2 => 'field_person_ref_unlimited',
       3 => 'field_related_idea_story',
       4 => 'field_related_other_unlimited',
-      5 => 'related_title',
+      5 => 'gsb_feature_base_fields_faculty_authors',
+      6 => 'related_title',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
