@@ -1265,7 +1265,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_person_ref_unlimited',
-    'label' => 'Alumni or Staff or PhD Student or MSx Student or Faculty',
+    'label' => 'People (Faculty, Alumni, PhD Student, MSx Fellow, Staff)',
     'required' => 0,
     'settings' => array(
       'custom_add_another' => '',
@@ -2005,7 +2005,6 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
   t('Abstract');
   t('Academic Area');
   t('Additional Topics');
-  t('Alumni or Staff or PhD Student or MSx Student or Faculty');
   t('Author & Co-Authors');
   t('Day');
   t('Document Link');
@@ -2020,6 +2019,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
   t('Month');
   t('Must have PDF uploaded to submit to SSRN or EBSCO');
   t('Paper Copy');
+  t('People (Faculty, Alumni, PhD Student, MSx Fellow, Staff)');
   t('Product Type');
   t('Publication or Event');
   t('Publish this working paper on the following databases');
