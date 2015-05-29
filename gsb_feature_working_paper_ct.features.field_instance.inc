@@ -46,7 +46,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 26,
       ),
       'teaser_listing' => array(
         'label' => 'hidden',
@@ -136,7 +136,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
           'view_mode' => 'existing_node_teaser',
         ),
         'type' => 'gsb_field_formatter_field_collection_separator',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'teaser_listing' => array(
         'label' => 'hidden',
@@ -219,7 +219,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 24,
+        'weight' => 30,
       ),
       'teaser_listing' => array(
         'label' => 'hidden',
@@ -301,17 +301,17 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
           'more_link' => 0,
           'more_text' => '',
           'summary_handler' => 'full',
-          'trim_length' => 35,
-          'trim_link' => FALSE,
+          'trim_length' => 255,
+          'trim_link' => 0,
           'trim_options' => array(
-            'text' => 0,
+            'text' => 'text',
           ),
           'trim_preserve_tags' => '',
           'trim_suffix' => '...',
-          'trim_type' => 'words',
+          'trim_type' => 'chars',
         ),
         'type' => 'smart_trim_format',
-        'weight' => 7,
+        'weight' => 4,
       ),
       'teaser_listing' => array(
         'label' => 'hidden',
@@ -430,7 +430,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 23,
+        'weight' => 29,
       ),
       'teaser_listing' => array(
         'label' => 'above',
@@ -503,7 +503,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 22,
+        'weight' => 28,
       ),
       'teaser_listing' => array(
         'label' => 'above',
@@ -574,10 +574,15 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'weight' => 24,
       ),
       'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 16,
+        'label' => 'hidden',
+        'module' => 'gsb_field_formatter',
+        'settings' => array(
+          'conditions' => array(),
+          'file_view_mode' => 'default',
+          'text' => 'PDF',
+        ),
+        'type' => 'gsb_field_formatter_download_link',
+        'weight' => 1,
       ),
       'teaser_listing' => array(
         'label' => 'above',
@@ -672,7 +677,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 16,
       ),
       'teaser_listing' => array(
         'label' => 'above',
@@ -764,7 +769,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 17,
       ),
       'teaser_listing' => array(
         'label' => 'above',
@@ -834,7 +839,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 25,
+        'weight' => 31,
       ),
       'teaser_listing' => array(
         'label' => 'inline',
@@ -907,7 +912,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 20,
       ),
       'teaser_listing' => array(
         'label' => 'hidden',
@@ -1002,7 +1007,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 9,
       ),
       'teaser_listing' => array(
         'label' => 'above',
@@ -1093,12 +1098,9 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'list',
-        'settings' => array(
-          'conditions' => array(),
-        ),
-        'type' => 'list_default',
-        'weight' => 2,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
       ),
       'teaser_listing' => array(
         'label' => 'hidden',
@@ -1174,7 +1176,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 26,
+        'weight' => 32,
       ),
       'teaser_listing' => array(
         'label' => 'above',
@@ -1247,7 +1249,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 8,
       ),
       'teaser_listing' => array(
         'label' => 'above',
@@ -1265,7 +1267,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_person_ref_unlimited',
-    'label' => 'Alumni or Staff or PhD Student or MSx Student or Faculty',
+    'label' => 'People (Faculty, Alumni, PhD Student, MSx Fellow, Staff)',
     'required' => 0,
     'settings' => array(
       'custom_add_another' => '',
@@ -1315,7 +1317,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 25,
       ),
       'teaser_listing' => array(
         'label' => 'above',
@@ -1386,16 +1388,9 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'number',
-        'settings' => array(
-          'conditions' => array(),
-          'decimal_separator' => '.',
-          'prefix_suffix' => 1,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 3,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
       ),
       'teaser_listing' => array(
         'label' => 'hidden',
@@ -1486,7 +1481,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 7,
       ),
       'teaser_listing' => array(
         'label' => 'above',
@@ -1560,7 +1555,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 5,
       ),
       'teaser_listing' => array(
         'label' => 'above',
@@ -1624,7 +1619,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 22,
       ),
       'teaser_listing' => array(
         'label' => 'above',
@@ -1691,7 +1686,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 24,
       ),
       'teaser_listing' => array(
         'label' => 'above',
@@ -1777,7 +1772,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 21,
       ),
       'teaser_listing' => array(
         'label' => 'above',
@@ -1848,7 +1843,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 21,
+        'weight' => 27,
       ),
       'teaser_listing' => array(
         'label' => 'inline',
@@ -1933,7 +1928,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
           'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'teaser_listing' => array(
         'label' => 'hidden',
@@ -2005,7 +2000,6 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
   t('Abstract');
   t('Academic Area');
   t('Additional Topics');
-  t('Alumni or Staff or PhD Student or MSx Student or Faculty');
   t('Author & Co-Authors');
   t('Day');
   t('Document Link');
@@ -2020,6 +2014,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
   t('Month');
   t('Must have PDF uploaded to submit to SSRN or EBSCO');
   t('Paper Copy');
+  t('People (Faculty, Alumni, PhD Student, MSx Fellow, Staff)');
   t('Product Type');
   t('Publication or Event');
   t('Publish this working paper on the following databases');

@@ -290,7 +290,7 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'teaser';
   $ds_fieldsetting->settings = array(
     'title' => array(
-      'weight' => '1',
+      'weight' => '0',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -299,6 +299,12 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
         'class' => '',
         'ft' => array(
           'func' => 'theme_ds_field_expert',
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => '',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
         ),
         'conditions' => array(),
       ),
@@ -323,13 +329,13 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_pub_date_day' => array(
+    'field_file_single_public' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_expert',
-          'suffix' => ', ',
+          'prefix' => '<span class="pipe">|</span>',
           'ow' => TRUE,
-          'ow-el' => 'span',
+          'ow-el' => 'div',
           'ow-cl' => '',
           'ow-def-cl' => TRUE,
           'ow-at' => '',
@@ -341,20 +347,6 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_expert',
-          'ow' => TRUE,
-          'ow-el' => 'span',
-          'ow-cl' => '',
-          'ow-def-cl' => TRUE,
-          'ow-at' => '',
-          'ow-def-at' => FALSE,
-        ),
-      ),
-    ),
-    'field_month' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_ds_field_expert',
-          'suffix' => ' ',
           'ow' => TRUE,
           'ow-el' => 'span',
           'ow-cl' => '',
@@ -702,21 +694,17 @@ function gsb_feature_working_paper_ct_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'ds_content' => array(
-        0 => 'group_wrapper_title',
-        1 => 'field_authors',
-        2 => 'title',
-        3 => 'field_month',
-        4 => 'field_pub_date_day',
-        5 => 'field_year_of_publication',
-        6 => 'field_description',
+        0 => 'title',
+        1 => 'field_file_single_public',
+        2 => 'field_authors',
+        3 => 'field_year_of_publication',
+        4 => 'field_description',
       ),
     ),
     'fields' => array(
-      'group_wrapper_title' => 'ds_content',
-      'field_authors' => 'ds_content',
       'title' => 'ds_content',
-      'field_month' => 'ds_content',
-      'field_pub_date_day' => 'ds_content',
+      'field_file_single_public' => 'ds_content',
+      'field_authors' => 'ds_content',
       'field_year_of_publication' => 'ds_content',
       'field_description' => 'ds_content',
     ),
