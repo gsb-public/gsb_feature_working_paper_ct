@@ -290,7 +290,7 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'teaser';
   $ds_fieldsetting->settings = array(
     'title' => array(
-      'weight' => '0',
+      'weight' => '1',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -300,7 +300,7 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
         'ft' => array(
           'func' => 'theme_ds_field_expert',
           'ow' => TRUE,
-          'ow-el' => 'div',
+          'ow-el' => 'span',
           'ow-cl' => '',
           'ow-def-cl' => TRUE,
           'ow-at' => '',
@@ -335,7 +335,7 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
           'func' => 'theme_ds_field_expert',
           'prefix' => '<span class="pipe">|</span>',
           'ow' => TRUE,
-          'ow-el' => 'div',
+          'ow-el' => 'span',
           'ow-cl' => '',
           'ow-def-cl' => TRUE,
           'ow-at' => '',
@@ -694,14 +694,16 @@ function gsb_feature_working_paper_ct_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'ds_content' => array(
-        0 => 'title',
-        1 => 'field_file_single_public',
-        2 => 'field_authors',
-        3 => 'field_year_of_publication',
-        4 => 'field_description',
+        0 => 'group_wrapper_title',
+        1 => 'title',
+        2 => 'field_file_single_public',
+        3 => 'field_authors',
+        4 => 'field_year_of_publication',
+        5 => 'field_description',
       ),
     ),
     'fields' => array(
+      'group_wrapper_title' => 'ds_content',
       'title' => 'ds_content',
       'field_file_single_public' => 'ds_content',
       'field_authors' => 'ds_content',

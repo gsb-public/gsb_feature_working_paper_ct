@@ -257,14 +257,15 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group->mode = 'teaser';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Working paper title',
+    'label' => 'Title wrapper',
     'weight' => '0',
     'children' => array(
-      0 => 'title',
+      0 => 'field_file_single_public',
+      1 => 'title',
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'Working paper title',
+      'label' => 'Title wrapper',
       'instance_settings' => array(
         'classes' => '',
         'description' => '',
