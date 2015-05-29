@@ -120,7 +120,7 @@ function gsb_feature_working_paper_ct_strongarm() {
             'visible' => TRUE,
           ),
           'teaser' => array(
-            'weight' => '23',
+            'weight' => '24',
             'visible' => FALSE,
           ),
           'teaser_listing' => array(
@@ -184,7 +184,7 @@ function gsb_feature_working_paper_ct_strongarm() {
             'visible' => FALSE,
           ),
           'teaser' => array(
-            'weight' => '6',
+            'weight' => '13',
             'visible' => FALSE,
           ),
         ),
