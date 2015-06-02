@@ -728,7 +728,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 8,
+      'weight' => 29,
     ),
     'workbench_access_field' => 0,
   );
