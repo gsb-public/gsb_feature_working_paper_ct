@@ -1029,7 +1029,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'configurable_class' => 0,
         'configurable_title' => 0,
         'rel' => '',
-        'target' => 'default',
+        'target' => 'user',
         'title' => '',
       ),
       'custom_add_another' => '',
