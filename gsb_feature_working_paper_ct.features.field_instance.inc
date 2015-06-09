@@ -1113,11 +1113,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'list',
         'settings' => array(
-          'conditions' => array(
-            0 => array(
-              'condition' => '',
-            ),
-          ),
+          'conditions' => array(),
         ),
         'type' => 'list_default',
         'weight' => 2,
@@ -1203,6 +1199,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(
+        'checkall' => FALSE,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_buttons',
@@ -1653,6 +1650,7 @@ function gsb_feature_working_paper_ct_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(
+        'checkall' => FALSE,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_buttons',
