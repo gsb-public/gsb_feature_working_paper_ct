@@ -558,6 +558,27 @@ function gsb_feature_working_paper_ct_ds_layout_settings_info() {
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|working_paper|compact';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'working_paper';
+  $ds_layout->view_mode = 'compact';
+  $ds_layout->layout = 'ds_1col';
+  $ds_layout->settings = array(
+    'regions' => array(),
+    'fields' => array(),
+    'classes' => array(),
+    'wrappers' => array(),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => TRUE,
+    'layout_link_attribute' => FALSE,
+    'layout_link_custom' => '',
+    'layout_disable_css' => FALSE,
+  );
+  $export['node|working_paper|compact'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
   $ds_layout->id = 'node|working_paper|default';
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'working_paper';
@@ -625,6 +646,27 @@ function gsb_feature_working_paper_ct_ds_layout_settings_info() {
     'layout_disable_css' => 0,
   );
   $export['node|working_paper|default'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|working_paper|expanded';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'working_paper';
+  $ds_layout->view_mode = 'expanded';
+  $ds_layout->layout = 'ds_1col';
+  $ds_layout->settings = array(
+    'regions' => array(),
+    'fields' => array(),
+    'classes' => array(),
+    'wrappers' => array(),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => TRUE,
+    'layout_link_attribute' => FALSE,
+    'layout_link_custom' => '',
+    'layout_disable_css' => FALSE,
+  );
+  $export['node|working_paper|expanded'] = $ds_layout;
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
