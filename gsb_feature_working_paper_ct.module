@@ -276,6 +276,9 @@ function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form,
     $form['field_item_id']['#disabled'] = TRUE;
   }
 
+  $form['field_publication_type'][$language]['#default_value'] = 'working_paper';
+  $form['field_publication_type']['#access'] = FALSE;
+
   $form['field_paper_copy']['#access'] = FALSE;
   $form['field_product_type']['#access'] = FALSE;
 
