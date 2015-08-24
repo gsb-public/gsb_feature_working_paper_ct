@@ -110,6 +110,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
     'weight' => '21',
     'children' => array(
       0 => 'field_centers_research_programs',
+      1 => 'field_circle_topics',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -134,7 +135,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Version Date',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_pub_date_day',
       1 => 'field_year_of_publication',
@@ -168,7 +169,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Related Content',
-    'weight' => '7',
+    'weight' => '8',
     'children' => array(
       0 => 'field_file_unlimited_public',
       1 => 'field_link_unlimited',
@@ -201,9 +202,9 @@ function gsb_feature_working_paper_ct_field_group_info() {
     'label' => 'Tagging',
     'weight' => '9',
     'children' => array(
-      0 => 'group_centers',
-      1 => 'group_academic_area',
-      2 => 'group_additional_topics',
+      0 => 'group_academic_area',
+      1 => 'group_additional_topics',
+      2 => 'group_centers',
       3 => 'group_tags',
     ),
     'format_type' => 'tabs',
@@ -227,7 +228,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
   $field_group->parent_name = 'group_tagging';
   $field_group->data = array(
     'label' => 'Tags',
-    'weight' => '22',
+    'weight' => '23',
     'children' => array(
       0 => 'field_tag',
     ),

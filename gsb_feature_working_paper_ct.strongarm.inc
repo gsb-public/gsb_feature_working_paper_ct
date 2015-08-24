@@ -107,7 +107,7 @@ function gsb_feature_working_paper_ct_strongarm() {
           'weight' => '16',
         ),
         'title' => array(
-          'weight' => '1',
+          'weight' => '2',
         ),
         'path' => array(
           'weight' => '15',
