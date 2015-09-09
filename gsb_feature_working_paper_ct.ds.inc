@@ -95,7 +95,7 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_expert',
-          'suffix' => '<span class="pipe">|</span>',
+          'suffix' => '<span class="pipe pub-type">|</span>',
           'ow' => TRUE,
           'ow-el' => 'span',
           'ow-cl' => '',
@@ -412,7 +412,7 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_expert',
-          'suffix' => '<span class="pipe">|</span>',
+          'suffix' => '<span class="pipe pub-type">|</span>',
           'ow' => TRUE,
           'ow-el' => 'span',
           'ow-cl' => '',
