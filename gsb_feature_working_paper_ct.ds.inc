@@ -18,7 +18,7 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'compact';
   $ds_fieldsetting->settings = array(
     'title' => array(
-      'weight' => '1',
+      'weight' => '2',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -322,7 +322,7 @@ function gsb_feature_working_paper_ct_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'expanded';
   $ds_fieldsetting->settings = array(
     'title' => array(
-      'weight' => '1',
+      'weight' => '2',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -775,15 +775,17 @@ function gsb_feature_working_paper_ct_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'ds_content' => array(
-        0 => 'field_publication_type',
-        1 => 'title',
-        2 => 'field_authors',
-        3 => 'field_month',
-        4 => 'field_pub_date_day',
-        5 => 'field_year_of_publication',
+        0 => 'group_wrapper_title',
+        1 => 'field_publication_type',
+        2 => 'title',
+        3 => 'field_authors',
+        4 => 'field_month',
+        5 => 'field_pub_date_day',
+        6 => 'field_year_of_publication',
       ),
     ),
     'fields' => array(
+      'group_wrapper_title' => 'ds_content',
       'field_publication_type' => 'ds_content',
       'title' => 'ds_content',
       'field_authors' => 'ds_content',
@@ -883,16 +885,18 @@ function gsb_feature_working_paper_ct_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'ds_content' => array(
-        0 => 'field_publication_type',
-        1 => 'title',
-        2 => 'field_authors',
-        3 => 'field_month',
-        4 => 'field_pub_date_day',
-        5 => 'field_year_of_publication',
-        6 => 'field_description',
+        0 => 'group_wrapper_title',
+        1 => 'field_publication_type',
+        2 => 'title',
+        3 => 'field_authors',
+        4 => 'field_month',
+        5 => 'field_pub_date_day',
+        6 => 'field_year_of_publication',
+        7 => 'field_description',
       ),
     ),
     'fields' => array(
+      'group_wrapper_title' => 'ds_content',
       'field_publication_type' => 'ds_content',
       'title' => 'ds_content',
       'field_authors' => 'ds_content',

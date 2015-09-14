@@ -146,11 +146,11 @@ function gsb_feature_working_paper_ct_strongarm() {
             'visible' => FALSE,
           ),
           'compact' => array(
-            'weight' => '14',
+            'weight' => '15',
             'visible' => FALSE,
           ),
           'expanded' => array(
-            'weight' => '15',
+            'weight' => '16',
             'visible' => FALSE,
           ),
         ),
@@ -210,11 +210,11 @@ function gsb_feature_working_paper_ct_strongarm() {
             'visible' => FALSE,
           ),
           'compact' => array(
-            'weight' => '25',
+            'weight' => '26',
             'visible' => FALSE,
           ),
           'expanded' => array(
-            'weight' => '25',
+            'weight' => '26',
             'visible' => FALSE,
           ),
         ),
