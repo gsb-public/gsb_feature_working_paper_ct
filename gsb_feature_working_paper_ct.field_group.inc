@@ -394,12 +394,12 @@ function gsb_feature_working_paper_ct_field_group_info() {
     ),
     'format_type' => 'gsb_field_formatter_group_comma_separator',
     'format_settings' => array(
-      'formatter' => 'open',
+      'label' => 'Topics',
       'instance_settings' => array(
-        'show_label' => 1,
-        'label_element' => 'h3',
-        'classes' => '',
+        'item_count' => '0',
+        'classes' => 'field-group-format group_wrapper_topics field-group-gsb_field_formatter_group_comma_separator group-wrapper-topics',
       ),
+      'formatter' => 'open',
     ),
   );
   $export['group_wrapper_topics|node|working_paper|default'] = $field_group;
