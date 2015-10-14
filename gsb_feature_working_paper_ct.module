@@ -104,7 +104,9 @@ function gsb_feature_working_paper_ct_tokens($type, $tokens, array $data = array
  */
 function gsb_feature_working_paper_ct_node_insert($node) {
   if ($node->type == 'working_paper') {
+    $node->field_publication_type[$node->language][0]['value'] = 'working_paper';
     _gsb_feature_working_paper_ct_sendResearchDatabasesEmail($node);
+
   }
 }
 
@@ -113,6 +115,7 @@ function gsb_feature_working_paper_ct_node_insert($node) {
  */
 function gsb_feature_working_paper_ct_node_update($node) {
   if ($node->type == 'working_paper') {
+    $node->field_publication_type[$node->language][0]['value'] = 'working_paper';
     _gsb_feature_working_paper_ct_sendResearchDatabasesEmail($node);
   }
 }
@@ -276,8 +279,11 @@ function gsb_feature_working_paper_ct_form_working_paper_node_form_alter(&$form,
     $form['field_item_id']['#disabled'] = TRUE;
   }
 
-  $form['field_publication_type'][$language]['#default_value'] = 'working_paper';
+  unset($form['field_publication_type'][$language]['#options']['_none']);
   $form['field_publication_type']['#access'] = FALSE;
+  if ($user->uid == 1 || in_array('administrator', array_values($user->roles))) {
+    $form['field_publication_type']['#access'] = TRUE;
+  }
 
   $form['field_paper_copy']['#access'] = FALSE;
   $form['field_product_type']['#access'] = FALSE;
