@@ -106,7 +106,6 @@ function gsb_feature_working_paper_ct_node_insert($node) {
   if ($node->type == 'working_paper') {
     $node->field_publication_type[$node->language][0]['value'] = 'working_paper';
     _gsb_feature_working_paper_ct_sendResearchDatabasesEmail($node);
-
   }
 }
 
