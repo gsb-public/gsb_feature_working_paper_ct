@@ -1278,12 +1278,10 @@ function _gsb_feature_working_paper_ct_getAuthorProperties($node) {
   if (empty($node->field_authors[$language][0])) {
     return array($authorSunetIds, $authors);
   }  
-
-  foreach($node->field_authors[$language] as $author_item) {
-
-    $authors_nid = $author_item['value'];
-
-    $ewrap_author = entity_metadata_wrapper('field_collection_item', $authors_nid);
+  $wrapper = entity_metadata_wrapper('node', $node);
+  $authors_item = $wrapper->field_authors->value();
+  foreach($authors_item as $author_item) {
+    $ewrap_author = entity_metadata_wrapper('field_collection_item', $author_item);
     $ref = $ewrap_author->field_person_fac_single_ref->value();
 
     if ($ref) {
