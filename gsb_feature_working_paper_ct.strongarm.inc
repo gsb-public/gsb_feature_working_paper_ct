@@ -217,6 +217,10 @@ function gsb_feature_working_paper_ct_strongarm() {
             'weight' => '26',
             'visible' => FALSE,
           ),
+          'teaser_listing' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
         ),
       ),
     ),

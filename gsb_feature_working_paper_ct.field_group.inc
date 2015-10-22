@@ -425,7 +425,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       'label' => 'Topics',
       'instance_settings' => array(
         'item_count' => '0',
-        'classes' => '',
+        'classes' => 'group-wrapper-topics',
       ),
       'formatter' => 'open',
     ),
