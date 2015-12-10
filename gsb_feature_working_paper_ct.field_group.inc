@@ -269,7 +269,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
     'format_settings' => array(
       'label' => 'Related',
       'instance_settings' => array(
-        'classes' => 'field-group-fieldset group-wrapper-related',
+        'classes' => '',
         'description' => '',
       ),
       'formatter' => 'collapsed',
