@@ -980,7 +980,8 @@ function gsb_feature_working_paper_ct_node_presave($node) {
     if (empty($node->nid) && $node->type == 'working_paper' && empty($node->field_academic_area_unlimited['und'])) {
       _gsb_feature_working_paper_ct_modify_academic_area($node);
     }    
-    $result = _gsb_feature_working_paper_ct_updateAlfresco($node);
+    //$result = _gsb_feature_working_paper_ct_updateAlfresco($node);
+    $result = gsb_box_working_paper_file_upload($node);
   }
 }
 
