@@ -8,7 +8,7 @@
  * Implements hook_field_group_info().
  */
 function gsb_feature_working_paper_ct_field_group_info() {
-  $export = array();
+  $field_groups = array();
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -35,7 +35,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       ),
     ),
   );
-  $export['group_academic_area|node|working_paper|form'] = $field_group;
+  $field_groups['group_academic_area|node|working_paper|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -62,7 +62,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       ),
     ),
   );
-  $export['group_additional_topics|node|working_paper|form'] = $field_group;
+  $field_groups['group_additional_topics|node|working_paper|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -94,7 +94,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       'formatter' => 'collapsed',
     ),
   );
-  $export['group_alfresco_metadata|node|working_paper|form'] = $field_group;
+  $field_groups['group_alfresco_metadata|node|working_paper|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -122,7 +122,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       ),
     ),
   );
-  $export['group_centers|node|working_paper|form'] = $field_group;
+  $field_groups['group_centers|node|working_paper|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -156,7 +156,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $export['group_posted_date|node|working_paper|form'] = $field_group;
+  $field_groups['group_posted_date|node|working_paper|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -187,7 +187,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       ),
     ),
   );
-  $export['group_related_content|node|working_paper|form'] = $field_group;
+  $field_groups['group_related_content|node|working_paper|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -215,7 +215,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       ),
     ),
   );
-  $export['group_tagging|node|working_paper|form'] = $field_group;
+  $field_groups['group_tagging|node|working_paper|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -242,7 +242,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       ),
     ),
   );
-  $export['group_tags|node|working_paper|form'] = $field_group;
+  $field_groups['group_tags|node|working_paper|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -275,7 +275,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       'formatter' => 'collapsed',
     ),
   );
-  $export['group_wrapper_related|node|working_paper|default'] = $field_group;
+  $field_groups['group_wrapper_related|node|working_paper|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -308,7 +308,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $export['group_wrapper_title|node|working_paper|compact'] = $field_group;
+  $field_groups['group_wrapper_title|node|working_paper|compact'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -341,7 +341,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $export['group_wrapper_title|node|working_paper|expanded'] = $field_group;
+  $field_groups['group_wrapper_title|node|working_paper|expanded'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -374,7 +374,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $export['group_wrapper_title|node|working_paper|teaser'] = $field_group;
+  $field_groups['group_wrapper_title|node|working_paper|teaser'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -402,7 +402,7 @@ function gsb_feature_working_paper_ct_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $export['group_wrapper_topics|node|working_paper|default'] = $field_group;
+  $field_groups['group_wrapper_topics|node|working_paper|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -430,7 +430,21 @@ function gsb_feature_working_paper_ct_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $export['group_wrapper_topics|node|working_paper|teaser_listing'] = $field_group;
+  $field_groups['group_wrapper_topics|node|working_paper|teaser_listing'] = $field_group;
 
-  return $export;
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Academic Area');
+  t('Additional Topics');
+  t('Alfresco Metadata');
+  t('Centers');
+  t('Related');
+  t('Related Content');
+  t('Tagging');
+  t('Tags');
+  t('Title wrapper');
+  t('Topics');
+  t('Version Date');
+
+  return $field_groups;
 }

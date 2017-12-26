@@ -99,6 +99,7 @@ features[variable][] = node_submitted_working_paper
 features[variable][] = pathauto_node_working_paper_pattern
 features[variable][] = workbench_access_node_type_working_paper
 features[variable][] = workbench_moderation_default_state_working_paper
+features[variable][] = xmlsitemap_settings_node_working_paper
 features_exclude[field_base][field_submit] = field_submit
 features_exclude[field_instance][node-working_paper-field_citation] = node-working_paper-field_citation
 features_exclude[field_instance][node-working_paper-field_learning_objective] = node-working_paper-field_learning_objective
